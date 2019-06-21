@@ -35,7 +35,7 @@ PCGProgramNode class >> thisContext [
 
 { #category : #visiting }
 PCGProgramNode >> acceptVisitor: aConverterToRealAST [
-	^ aConverterToRealAST visitProgramNode: self
+	^ self subclassResponsibility
 ]
 
 { #category : #converting }

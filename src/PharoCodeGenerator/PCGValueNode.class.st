@@ -19,8 +19,3 @@ PCGValueNode class >> classForRealAST [
 PCGValueNode class >> instanceVariablesForRealAST [
 	^ #()
 ]
-
-{ #category : #visiting }
-PCGValueNode >> acceptVisitor: aConverterToRealAST [
-	^ aConverterToRealAST visitValueNode: self
-]

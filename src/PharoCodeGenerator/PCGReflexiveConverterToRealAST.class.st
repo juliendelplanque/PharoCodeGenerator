@@ -50,11 +50,6 @@ PCGReflexiveConverterToRealAST >> visitLiteralArrayNode: aLiteralArrayNode [
 ]
 
 { #category : #visiting }
-PCGReflexiveConverterToRealAST >> visitLiteralNode: aLiteralNode [
-	^ self visitProgramNode: aLiteralNode
-]
-
-{ #category : #visiting }
 PCGReflexiveConverterToRealAST >> visitLiteralValueNode: aLiteralValueNode [
 	^ self visitProgramNode: aLiteralValueNode
 ]
@@ -128,14 +123,4 @@ PCGReflexiveConverterToRealAST >> visitTemporaryNode: aTemporaryNode [
 { #category : #visiting }
 PCGReflexiveConverterToRealAST >> visitThisContextNode: aThisContextNode [
 	^ self visitProgramNode: aThisContextNode
-]
-
-{ #category : #visiting }
-PCGReflexiveConverterToRealAST >> visitValueNode: aValueNode [
-	^ self visitProgramNode: aValueNode
-]
-
-{ #category : #visiting }
-PCGReflexiveConverterToRealAST >> visitVariableNode: aVariableNode [
-	^ self visitProgramNode: aVariableNode
 ]

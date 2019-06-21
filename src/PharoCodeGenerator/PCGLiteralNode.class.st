@@ -19,8 +19,3 @@ PCGLiteralNode class >> classForRealAST [
 PCGLiteralNode class >> instanceVariablesForRealAST [
 	^ #()
 ]
-
-{ #category : #visiting }
-PCGLiteralNode >> acceptVisitor: aConverterToRealAST [
-	^ aConverterToRealAST visitLiteralNode: self
-]

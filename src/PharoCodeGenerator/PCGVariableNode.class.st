@@ -30,11 +30,6 @@ PCGVariableNode class >> name: name [
 		yourself
 ]
 
-{ #category : #visiting }
-PCGVariableNode >> acceptVisitor: aConverterToRealAST [
-	^ aConverterToRealAST visitVariableNode: self
-]
-
 { #category : #accessing }
 PCGVariableNode >> name [
 	^ name
