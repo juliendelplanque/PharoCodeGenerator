@@ -1,5 +1,5 @@
 "
-I model {1} node for generating Pharo code.
+I model RBArrayNode node for generating Pharo code.
 I define a lighter API that aims to ease AST nodes composition.
 "
 Class {
