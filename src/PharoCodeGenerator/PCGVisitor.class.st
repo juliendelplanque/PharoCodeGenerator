@@ -1,3 +1,6 @@
+"
+I am an abstract visitor for PCG nodes.
+"
 Class {
 	#name : #PCGVisitor,
 	#superclass : #Object,
