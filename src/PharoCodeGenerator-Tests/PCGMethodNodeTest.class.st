@@ -16,7 +16,7 @@ PCGMethodNodeTest >> setUp [
 	method := (PCGMethodNode selector: #test) bodyBlock: [ :body |
 	body 
 		addTemporary: #foo asPCGTemporary;
-		<< ((1 asPCG receiveMessage: #+ with: { 1 asPCG }) assignTo: #foo asPCGTemporary).
+		<< ((1 asPCG receiveMessage: #+ with: 1 asPCG) assignTo: #foo asPCGTemporary).
 	body << 42 asPCG returnIt ].
 
 	method protocol: 'generated'
@@ -70,6 +70,13 @@ PCGMethodNodeTest >> testInstallOnTraitClassSide [
 	
 	self assert: (PCGFakeTrait class canUnderstand: method selector).
 	self assert: (PCGFakeTrait class >> method selector) protocol equals: 'generated'
+]
+
+{ #category : #test }
+PCGMethodNodeTest >> testSelectorKeywords [
+	method selectorKeywords: #(this: is: a: selector:).
+	
+	self assert: method selector equals: #this:is:a:selector:
 ]
 
 { #category : #test }

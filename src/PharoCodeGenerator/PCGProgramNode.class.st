@@ -43,6 +43,12 @@ PCGProgramNode >> asPCG [
 	^ self
 ]
 
+{ #category : #checking }
+PCGProgramNode >> checkAST [
+	PCGASTChecker new
+		visit: self
+]
+
 { #category : #accessing }
 PCGProgramNode >> classForRealAST [
 	^ self class classForRealAST
@@ -55,6 +61,7 @@ PCGProgramNode >> instanceVariablesForRealAST [
 
 { #category : #accessing }
 PCGProgramNode >> realAST [
+	self checkAST.
 	^ PCGReflexiveConverterToRealAST new
 		visit: self
 ]

@@ -69,6 +69,21 @@ PCGMethodNode class >> selector: selector body: body [
 		yourself
 ]
 
+{ #category : #'instance creation' }
+PCGMethodNode class >> selectorKeywords: anArrayOfSymbols [ 
+	^ self new
+		selectorKeywords: anArrayOfSymbols;
+		yourself
+]
+
+{ #category : #'instance creation' }
+PCGMethodNode class >> selectorKeywords: anArrayOfSymbols arguments: arguments [ 
+	^ self new
+		selectorKeywords: anArrayOfSymbols;
+		arguments: arguments;
+		yourself
+]
+
 { #category : #visiting }
 PCGMethodNode >> acceptVisitor: aVisitor [
 	^ aVisitor visitMethodNode: self
@@ -92,12 +107,6 @@ PCGMethodNode >> body [
 { #category : #accessing }
 PCGMethodNode >> body: anObject [
 	body := anObject
-]
-
-{ #category : #checking }
-PCGMethodNode >> checkAST [
-	PCGASTChecker new
-		visit: self
 ]
 
 { #category : #initialization }
@@ -143,6 +152,11 @@ PCGMethodNode >> selector [
 { #category : #accessing }
 PCGMethodNode >> selector: anObject [
 	selector := anObject
+]
+
+{ #category : #dsl }
+PCGMethodNode >> selectorKeywords: anArrayOfSymbols [
+	self selector: (Symbol newFrom: (anArrayOfSymbols size = 1 ifTrue: [ anArrayOfSymbols first ] ifFalse: [ anArrayOfSymbols flatCollect: #yourself ]))
 ]
 
 { #category : #accessing }

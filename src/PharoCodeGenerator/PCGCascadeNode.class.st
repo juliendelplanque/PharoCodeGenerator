@@ -33,6 +33,17 @@ PCGCascadeNode >> acceptVisitor: aVisitor [
 	^ aVisitor visitCascadeNode: self
 ]
 
+{ #category : #adding }
+PCGCascadeNode >> addMessage: aMessageNode [
+	self messages add: aMessageNode
+]
+
+{ #category : #initialization }
+PCGCascadeNode >> initialize [
+	super initialize.
+	self messages: OrderedCollection new
+]
+
 { #category : #accessing }
 PCGCascadeNode >> messages [
 	^ messages
