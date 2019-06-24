@@ -104,7 +104,9 @@ PCGMethodNode >> initialize [
 
 { #category : #displaying }
 PCGMethodNode >> installOn: aBehavior [
-	aBehavior compile: self sourceCode
+	aBehavior compile: self sourceCode.
+	(aBehavior >> self selector)
+		protocol: self protocol
 ]
 
 { #category : #accessing }

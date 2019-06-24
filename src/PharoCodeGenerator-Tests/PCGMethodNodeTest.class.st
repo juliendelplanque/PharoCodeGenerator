@@ -18,6 +18,8 @@ PCGMethodNodeTest >> setUp [
 		addTemporary: #foo asPCGTemporary;
 		<< ((1 asPCG receiveMessage: #+ with: { 1 asPCG }) assignTo: #foo asPCGTemporary).
 	body << 42 asPCG returnIt ].
+
+	method protocol: 'generated'
 ]
 
 { #category : #running }
@@ -26,7 +28,7 @@ PCGMethodNodeTest >> tearDown [
 	PCGFakeClass class methodsDo: #removeFromSystem.
 	
 	PCGFakeTrait methodsDo: #removeFromSystem.
-	PCGFakeTrait methodsDo: #removeFromSystem.
+	PCGFakeTrait class methodsDo: #removeFromSystem.
 	super tearDown
 ]
 
@@ -36,7 +38,8 @@ PCGMethodNodeTest >> testInstallOn [
 	
 	method installOn: PCGFakeClass.
 	
-	self assert: (PCGFakeClass canUnderstand: method selector)
+	self assert: (PCGFakeClass canUnderstand: method selector).
+	self assert: (PCGFakeClass >> method selector) protocol equals: 'generated'
 ]
 
 { #category : #test }
@@ -45,7 +48,8 @@ PCGMethodNodeTest >> testInstallOnClassSide [
 	
 	method installOn: PCGFakeClass class.
 	
-	self assert: (PCGFakeClass class canUnderstand: method selector)
+	self assert: (PCGFakeClass class canUnderstand: method selector).
+	self assert: (PCGFakeClass class >> method selector) protocol equals: 'generated'
 ]
 
 { #category : #test }
@@ -54,7 +58,8 @@ PCGMethodNodeTest >> testInstallOnTrait [
 	
 	method installOn: PCGFakeTrait.
 	
-	self assert: (PCGFakeTrait canUnderstand: method selector)
+	self assert: (PCGFakeTrait canUnderstand: method selector).
+	self assert: (PCGFakeTrait >> method selector) protocol equals: 'generated'
 ]
 
 { #category : #test }
@@ -63,7 +68,8 @@ PCGMethodNodeTest >> testInstallOnTraitClassSide [
 	
 	method installOn: PCGFakeTrait class.
 	
-	self assert: (PCGFakeTrait class canUnderstand: method selector)
+	self assert: (PCGFakeTrait class canUnderstand: method selector).
+	self assert: (PCGFakeTrait class >> method selector) protocol equals: 'generated'
 ]
 
 { #category : #test }
