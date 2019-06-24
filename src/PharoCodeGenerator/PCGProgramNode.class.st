@@ -52,3 +52,14 @@ PCGProgramNode >> classForRealAST [
 PCGProgramNode >> instanceVariablesForRealAST [
 	^ self class instanceVariablesForRealAST
 ]
+
+{ #category : #accessing }
+PCGProgramNode >> realAST [
+	^ PCGReflexiveConverterToRealAST new
+		visit: self
+]
+
+{ #category : #accessing }
+PCGProgramNode >> sourceCode [
+	^ self realAST newSource
+]
