@@ -8,8 +8,8 @@ Class {
 	#traits : 'PCGTMessageReceiver',
 	#classTraits : 'PCGTMessageReceiver classTrait',
 	#instVars : [
-		'target',
-		'messages'
+		'#target => TypedSlot type: PCGValueNode',
+		'#messages => TypedSlot type: (SequenceableCollection withItemsType: PCGMessageNode)'
 	],
 	#category : #'PharoCodeGenerator-AST'
 }

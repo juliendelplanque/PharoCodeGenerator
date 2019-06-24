@@ -5,8 +5,10 @@ I define a lighter API that aims to ease AST nodes composition.
 Class {
 	#name : #PCGReturnNode,
 	#superclass : #PCGProgramNode,
+	#traits : 'PCGTStatement',
+	#classTraits : 'PCGTStatement classTrait',
 	#instVars : [
-		'value'
+		'#value => TypedSlot type: PCGValueNode'
 	],
 	#category : #'PharoCodeGenerator-AST'
 }

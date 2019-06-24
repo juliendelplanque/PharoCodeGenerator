@@ -6,9 +6,9 @@ Class {
 	#name : #PCGMessageNode,
 	#superclass : #PCGValueNode,
 	#instVars : [
-		'receiver',
-		'selector',
-		'arguments'
+		'#receiver => TypedSlot type: PCGValueNode',
+		'#selector => TypedSlot type: Symbol',
+		'#arguments => TypedSlot type: (SequenceableCollection withItemsType: PCGValueNode)'
 	],
 	#category : #'PharoCodeGenerator-AST'
 }
