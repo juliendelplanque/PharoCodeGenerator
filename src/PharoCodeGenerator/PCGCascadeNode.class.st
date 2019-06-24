@@ -5,7 +5,10 @@ I define a lighter API that aims to ease AST nodes composition.
 Class {
 	#name : #PCGCascadeNode,
 	#superclass : #PCGValueNode,
+	#traits : 'PCGTMessageReceiver',
+	#classTraits : 'PCGTMessageReceiver classTrait',
 	#instVars : [
+		'target',
 		'messages'
 	],
 	#category : #'PharoCodeGenerator-AST'
@@ -28,6 +31,13 @@ PCGCascadeNode class >> messages: messages [
 		yourself
 ]
 
+{ #category : #'instance creation' }
+PCGCascadeNode class >> target: target [
+	^ self new
+		target: target;
+		yourself
+]
+
 { #category : #visiting }
 PCGCascadeNode >> acceptVisitor: aVisitor [
 	^ aVisitor visitCascadeNode: self
@@ -36,6 +46,12 @@ PCGCascadeNode >> acceptVisitor: aVisitor [
 { #category : #adding }
 PCGCascadeNode >> addMessage: aMessageNode [
 	self messages add: aMessageNode
+]
+
+{ #category : #private }
+PCGCascadeNode >> buildMessageNode: aSymbol withAll: arguments [
+	"Here we override the message to change the receiver to be the target of cascade."
+	^ self addMessage: (PCGMessageNode receiver: self target selector: aSymbol arguments: arguments)
 ]
 
 { #category : #initialization }
@@ -52,4 +68,14 @@ PCGCascadeNode >> messages [
 { #category : #accessing }
 PCGCascadeNode >> messages: anObject [
 	messages := anObject asOrderedCollection
+]
+
+{ #category : #accessing }
+PCGCascadeNode >> target [
+	^ target
+]
+
+{ #category : #accessing }
+PCGCascadeNode >> target: anObject [
+	target := anObject
 ]
