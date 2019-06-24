@@ -94,6 +94,12 @@ PCGMethodNode >> body: anObject [
 	body := anObject
 ]
 
+{ #category : #checking }
+PCGMethodNode >> checkAST [
+	PCGASTChecker new
+		visit: self
+]
+
 { #category : #initialization }
 PCGMethodNode >> initialize [
 	super initialize.
