@@ -1,9 +1,9 @@
 Trait {
-	#name : #PCGAssignmentTarget,
+	#name : #PCGTAssignmentTarget,
 	#category : #'PharoCodeGenerator-Traits'
 }
 
 { #category : #dsl }
-PCGAssignmentTarget >> assign: anObject [
+PCGTAssignmentTarget >> assign: anObject [
 	^ anObject asPCG assignTo: self
 ]
