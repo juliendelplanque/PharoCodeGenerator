@@ -1,3 +1,6 @@
+"
+I provide the DSL for nodes that can receive message.
+"
 Trait {
 	#name : #PCGTMessageReceiver,
 	#category : #'PharoCodeGenerator-Traits'

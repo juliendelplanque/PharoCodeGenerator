@@ -1,3 +1,6 @@
+"
+I provide the DSL for nodes that can be target of a cascade.
+"
 Trait {
 	#name : #PCGTCascadeTarget,
 	#category : #'PharoCodeGenerator-Traits'

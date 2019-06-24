@@ -1,3 +1,6 @@
+"
+I provide the DSL for get values assigned.
+"
 Trait {
 	#name : #PCGTAssignmentTarget,
 	#category : #'PharoCodeGenerator-Traits'

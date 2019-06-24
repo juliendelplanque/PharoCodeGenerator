@@ -1,3 +1,6 @@
+"
+I provide the DSL for nodes that wrap a body and need to be used as a stream to write statements.
+"
 Trait {
 	#name : #PCGTStatementsStream,
 	#category : #'PharoCodeGenerator-Traits'

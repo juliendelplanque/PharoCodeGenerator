@@ -1,3 +1,6 @@
+"
+I provide the DSL for nodes that wrap a body and need to get temporary variable declaration.
+"
 Trait {
 	#name : #PCGTWithTemporaries,
 	#category : #'PharoCodeGenerator-Traits'
