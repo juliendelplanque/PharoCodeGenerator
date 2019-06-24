@@ -5,6 +5,8 @@ I define a lighter API that aims to ease AST nodes composition.
 Class {
 	#name : #PCGGlobalNode,
 	#superclass : #PCGVariableNode,
+	#traits : 'PCGAssignmentTarget',
+	#classTraits : 'PCGAssignmentTarget classTrait',
 	#category : #'PharoCodeGenerator-AST'
 }
 
