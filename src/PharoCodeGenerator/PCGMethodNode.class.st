@@ -102,6 +102,11 @@ PCGMethodNode >> initialize [
 	self protocol: Protocol unclassified
 ]
 
+{ #category : #displaying }
+PCGMethodNode >> installOn: aBehavior [
+	aBehavior compile: self sourceCode
+]
+
 { #category : #accessing }
 PCGMethodNode >> pragmas [
 	^ pragmas
