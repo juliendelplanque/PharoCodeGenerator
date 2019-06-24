@@ -5,8 +5,8 @@ I define a lighter API that aims to ease AST nodes composition.
 Class {
 	#name : #PCGValueNode,
 	#superclass : #PCGProgramNode,
-	#traits : 'PCGTReturnable + PCGTAssignable',
-	#classTraits : 'PCGTReturnable classTrait + PCGTAssignable classTrait',
+	#traits : 'PCGTReturnable + PCGTAssignable + PCGTCascadeTarget',
+	#classTraits : 'PCGTReturnable classTrait + PCGTAssignable classTrait + PCGTCascadeTarget classTrait',
 	#category : #'PharoCodeGenerator-AST'
 }
 
