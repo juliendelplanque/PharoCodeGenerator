@@ -1,3 +1,6 @@
+"
+I substitute PCGTemplateParameterNodes with objects for which its key is equal to the template parameter name in my #context.
+"
 Class {
 	#name : #PCGParametersReplacer,
 	#superclass : #PCGGenericVisitor,
