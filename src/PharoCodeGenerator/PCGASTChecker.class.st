@@ -8,6 +8,28 @@ Class {
 }
 
 { #category : #visiting }
+PCGASTChecker >> checkMethodOrMessageNode: aMethodOrMessageNode [
+	"Binary selector"
+	(((aMethodOrMessageNode selector allSatisfy: #isSpecial) and: [ aMethodOrMessageNode arguments size ~= 1 ]) or: [ "Other selectors."
+		(aMethodOrMessageNode selector count: [ :c | c = $: ]) ~= aMethodOrMessageNode arguments size ])
+			ifTrue: [ 
+				PCGASTInvalidForTranslation
+					signal: 'Inconsistent number of arguments compared to method selector.' ]
+]
+
+{ #category : #visiting }
+PCGASTChecker >> visitMessageNode: aMessageNode [
+	self checkMethodOrMessageNode: aMessageNode.
+	^ super visitMethodNode: aMessageNode.
+]
+
+{ #category : #visiting }
+PCGASTChecker >> visitMethodNode: aMethodNode [
+	self checkMethodOrMessageNode: aMethodNode.
+	^ super visitMethodNode: aMethodNode.
+]
+
+{ #category : #visiting }
 PCGASTChecker >> visitProgramNode: aProgramNode [
 	aProgramNode instanceVariablesForRealAST do: [ :instVarName |
 		(instVarName value: aProgramNode) ifNil: [ 
@@ -20,5 +42,5 @@ PCGASTChecker >> visitProgramNode: aProgramNode [
 
 { #category : #visiting }
 PCGASTChecker >> visitTemplateParameter: aTemplateParameter [
-	self error: 'The AST still contains a template parameter and is thus not ready for conversion to real AST.'
+	PCGASTInvalidForTranslation signal: 'The AST still contains a template parameter and is thus not ready for conversion to real AST.'
 ]
