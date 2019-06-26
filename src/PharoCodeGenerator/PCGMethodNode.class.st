@@ -89,6 +89,37 @@ PCGMethodNode >> acceptVisitor: aVisitor [
 	^ aVisitor visitMethodNode: self
 ]
 
+{ #category : #dsl }
+PCGMethodNode >> addPragma: aPragmaNode [
+	self pragmas
+		add: aPragmaNode
+]
+
+{ #category : #dsl }
+PCGMethodNode >> addPragmaNamed: aSymbol [
+	self addPragmaNamed: aSymbol withAll: Array empty
+]
+
+{ #category : #dsl }
+PCGMethodNode >> addPragmaNamed: aSymbol with: arg1 [
+	self addPragmaNamed: aSymbol withAll: { arg1 }
+]
+
+{ #category : #dsl }
+PCGMethodNode >> addPragmaNamed: aSymbol with: arg1 with: arg2 [
+	self addPragmaNamed: aSymbol withAll: { arg1. arg2 }
+]
+
+{ #category : #dsl }
+PCGMethodNode >> addPragmaNamed: aSymbol with: arg1 with: arg2 with: arg3 [
+	self addPragmaNamed: aSymbol withAll: { arg1. arg2. arg3 }
+]
+
+{ #category : #dsl }
+PCGMethodNode >> addPragmaNamed: aSymbol withAll: args [
+	self addPragma: (PCGPragmaNode selector: aSymbol arguments: args)
+]
+
 { #category : #accessing }
 PCGMethodNode >> arguments [
 	^ arguments
@@ -112,9 +143,11 @@ PCGMethodNode >> body: anObject [
 { #category : #initialization }
 PCGMethodNode >> initialize [
 	super initialize.
-	self arguments: OrderedCollection new.
-	self pragmas: OrderedCollection new.
-	self protocol: Protocol unclassified
+	self
+		arguments: OrderedCollection new;
+		pragmas: OrderedCollection new;
+		protocol: Protocol unclassified;
+		addPragmaNamed: #generated 
 ]
 
 { #category : #installing }
