@@ -6,6 +6,8 @@ I allow one to create parametrisable AST that can get an arbitrary sub-tree to s
 Class {
 	#name : #PCGTemplateParameter,
 	#superclass : #PCGProgramNode,
+	#traits : 'PCGTReturnable + PCGTAssignable + PCGTCascadeTarget + PCGTStatement + PCGTMessageReceiver + PCGTAssignmentTarget',
+	#classTraits : 'PCGTReturnable classTrait + PCGTAssignable classTrait + PCGTCascadeTarget classTrait + PCGTStatement classTrait + PCGTMessageReceiver classTrait + PCGTAssignmentTarget classTrait',
 	#instVars : [
 		'name'
 	],
