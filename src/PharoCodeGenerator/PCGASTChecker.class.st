@@ -20,7 +20,7 @@ PCGASTChecker >> checkMethodOrMessageNode: aMethodOrMessageNode [
 { #category : #visiting }
 PCGASTChecker >> visitMessageNode: aMessageNode [
 	self checkMethodOrMessageNode: aMessageNode.
-	^ super visitMethodNode: aMessageNode.
+	^ super visitMessageNode: aMessageNode.
 ]
 
 { #category : #visiting }
