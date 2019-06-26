@@ -34,7 +34,7 @@ PCGProgramNode class >> thisContext [
 ]
 
 { #category : #visiting }
-PCGProgramNode >> acceptVisitor: aConverterToRealAST [
+PCGProgramNode >> acceptVisitor: aVisitor [
 	^ self subclassResponsibility
 ]
 
@@ -69,4 +69,11 @@ PCGProgramNode >> realAST [
 { #category : #accessing }
 PCGProgramNode >> sourceCode [
 	^ self realAST newSource
+]
+
+{ #category : #'as yet unclassified' }
+PCGProgramNode >> substituteParametersWith: aDictionary [
+	^ PCGParametersReplacer new
+		context: aDictionary;
+		visit: self
 ]

@@ -3,7 +3,7 @@ I ensure that the PCG AST is ready to be converted to a real AST.
 "
 Class {
 	#name : #PCGASTChecker,
-	#superclass : #PCGReflexiveVisitor,
+	#superclass : #PCGGenericVisitor,
 	#category : #'PharoCodeGenerator-Visitors'
 }
 
@@ -16,4 +16,9 @@ PCGASTChecker >> visitProgramNode: aProgramNode [
 	"Type-check the AST."
 	aProgramNode class slots select: #isTypedSlot thenDo: [ :slot |
 		slot checkTypeOfCurrentValueFor: aProgramNode ]
+]
+
+{ #category : #visiting }
+PCGASTChecker >> visitTemplateParameter: aTemplateParameter [
+	self error: 'The AST still contains a template parameter and is thus not ready for conversion to real AST.'
 ]
