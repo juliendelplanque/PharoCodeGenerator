@@ -30,6 +30,12 @@ PCGASTChecker >> visitMethodNode: aMethodNode [
 ]
 
 { #category : #visiting }
+PCGASTChecker >> visitPragmaNode: aMessageNode [
+	self checkMethodOrMessageNode: aMessageNode.
+	^ super visitPragmaNode: aMessageNode.
+]
+
+{ #category : #visiting }
 PCGASTChecker >> visitProgramNode: aProgramNode [
 	aProgramNode instanceVariablesForRealAST do: [ :instVarName |
 		(instVarName value: aProgramNode) ifNil: [ 
