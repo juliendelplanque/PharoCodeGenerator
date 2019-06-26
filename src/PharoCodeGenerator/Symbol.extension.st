@@ -21,6 +21,11 @@ Symbol >> asPCGInstanceVariable [
 ]
 
 { #category : #'*PharoCodeGenerator' }
+Symbol >> asPCGTemplateParameter [
+	^ PCGTemplateParameter name: self
+]
+
+{ #category : #'*PharoCodeGenerator' }
 Symbol >> asPCGTemporary [
 	^ PCGTemporaryNode name: self
 ]
