@@ -140,6 +140,11 @@ PCGMethodNode >> body: anObject [
 	body := anObject
 ]
 
+{ #category : #accessing }
+PCGMethodNode >> generatedPragmaSelector [
+	^ #generated
+]
+
 { #category : #initialization }
 PCGMethodNode >> initialize [
 	super initialize.
@@ -147,7 +152,7 @@ PCGMethodNode >> initialize [
 		arguments: OrderedCollection new;
 		pragmas: OrderedCollection new;
 		protocol: Protocol unclassified;
-		addPragmaNamed: #generated 
+		withGeneratedPragma
 ]
 
 { #category : #installing }
@@ -200,4 +205,17 @@ PCGMethodNode >> statements [
 { #category : #accessing }
 PCGMethodNode >> temporaries [
 	^ self body temporaries
+]
+
+{ #category : #dsl }
+PCGMethodNode >> withGeneratedPragma [
+	self pragmas
+		detect: [ :pragma | pragma name = self generatedPragmaSelector ]
+		ifNone: [ self addPragmaNamed: self generatedPragmaSelector ]
+]
+
+{ #category : #dsl }
+PCGMethodNode >> withoutGeneratedPragma [
+	self pragmas
+		removeAllSuchThat: [ :pragma | pragma name = self generatedPragmaSelector ]
 ]
