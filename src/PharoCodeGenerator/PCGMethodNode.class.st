@@ -217,5 +217,5 @@ PCGMethodNode >> withGeneratedPragma [
 { #category : #dsl }
 PCGMethodNode >> withoutGeneratedPragma [
 	self pragmas
-		removeAllSuchThat: [ :pragma | pragma name = self generatedPragmaSelector ]
+		removeAllSuchThat: [ :pragma | pragma selector = self generatedPragmaSelector ]
 ]
