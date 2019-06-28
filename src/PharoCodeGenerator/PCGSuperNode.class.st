@@ -5,6 +5,8 @@ I define a lighter API that aims to ease AST nodes composition.
 Class {
 	#name : #PCGSuperNode,
 	#superclass : #PCGVariableNode,
+	#traits : 'PCGTUnchangeableName',
+	#classTraits : 'PCGTUnchangeableName classTrait',
 	#category : #'PharoCodeGenerator-AST'
 }
 
@@ -21,5 +23,5 @@ PCGSuperNode >> acceptVisitor: aVisitor [
 { #category : #initialization }
 PCGSuperNode >> initialize [
 	super initialize.
-	self name: #super
+	name := #super
 ]
