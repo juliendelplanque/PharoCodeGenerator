@@ -52,6 +52,15 @@ PCGExtensionMethodsTest >> testStringAsPCG [
 ]
 
 { #category : #tests }
+PCGExtensionMethodsTest >> testSymbolAsPCG [
+	| symbol |
+	symbol := #x asPCG.
+	
+	self assert: symbol class equals: PCGLiteralValueNode.
+	self assert: symbol value equals: #x
+]
+
+{ #category : #tests }
 PCGExtensionMethodsTest >> testSymbolAsPCGArgument [
 	| argument |
 	argument := #x asPCGArgument.
