@@ -52,13 +52,6 @@ PCGExtensionMethodsTest >> testStringAsPCG [
 ]
 
 { #category : #tests }
-PCGExtensionMethodsTest >> testSymbolAsPCG [
-	self assert: #self asPCG class equals: PCGSelfNode.
-	self assert: #super asPCG class equals: PCGSuperNode.
-	self assert: #thisContext asPCG class equals: PCGThisContextNode.
-]
-
-{ #category : #tests }
 PCGExtensionMethodsTest >> testSymbolAsPCGArgument [
 	| argument |
 	argument := #x asPCGArgument.
@@ -83,6 +76,13 @@ PCGExtensionMethodsTest >> testSymbolAsPCGInstanceVariable [
 	
 	self assert: instanceVariable class equals: PCGInstanceVariableNode.
 	self assert: instanceVariable name equals: #x
+]
+
+{ #category : #tests }
+PCGExtensionMethodsTest >> testSymbolAsPCGNode [
+	self assert: #self asPCGNode equals: PCGSelfNode new.
+	self assert: #super asPCGNode equals: PCGSuperNode new.
+	self assert: #thisContext asPCGNode equals: PCGThisContextNode new.
 ]
 
 { #category : #tests }
