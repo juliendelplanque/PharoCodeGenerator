@@ -26,6 +26,7 @@ PCGMutatorMethodTemplateTest >> testSubstitute1 [
 	self
 		assert: (self mutatorTemplate substituteParametersWith: context) sourceCode
 		equals: 'foo: aFooObject
+	<generated>
 	foo := aFooObject'
 ]
 
@@ -40,6 +41,7 @@ PCGMutatorMethodTemplateTest >> testSubstitute2 [
 	self
 		assert: (self mutatorTemplate substituteParametersWith: context) sourceCode
 		equals: 'name: aString
+	<generated>
 	name := aString'
 ]
 
@@ -54,5 +56,6 @@ PCGMutatorMethodTemplateTest >> testSubstitute3 [
 	self
 		assert: (self mutatorTemplate substituteParametersWith: context) sourceCode
 		equals: 'setName: aString
+	<generated>
 	name := aString'
 ]
