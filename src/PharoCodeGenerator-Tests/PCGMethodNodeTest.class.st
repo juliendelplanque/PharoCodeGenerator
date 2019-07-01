@@ -82,6 +82,16 @@ PCGMethodNodeTest >> testSelectorKeywords [
 { #category : #test }
 PCGMethodNodeTest >> testSourceCode [
 	self assert: method sourceCode equals: 'test
+	<generated>
+	| foo |
+	foo := 1 + 1.
+	^ 42'
+]
+
+{ #category : #test }
+PCGMethodNodeTest >> testWithoutGeneratedPragma [
+	method withoutGeneratedPragma.
+	self assert: method sourceCode equals: 'test
 	| foo |
 	foo := 1 + 1.
 	^ 42'

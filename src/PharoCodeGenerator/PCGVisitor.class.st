@@ -93,6 +93,11 @@ PCGVisitor >> visitSuperNode: aSuperNode [
 ]
 
 { #category : #visiting }
+PCGVisitor >> visitTemplateParameter: aTemplateParameter [
+	^ self subclassResponsibility
+]
+
+{ #category : #visiting }
 PCGVisitor >> visitTemporaryNode: aTemporaryNode [
 	^ self subclassResponsibility
 ]

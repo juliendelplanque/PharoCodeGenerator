@@ -6,8 +6,8 @@ Class {
 	#name : #PCGAssignmentNode,
 	#superclass : #PCGValueNode,
 	#instVars : [
-		'variable',
-		'value'
+		'#variable => TypedSlot type: PCGVariableNode',
+		'#value => TypedSlot type: PCGValueNode'
 	],
 	#category : #'PharoCodeGenerator-AST'
 }

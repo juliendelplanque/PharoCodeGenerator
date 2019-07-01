@@ -8,7 +8,7 @@ Class {
 	#traits : 'PCGTMessageReceiver',
 	#classTraits : 'PCGTMessageReceiver classTrait',
 	#instVars : [
-		'name'
+		'#name => TypedSlot type: Symbol'
 	],
 	#category : #'PharoCodeGenerator-AST'
 }
@@ -28,6 +28,24 @@ PCGVariableNode class >> name: name [
 	^ self new
 		name: name;
 		yourself
+]
+
+{ #category : #comparing }
+PCGVariableNode >> = anObject [
+	"Answer whether the receiver and anObject represent the same object."
+
+	self == anObject
+		ifTrue: [ ^ true ].
+	self class = anObject class
+		ifFalse: [ ^ false ].
+	^ name = anObject name
+]
+
+{ #category : #comparing }
+PCGVariableNode >> hash [
+	"Answer an integer value that is related to the identity of the receiver."
+
+	^ name hash
 ]
 
 { #category : #accessing }

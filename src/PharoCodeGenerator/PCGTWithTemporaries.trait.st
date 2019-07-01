@@ -6,7 +6,7 @@ Trait {
 	#category : #'PharoCodeGenerator-Traits'
 }
 
-{ #category : #adding }
+{ #category : #dsl }
 PCGTWithTemporaries >> addTemporary: aTemporaryNode [
 	self temporaries add: aTemporaryNode  asPCG
 ]

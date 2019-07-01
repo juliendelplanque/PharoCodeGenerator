@@ -8,11 +8,11 @@ Class {
 	#traits : 'PCGTStatementsStream + PCGTBodyBlock + PCGTWithTemporaries',
 	#classTraits : 'PCGTStatementsStream classTrait + PCGTBodyBlock classTrait + PCGTWithTemporaries classTrait',
 	#instVars : [
-		'selector',
-		'body',
-		'arguments',
-		'pragmas',
-		'protocol'
+		'#selector => TypedSlot type: Symbol',
+		'#body => TypedSlot type: PCGSequenceNode',
+		'#arguments => TypedSlot type: (SequenceableCollection withItemsType: PCGArgumentNode)',
+		'#pragmas => TypedSlot type: (SequenceableCollection withItemsType: PCGPragmaNode)',
+		'#protocol => TypedSlot type: String'
 	],
 	#category : #'PharoCodeGenerator-AST'
 }
@@ -89,6 +89,37 @@ PCGMethodNode >> acceptVisitor: aVisitor [
 	^ aVisitor visitMethodNode: self
 ]
 
+{ #category : #dsl }
+PCGMethodNode >> addPragma: aPragmaNode [
+	self pragmas
+		add: aPragmaNode
+]
+
+{ #category : #dsl }
+PCGMethodNode >> addPragmaNamed: aSymbol [
+	self addPragmaNamed: aSymbol withAll: Array empty
+]
+
+{ #category : #dsl }
+PCGMethodNode >> addPragmaNamed: aSymbol with: arg1 [
+	self addPragmaNamed: aSymbol withAll: { arg1 }
+]
+
+{ #category : #dsl }
+PCGMethodNode >> addPragmaNamed: aSymbol with: arg1 with: arg2 [
+	self addPragmaNamed: aSymbol withAll: { arg1. arg2 }
+]
+
+{ #category : #dsl }
+PCGMethodNode >> addPragmaNamed: aSymbol with: arg1 with: arg2 with: arg3 [
+	self addPragmaNamed: aSymbol withAll: { arg1. arg2. arg3 }
+]
+
+{ #category : #dsl }
+PCGMethodNode >> addPragmaNamed: aSymbol withAll: args [
+	self addPragma: (PCGPragmaNode selector: aSymbol arguments: args)
+]
+
 { #category : #accessing }
 PCGMethodNode >> arguments [
 	^ arguments
@@ -109,15 +140,22 @@ PCGMethodNode >> body: anObject [
 	body := anObject
 ]
 
+{ #category : #accessing }
+PCGMethodNode >> generatedPragmaSelector [
+	^ #generated
+]
+
 { #category : #initialization }
 PCGMethodNode >> initialize [
 	super initialize.
-	self arguments: OrderedCollection new.
-	self pragmas: OrderedCollection new.
-	self protocol: Protocol unclassified
+	self
+		arguments: OrderedCollection new;
+		pragmas: OrderedCollection new;
+		protocol: Protocol unclassified;
+		withGeneratedPragma
 ]
 
-{ #category : #displaying }
+{ #category : #installing }
 PCGMethodNode >> installOn: aBehavior [
 	aBehavior compile: self sourceCode.
 	(aBehavior >> self selector)
@@ -167,4 +205,17 @@ PCGMethodNode >> statements [
 { #category : #accessing }
 PCGMethodNode >> temporaries [
 	^ self body temporaries
+]
+
+{ #category : #dsl }
+PCGMethodNode >> withGeneratedPragma [
+	self pragmas
+		detect: [ :pragma | pragma name = self generatedPragmaSelector ]
+		ifNone: [ self addPragmaNamed: self generatedPragmaSelector ]
+]
+
+{ #category : #dsl }
+PCGMethodNode >> withoutGeneratedPragma [
+	self pragmas
+		removeAllSuchThat: [ :pragma | pragma selector = self generatedPragmaSelector ]
 ]
