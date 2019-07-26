@@ -8,6 +8,8 @@ Class {
 PCGReflexiveConverterToRealAST >> visitProgramNode: aProgramNode [
 	|realASTNode|
 	realASTNode := aProgramNode classForRealAST new.
+	(realASTNode isKindOf: RBVariableNode)
+		ifTrue: [ realASTNode start: 0 ].
 	aProgramNode instanceVariablesForRealAST do: [ :instVarName |
 		|subNode realSubNode|
 		subNode := instVarName value: aProgramNode.
