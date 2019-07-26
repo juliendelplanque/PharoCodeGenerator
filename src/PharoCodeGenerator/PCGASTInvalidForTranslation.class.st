@@ -3,6 +3,6 @@ I am the error created when the AST is not in valid state to be translated as Ph
 "
 Class {
 	#name : #PCGASTInvalidForTranslation,
-	#superclass : #Error,
+	#superclass : #PCGTranslationError,
 	#category : #'PharoCodeGenerator-Errors'
 }

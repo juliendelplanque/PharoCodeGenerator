@@ -1,6 +1,9 @@
+"
+I am the error created when an AST node is incomplete and can thus not be translated as Pharo's real AST.
+"
 Class {
 	#name : #PCGASTIncompleteForTranslation,
-	#superclass : #Error,
+	#superclass : #PCGTranslationError,
 	#instVars : [
 		'node',
 		'unsetInstanceVariable'
