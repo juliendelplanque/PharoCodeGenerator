@@ -5,8 +5,8 @@ I define a lighter API that aims to ease AST nodes composition.
 Class {
 	#name : #PCGCascadeNode,
 	#superclass : #PCGValueNode,
-	#traits : 'PCGTMessageReceiver',
-	#classTraits : 'PCGTMessageReceiver classTrait',
+	#traits : 'PCGTMessageReceiver + PCGTStatement',
+	#classTraits : 'PCGTMessageReceiver classTrait + PCGTStatement classTrait',
 	#instVars : [
 		'#target => TypedSlot type: PCGValueNode',
 		'#messages => TypedSlot type: (SequenceableCollection withItemsType: PCGMessageNode)'
