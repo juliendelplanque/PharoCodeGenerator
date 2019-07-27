@@ -3,6 +3,6 @@ I am an abstract superclass for errors that are created during translation from 
 "
 Class {
 	#name : #PCGTranslationError,
-	#superclass : #Error,
+	#superclass : #PCGError,
 	#category : #'PharoCodeGenerator-Errors'
 }
