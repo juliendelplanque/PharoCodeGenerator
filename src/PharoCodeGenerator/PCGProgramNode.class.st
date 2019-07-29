@@ -71,7 +71,7 @@ PCGProgramNode >> sourceCode [
 	^ self realAST newSource
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'parameters-substitution' }
 PCGProgramNode >> substituteParametersWith: aDictionary [
 	^ PCGParametersReplacer new
 		context: aDictionary;
