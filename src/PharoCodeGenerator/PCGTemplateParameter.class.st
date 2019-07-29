@@ -14,6 +14,11 @@ Class {
 	#category : #'PharoCodeGenerator-AST'
 }
 
+{ #category : #accessing }
+PCGTemplateParameter class >> classForRealAST [
+	^ PCGNoEquivalentClassInRealAST signal
+]
+
 { #category : #'instance creation' }
 PCGTemplateParameter class >> name: name [
 	^ self new
