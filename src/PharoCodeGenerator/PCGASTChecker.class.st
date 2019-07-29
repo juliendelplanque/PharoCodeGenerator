@@ -10,12 +10,29 @@ Class {
 { #category : #visiting }
 PCGASTChecker >> checkMethodOrMessageNode: aMethodOrMessageNode [
 	"Binary selector"
-	(((aMethodOrMessageNode selector allSatisfy: #isSpecial) and: [ aMethodOrMessageNode arguments size = 1 ]) or: [ 
-		"Other selectors."
-		(aMethodOrMessageNode selector count: [ :c | c = $: ]) ~= aMethodOrMessageNode arguments size ])
-			ifTrue: [ 
-				PCGASTInvalidForTranslation
-					signal: 'Inconsistent number of arguments compared to method selector.' ]
+	(aMethodOrMessageNode selector allSatisfy: #isSpecial)
+		ifTrue: [
+			self checkMethodOrMessageNodeWithBinarySelector: aMethodOrMessageNode.
+			^ self ].
+
+	"Other selectors."
+	self checkMethodOrMessageNodeWithNormalSelector: aMethodOrMessageNode
+]
+
+{ #category : #visiting }
+PCGASTChecker >> checkMethodOrMessageNodeWithBinarySelector: aMethodOrMessageNode [
+	aMethodOrMessageNode arguments size = 1
+		ifFalse: [
+			PCGASTInvalidForTranslation
+				signal: 'Inconsistent number of arguments compared to method selector.' ]
+]
+
+{ #category : #visiting }
+PCGASTChecker >> checkMethodOrMessageNodeWithNormalSelector: aMethodOrMessageNode [
+	(aMethodOrMessageNode selector count: [ :c | c = $: ])
+		~= aMethodOrMessageNode arguments size
+		ifTrue: [ PCGASTInvalidForTranslation
+				signal: 'Inconsistent number of arguments compared to method selector.' ]
 ]
 
 { #category : #visiting }
