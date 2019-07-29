@@ -23,6 +23,11 @@ PCGMethodNode class >> classForRealAST [
 ]
 
 { #category : #accessing }
+PCGMethodNode class >> generatedPragmaSelector [
+	^ #generated
+]
+
+{ #category : #accessing }
 PCGMethodNode class >> instanceVariablesForRealAST [
 	^ #(#selector #body #arguments #pragmas)
 ]
@@ -142,7 +147,7 @@ PCGMethodNode >> body: anObject [
 
 { #category : #accessing }
 PCGMethodNode >> generatedPragmaSelector [
-	^ #generated
+	^ self class generatedPragmaSelector
 ]
 
 { #category : #initialization }
@@ -210,8 +215,16 @@ PCGMethodNode >> temporaries [
 { #category : #dsl }
 PCGMethodNode >> withGeneratedPragma [
 	self pragmas
-		detect: [ :pragma | pragma name = self generatedPragmaSelector ]
+		detect: [ :pragma | pragma selector = self generatedPragmaSelector ]
 		ifNone: [ self addPragmaNamed: self generatedPragmaSelector ]
+]
+
+{ #category : #dsl }
+PCGMethodNode >> withGeneratedPragma: aBoolean [
+	"Dispatch on #withGeneratedPragma if aBoolean is true else dispatch on #withoutGeneratedPragma."
+	aBoolean
+		ifTrue: [ self withGeneratedPragma ]
+		ifFalse: [ self withoutGeneratedPragma ]
 ]
 
 { #category : #dsl }

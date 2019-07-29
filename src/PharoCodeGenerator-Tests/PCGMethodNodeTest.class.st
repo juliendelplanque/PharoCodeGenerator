@@ -89,8 +89,22 @@ PCGMethodNodeTest >> testSourceCode [
 ]
 
 { #category : #test }
+PCGMethodNodeTest >> testWithGeneratedPragma [
+	method withGeneratedPragma: true.
+	
+	self assert: (method pragmas anySatisfy: [ :p | p selector = PCGMethodNode generatedPragmaSelector ]).
+	
+	method withGeneratedPragma: false.
+	
+	self deny: (method pragmas anySatisfy: [ :p | p selector = PCGMethodNode generatedPragmaSelector ]).
+]
+
+{ #category : #test }
 PCGMethodNodeTest >> testWithoutGeneratedPragma [
 	method withoutGeneratedPragma.
+	
+	self deny: (method pragmas anySatisfy: [ :p | p selector = PCGMethodNode generatedPragmaSelector ]).
+	
 	self assert: method sourceCode equals: 'test
 	| foo |
 	foo := 1 + 1.
