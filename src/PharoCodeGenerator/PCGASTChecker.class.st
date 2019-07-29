@@ -10,9 +10,10 @@ Class {
 { #category : #visiting }
 PCGASTChecker >> checkMethodOrMessageNode: aMethodOrMessageNode [
 	"Binary selector"
-	(((aMethodOrMessageNode selector allSatisfy: #isSpecial) and: [ aMethodOrMessageNode arguments size = 1 ]) or: [ "Other selectors."
-		(aMethodOrMessageNode selector count: [ :c | c = $: ]) = aMethodOrMessageNode arguments size ])
-			ifFalse: [ 
+	(((aMethodOrMessageNode selector allSatisfy: #isSpecial) and: [ aMethodOrMessageNode arguments size = 1 ]) or: [ 
+		"Other selectors."
+		(aMethodOrMessageNode selector count: [ :c | c = $: ]) ~= aMethodOrMessageNode arguments size ])
+			ifTrue: [ 
 				PCGASTInvalidForTranslation
 					signal: 'Inconsistent number of arguments compared to method selector.' ]
 ]
@@ -43,7 +44,12 @@ PCGASTChecker >> visitProgramNode: aProgramNode [
 		 ].
 	"Type-check the AST."
 	aProgramNode class slots select: #isTypedSlot thenDo: [ :slot |
-		slot checkTypeOfCurrentValueFor: aProgramNode ]
+		slot checkTypeOfCurrentValueFor: aProgramNode.
+		slot type class = CollectionOfType
+			ifTrue: [ (slot read: aProgramNode) do: [ :toVisit | self visit: toVisit ] ]
+			ifFalse: [ 
+				(slot type inheritsFrom: PCGProgramNode)
+					ifTrue: [ self visit: (slot read: aProgramNode) ] ] ].
 ]
 
 { #category : #visiting }
