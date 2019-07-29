@@ -19,6 +19,32 @@ PCGExtensionMethodsTest >> testBooleanAsPCG [
 ]
 
 { #category : #tests }
+PCGExtensionMethodsTest >> testClassDescriptionAsPCG [
+	| pcgAst |
+	pcgAst := PCGFakeClass asPCG.
+	self assert: pcgAst class equals: PCGGlobalNode.
+	self assert: pcgAst name equals: 'PCGFakeClass'.
+	
+	pcgAst := PCGFakeClass class asPCG.
+	self assert: pcgAst class equals: PCGMessageNode.
+	self assert: pcgAst receiver class equals: PCGGlobalNode.
+	self assert: pcgAst receiver name equals: 'PCGFakeClass'.
+	self assert: pcgAst selector equals: #class.
+	self assert: pcgAst arguments isEmpty.
+
+	pcgAst := PCGFakeTrait asPCG.
+	self assert: pcgAst class equals: PCGGlobalNode.
+	self assert: pcgAst name equals: 'PCGFakeTrait'.
+	
+	pcgAst := PCGFakeTrait class asPCG.
+	self assert: pcgAst class equals: PCGMessageNode.
+	self assert: pcgAst receiver class equals: PCGGlobalNode.
+	self assert: pcgAst receiver name equals: 'PCGFakeTrait'.
+	self assert: pcgAst selector equals: #class.
+	self assert: pcgAst arguments isEmpty.
+]
+
+{ #category : #tests }
 PCGExtensionMethodsTest >> testNumberAsPCG [
 	| numberPCG |
 	numberPCG := 1 asPCG.
