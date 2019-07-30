@@ -5,8 +5,8 @@ I define a lighter API that aims to ease AST nodes composition.
 Class {
 	#name : #PCGBlockNode,
 	#superclass : #PCGValueNode,
-	#traits : 'PCGTStatementsStream + PCGTBodyBlock + PCGTWithTemporaries',
-	#classTraits : 'PCGTStatementsStream classTrait + PCGTBodyBlock classTrait + PCGTWithTemporaries classTrait',
+	#traits : 'PCGTStatementsStream + PCGTBodyBlock + PCGTWithTemporaries + PCGTStatement',
+	#classTraits : 'PCGTStatementsStream classTrait + PCGTBodyBlock classTrait + PCGTWithTemporaries classTrait + PCGTStatement classTrait',
 	#instVars : [
 		'#arguments => TypedSlot type: (SequenceableCollection withItemsType: PCGArgumentNode)',
 		'#body => TypedSlot type: PCGSequenceNode'
