@@ -15,6 +15,13 @@ Class {
 }
 
 { #category : #'instance creation' }
+PCGBlockNode class >> arguments: arguments [
+	^ self new
+		arguments: arguments;
+		yourself
+]
+
+{ #category : #'instance creation' }
 PCGBlockNode class >> arguments: arguments body: body [ 
 	^ self new
 		arguments: arguments;
