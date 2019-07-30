@@ -1,6 +1,9 @@
+"
+I am the warning raised when an attempt is made to install a method in a class where there is already a method with the same selector that has no <generated> pragma.
+"
 Class {
 	#name : #PCGHandwrittenMethodAlreadyExist,
-	#superclass : #PCGError,
+	#superclass : #Warning,
 	#instVars : [
 		'method'
 	],
