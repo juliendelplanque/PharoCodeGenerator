@@ -18,21 +18,6 @@ PCGProgramNode class >> instanceVariablesForRealAST [
 	^ #()
 ]
 
-{ #category : #factory }
-PCGProgramNode class >> self [
-	^ PCGSelfNode new
-]
-
-{ #category : #factory }
-PCGProgramNode class >> super [
-	^ PCGSuperNode new
-]
-
-{ #category : #factory }
-PCGProgramNode class >> thisContext [
-	^ PCGThisContextNode new
-]
-
 { #category : #visiting }
 PCGProgramNode >> acceptVisitor: aVisitor [
 	^ self subclassResponsibility

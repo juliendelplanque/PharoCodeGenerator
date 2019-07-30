@@ -23,7 +23,17 @@ Symbol >> asPCGNode [
 	 #super asPCGNode >>> PCGSuperNode new
 	 #thisContext asPCGNode >>> PCGThisContextNode new
 	"
-	^ self value: PCGProgramNode
+	
+	self = #self
+		ifTrue: [ PCGSelfNode new ].
+		
+	self = #super
+		ifTrue: [ PCGSuperNode new ].
+		
+	self = #thisContext
+		ifTrue: [ PCGThisContextNode new ].
+		
+	self error: 'Symbol can not be converted as PCG node.'
 ]
 
 { #category : #'*PharoCodeGenerator' }
