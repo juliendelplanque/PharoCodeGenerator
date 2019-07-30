@@ -77,5 +77,7 @@ PCGCascadeNode >> target [
 
 { #category : #accessing }
 PCGCascadeNode >> target: anObject [
-	target := anObject
+	target := anObject.
+	self messages do: [ :m |
+		m receiver: self target ]
 ]
