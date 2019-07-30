@@ -47,7 +47,7 @@ PCGProgramNode >> instanceVariablesForRealAST [
 { #category : #accessing }
 PCGProgramNode >> realAST [
 	self checkAST.
-	^ PCGReflexiveConverterToRealAST new
+	^ PCGStaticConverterToRealAST new
 		visit: self
 ]
 
