@@ -35,11 +35,15 @@ PCGMethodNodeTest >> tearDown [
 { #category : #test }
 PCGMethodNodeTest >> testInstallOn [
 	self deny: (PCGFakeClass canUnderstand: method selector).
+	method
+		withoutGeneratedPragma.
 	
-	method installOn: PCGFakeClass.
+	self shouldnt: [ method installOn: PCGFakeClass ] raise: PCGHandwrittenMethodAlreadyExist.
 	
 	self assert: (PCGFakeClass canUnderstand: method selector).
-	self assert: (PCGFakeClass >> method selector) protocol equals: 'generated'
+	self assert: (PCGFakeClass >> method selector) protocol equals: 'generated'.
+	
+	self should: [ method installOn: PCGFakeClass ] raise: PCGHandwrittenMethodAlreadyExist
 ]
 
 { #category : #test }
