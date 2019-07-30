@@ -35,3 +35,8 @@ PCGTMessageReceiver >> receiveMessage: aSymbol with: argument1 with: argument2 w
 PCGTMessageReceiver >> receiveMessage: aSymbol withAll: arguments [
 	^ self buildMessageNode: aSymbol withAll: arguments
 ]
+
+{ #category : #dsl }
+PCGTMessageReceiver >> receiveYourself [
+	^ self receiveMessage: #yourself
+]
