@@ -172,6 +172,13 @@ PCGMethodNode >> installOn: aBehavior [
 		protocol: self protocol
 ]
 
+{ #category : #installing }
+PCGMethodNode >> installOn: aBehaviour ifHandwrittenMethodAlreadyExist: aBlock [
+	[ self installOn: aBehaviour ]
+		on: PCGHandwrittenMethodAlreadyExist
+		do: aBlock
+]
+
 { #category : #accessing }
 PCGMethodNode >> pragmas [
 	^ pragmas
