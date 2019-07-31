@@ -8,6 +8,7 @@ Class {
 PCGStaticConverterToRealAST >> visitArgumentNode: anArgumentNode [
 	<generated>
 	^ anArgumentNode classForRealAST new
+		start: 0;
 		name: anArgumentNode name;
 		yourself
 ]
@@ -50,6 +51,7 @@ PCGStaticConverterToRealAST >> visitCascadeNode: aCascadeNode [
 PCGStaticConverterToRealAST >> visitGlobalNode: aGlobalNode [
 	<generated>
 	^ aGlobalNode classForRealAST new
+		start: 0;
 		name: aGlobalNode name;
 		yourself
 ]
@@ -58,6 +60,7 @@ PCGStaticConverterToRealAST >> visitGlobalNode: aGlobalNode [
 PCGStaticConverterToRealAST >> visitInstanceVariableNode: anInstanceVariableNode [
 	<generated>
 	^ anInstanceVariableNode classForRealAST new
+		start: 0;
 		name: anInstanceVariableNode name;
 		yourself
 ]
@@ -126,6 +129,7 @@ PCGStaticConverterToRealAST >> visitReturnNode: aReturnNode [
 PCGStaticConverterToRealAST >> visitSelfNode: aSelfNode [
 	<generated>
 	^ aSelfNode classForRealAST new
+		start: 0;
 		name: aSelfNode name;
 		yourself
 ]
@@ -143,6 +147,7 @@ PCGStaticConverterToRealAST >> visitSequenceNode: aSequenceNode [
 PCGStaticConverterToRealAST >> visitSuperNode: aSuperNode [
 	<generated>
 	^ aSuperNode classForRealAST new
+		start: 0;
 		name: aSuperNode name;
 		yourself
 ]
@@ -151,6 +156,7 @@ PCGStaticConverterToRealAST >> visitSuperNode: aSuperNode [
 PCGStaticConverterToRealAST >> visitTemporaryNode: aTemporaryNode [
 	<generated>
 	^ aTemporaryNode classForRealAST new
+		start: 0;
 		name: aTemporaryNode name;
 		yourself
 ]
@@ -159,6 +165,7 @@ PCGStaticConverterToRealAST >> visitTemporaryNode: aTemporaryNode [
 PCGStaticConverterToRealAST >> visitThisContextNode: aThisContextNode [
 	<generated>
 	^ aThisContextNode classForRealAST new
+		start: 0;
 		name: aThisContextNode name;
 		yourself
 ]
