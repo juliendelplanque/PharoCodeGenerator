@@ -25,13 +25,13 @@ Symbol >> asPCGNode [
 	"
 	
 	self = #self
-		ifTrue: [ PCGSelfNode new ].
+		ifTrue: [ ^ PCGSelfNode new ].
 		
 	self = #super
-		ifTrue: [ PCGSuperNode new ].
+		ifTrue: [ ^ PCGSuperNode new ].
 		
 	self = #thisContext
-		ifTrue: [ PCGThisContextNode new ].
+		ifTrue: [ ^ PCGThisContextNode new ].
 		
 	self error: 'Symbol can not be converted as PCG node.'
 ]
