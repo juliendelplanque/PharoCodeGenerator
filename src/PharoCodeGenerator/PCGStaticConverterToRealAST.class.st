@@ -4,6 +4,50 @@ Class {
 	#category : #'PharoCodeGenerator-Visitors'
 }
 
+{ #category : #'methods generation' }
+PCGStaticConverterToRealAST class >> regenerateVisitMethods [
+	<script>
+	PCGProgramNode allSubclasses \ {PCGTemplateParameter}
+		select: [ :c | c subclasses isEmpty ]
+		thenCollect: [ :class | 
+			| classNameWithoutPrefix argument |
+			classNameWithoutPrefix := class name allButFirst: 3.
+			argument := ((classNameWithoutPrefix first isVowel
+				ifTrue: [ 'an' ]
+				ifFalse: [ 'a' ]) , classNameWithoutPrefix) asSymbol asPCGArgument.
+			(PCGMethodNode
+				selector: ('visit' , (class name allButFirst: 3) , ':') asSymbol
+				arguments: {argument})
+				bodyBlock: [ :body | 
+					| cascade |
+					cascade := PCGCascadeNode
+						target: (argument receiveMessage: #classForRealAST) receiveNew.
+					(class classForRealAST inheritsFrom: RBVariableNode)
+						ifTrue: [ cascade receiveMessage: #start: with: 0 asPCG ].
+					class instanceVariablesForRealAST
+						do: [ :instVarName | 
+							| visitingAst |
+							visitingAst := (class slotNamed: instVarName) type class
+								= CollectionOfType
+								ifTrue: [ (argument receiveMessage: instVarName)
+										receiveMessage: #collect:
+										with:
+											((PCGBlockNode arguments: {#toVisit asPCGArgument})
+												bodyBlock: [ :blockBody | 
+													blockBody
+														<< (#self asPCGNode receiveMessage: #visit: with: #toVisit asPCGArgument) ]) ]
+								ifFalse: [ ((class slotNamed: instVarName) type inheritsFrom: PCGProgramNode)
+										ifTrue: [ #self asPCGNode
+												receiveMessage: #visit:
+												with: (argument receiveMessage: instVarName) ]
+										ifFalse: [ argument receiveMessage: instVarName ] ].
+							cascade receiveMessage: instVarName asMutator with: visitingAst ].
+					cascade receiveYourself.
+					body << cascade returnIt ];
+				protocol: 'visiting';
+				installOn: self ]
+]
+
 { #category : #visiting }
 PCGStaticConverterToRealAST >> visitArgumentNode: anArgumentNode [
 	<generated>
