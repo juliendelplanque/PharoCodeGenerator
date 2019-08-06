@@ -162,7 +162,7 @@ PCGMethodNode >> initialize [
 
 { #category : #installing }
 PCGMethodNode >> installOn: aBehavior [
-	((aBehavior canUnderstand: self selector) and: [ 
+	((aBehavior includesLocalSelector: self selector) and: [ 
 		(aBehavior >> self selector) pragmas
 			noneSatisfy: [ :p | p selector = self generatedPragmaSelector ] ])
 				ifTrue: [ PCGHandwrittenMethodAlreadyExist signalForMethod: aBehavior >> self selector ].
