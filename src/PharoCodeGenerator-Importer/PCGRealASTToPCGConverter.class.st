@@ -46,6 +46,11 @@ PCGRealASTToPCGConverter class >> regenerateVisitMethods [
 ]
 
 { #category : #visiting }
+PCGRealASTToPCGConverter class >> visit: aProgramNode [
+	^ self new visit: aProgramNode
+]
+
+{ #category : #visiting }
 PCGRealASTToPCGConverter >> visit: aProgramNode [
 	^ aProgramNode acceptVisitor: self
 ]
