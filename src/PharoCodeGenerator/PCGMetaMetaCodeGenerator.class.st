@@ -25,6 +25,17 @@ PCGMetaMetaCodeGenerator >> visitInstanceVariableNode: aInstanceVariableNode [
 ]
 
 { #category : #visiting }
+PCGMetaMetaCodeGenerator >> visitLiteralValueNode: aLiteralValueNode [
+	^ aLiteralValueNode value asPCG receiveMessage: #asPCG
+]
+
+{ #category : #visiting }
+PCGMetaMetaCodeGenerator >> visitPragmaNode: aPragmaNode [
+	^ PCGPragmaNode asPCG
+		receiveMessage: #selector:arguments: with: aPragmaNode selector asPCG with: (aPragmaNode arguments collect: [ :arg | self visit: arg ]) asArray asPCG
+]
+
+{ #category : #visiting }
 PCGMetaMetaCodeGenerator >> visitReturnNode: aReturnNode [
 	^ (self visit: aReturnNode value) receiveMessage: #returnIt
 ]
