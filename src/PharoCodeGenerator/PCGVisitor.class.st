@@ -28,7 +28,7 @@ PCGVisitor >> visitArrayNode: aArrayNode [
 ]
 
 { #category : #visiting }
-PCGVisitor >> visitAssignmentNode: aAssignmentNode [
+PCGVisitor >> visitAssignmentNode: anAssignmentNode [
 	^ self subclassResponsibility
 ]
 
