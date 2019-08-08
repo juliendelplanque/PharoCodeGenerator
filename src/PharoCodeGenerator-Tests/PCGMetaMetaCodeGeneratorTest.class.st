@@ -173,6 +173,25 @@ PCGMetaMetaCodeGeneratorTest >> testVisitMessageNode [
 { #category : #test }
 PCGMetaMetaCodeGeneratorTest >> testVisitMessageNode2 [
 	| messageNode metaMetaAST |
+	messageNode := 1 asPCG receiveMessage: #+ with: 1 asPCG.
+
+	metaMetaAST := PCGMetaMetaCodeGenerator visit: messageNode.
+	self assert: metaMetaAST class equals: PCGMessageNode.
+	self assert: metaMetaAST selector equals: #receiveMessage:with:.
+	self assert: metaMetaAST receiver class equals: PCGMessageNode.
+	self assert: metaMetaAST receiver selector equals: #asPCG.
+	self assert: metaMetaAST arguments size equals: 2.
+	self assert: metaMetaAST arguments first class equals: PCGLiteralValueNode.
+	self assert: metaMetaAST arguments first value equals: #+.
+	self assert: metaMetaAST arguments second class equals: PCGMessageNode.
+	self assert: metaMetaAST arguments second selector equals: #asPCG.
+	
+	self assert: metaMetaAST sourceCode equals: '1 asPCG receiveMessage: #+ with: 1 asPCG'
+]
+
+{ #category : #test }
+PCGMetaMetaCodeGeneratorTest >> testVisitMessageNode3 [
+	| messageNode metaMetaAST |
 	messageNode := 1 asPCG receiveMessage: #foo:bar: with: 1 asPCG with: 1 asPCG.
 
 	metaMetaAST := PCGMetaMetaCodeGenerator visit: messageNode.
