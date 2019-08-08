@@ -36,6 +36,12 @@ PCGASTChecker >> checkMethodOrMessageNodeWithNormalSelector: aMethodOrMessageNod
 ]
 
 { #category : #visiting }
+PCGASTChecker >> visitCascadeNode: aCascadeNode [
+	super visitCascadeNode: aCascadeNode.
+	aCascadeNode messages ifEmpty: [ PCGASTInvalidForTranslation signal: 'A cascade can not be empty.' ]
+]
+
+{ #category : #visiting }
 PCGASTChecker >> visitMessageNode: aMessageNode [
 	self checkMethodOrMessageNode: aMessageNode.
 	^ super visitMessageNode: aMessageNode.
