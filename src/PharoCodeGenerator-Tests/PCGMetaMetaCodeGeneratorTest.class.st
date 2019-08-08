@@ -211,6 +211,33 @@ PCGMetaMetaCodeGeneratorTest >> testVisitMessageNode3 [
 ]
 
 { #category : #test }
+PCGMetaMetaCodeGeneratorTest >> testVisitMessageNode4 [
+	| messageNode metaMetaAST |
+	messageNode := 1 asPCG receiveMessage: #foo:bar:foo: with: 1 asPCG with: 1 asPCG with: 1 asPCG.
+
+	metaMetaAST := PCGMetaMetaCodeGenerator visit: messageNode.
+	self assert: metaMetaAST class equals: PCGMessageNode.
+	self assert: metaMetaAST selector equals: #receiveMessage:with:with:with:.
+	self assert: metaMetaAST receiver class equals: PCGMessageNode.
+	self assert: metaMetaAST receiver selector equals: #asPCG.
+	self assert: metaMetaAST arguments size equals: 4.
+	self assert: metaMetaAST arguments first class equals: PCGLiteralValueNode.
+	self assert: metaMetaAST arguments first value equals: #foo:bar:foo:.
+	self assert: metaMetaAST arguments second class equals: PCGMessageNode.
+	self assert: metaMetaAST arguments second selector equals: #asPCG.
+	self assert: metaMetaAST arguments third class equals: PCGMessageNode.
+	self assert: metaMetaAST arguments third selector equals: #asPCG.
+	self assert: metaMetaAST arguments fourth class equals: PCGMessageNode.
+	self assert: metaMetaAST arguments fourth selector equals: #asPCG.
+	
+	self assert: metaMetaAST sourceCode equals: '1 asPCG
+	receiveMessage: #foo:bar:foo:
+	with: 1 asPCG
+	with: 1 asPCG
+	with: 1 asPCG'
+]
+
+{ #category : #test }
 PCGMetaMetaCodeGeneratorTest >> testVisitPragmaNode [
 	| pragmaNode metaMetaAST |
 	pragmaNode := PCGPragmaNode selector: #foo: arguments: { 1 asPCG }.
