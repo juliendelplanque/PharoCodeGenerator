@@ -57,8 +57,8 @@ PCGProgramNode >> sourceCode [
 ]
 
 { #category : #'parameters-substitution' }
-PCGProgramNode >> substituteParametersWith: aDictionary [
+PCGProgramNode >> substituteParametersWith: anObject [
 	^ PCGParametersReplacer new
-		context: aDictionary;
+		context: anObject asDictionary;
 		visit: self
 ]
