@@ -8,12 +8,17 @@ Class {
 }
 
 { #category : #visiting }
+PCGVisitor class >> visit: aPCGProgramNode [
+	^ self new visit: aPCGProgramNode
+]
+
+{ #category : #visiting }
 PCGVisitor >> visit: anObject [
 	^ anObject acceptVisitor: self
 ]
 
 { #category : #visiting }
-PCGVisitor >> visitArgumentNode: aArgumentNode [
+PCGVisitor >> visitArgumentNode: anArgumentNode [
 	^ self subclassResponsibility
 ]
 
