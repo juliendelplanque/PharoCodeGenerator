@@ -16,5 +16,6 @@ BaselineOfPharoCodeGenerator >> baseline: spec [
 			"Packages"
 			spec
 				package: 'PharoCodeGenerator' with: [ spec requires: #('TypedSlot') ];
+				package: 'PharoCodeGenerator-Importer' with: [ spec requires: #('PharoCodeGenerator') ];
 				package: 'PharoCodeGenerator-Tests' with: [ spec requires: #('PharoCodeGenerator') ] ]
 ]
