@@ -10,8 +10,24 @@ PCGMetaMetaCodeGenerator >> visitArgumentNode: anArgumentNode [
 ]
 
 { #category : #visiting }
+PCGMetaMetaCodeGenerator >> visitArrayNode: anArrayNode [
+	^ (anArrayNode statements collect: [ :statement | self visit: statement ]) asArray asPCG
+		receiveMessage: #asPCG
+]
+
+{ #category : #visiting }
 PCGMetaMetaCodeGenerator >> visitAssignmentNode: anAssignmentNode [
 	^ (self visit: anAssignmentNode variable) receiveMessage: #assign: with: (self visit: anAssignmentNode value)
+]
+
+{ #category : #visiting }
+PCGMetaMetaCodeGenerator >> visitBlockNode: aBlockNode [
+	^ (PCGBlockNode asPCG receiveMessage: #arguments: with: (aBlockNode arguments collect: [ :arg | self visit: arg ]) asArray asPCG)
+			receiveMessage: #bodyBlock:
+			with: ((PCGBlockNode arguments: { #body asPCGArgument })
+						bodyBlock: [ :body |
+							aBlockNode statements do: [ :statement |
+								body << (#body asPCGArgument receiveMessage: #<< with: (self visit: statement)) ] ])
 ]
 
 { #category : #visiting }
@@ -25,8 +41,35 @@ PCGMetaMetaCodeGenerator >> visitInstanceVariableNode: aInstanceVariableNode [
 ]
 
 { #category : #visiting }
+PCGMetaMetaCodeGenerator >> visitLiteralArrayNode: aLiteralArrayNode [
+	^ PCGLiteralArrayNode asPCG
+		receiveMessage: #contents: 
+		with: (aLiteralArrayNode contents collect: [ :statement | self visit: statement ]) asArray asPCG
+]
+
+{ #category : #visiting }
 PCGMetaMetaCodeGenerator >> visitLiteralValueNode: aLiteralValueNode [
 	^ aLiteralValueNode value asPCG receiveMessage: #asPCG
+]
+
+{ #category : #visiting }
+PCGMetaMetaCodeGenerator >> visitMessageNode: aMessageNode [
+	| visitedReceiver |
+	visitedReceiver := self visit: aMessageNode receiver.
+	
+	aMessageNode arguments
+		ifEmpty: [ ^ visitedReceiver receiveMessage: #receiveMessage: with: aMessageNode selector asPCG ].
+		
+	aMessageNode arguments size = 1
+		ifTrue: [ ^ visitedReceiver receiveMessage: #receiveMessage:with: with: aMessageNode selector asPCG with: (self visit: aMessageNode arguments first) ].
+		
+	aMessageNode arguments size = 2
+		ifTrue: [ ^ visitedReceiver receiveMessage: #receiveMessage:with:with: with: aMessageNode selector asPCG with: (self visit: aMessageNode arguments first) with: (self visit: aMessageNode arguments second) ].
+		
+	aMessageNode arguments size = 3
+		ifTrue: [ ^ visitedReceiver receiveMessage: #receiveMessage:with:with:with: withAll: { aMessageNode selector asPCG } , (aMessageNode arguments collect: [ :arg | self visit: arg ]) ].
+		
+	^ visitedReceiver receiveMessage: #receiveMessage:withAll: withAll: { aMessageNode selector asPCG } , (aMessageNode arguments collect: [ :arg | self visit: arg ])
 ]
 
 { #category : #visiting }
@@ -43,6 +86,14 @@ PCGMetaMetaCodeGenerator >> visitReturnNode: aReturnNode [
 { #category : #visiting }
 PCGMetaMetaCodeGenerator >> visitSelfNode: aSelfNode [
 	^ aSelfNode name asPCG receiveMessage: #asPCGNode
+]
+
+{ #category : #visiting }
+PCGMetaMetaCodeGenerator >> visitSequenceNode: aSequenceNode [
+	^ PCGSequenceNode asPCG
+		receiveMessage: #temporaries:statements:
+		with: (aSequenceNode temporaries collect: [ :temporary | self visit: temporary ]) asArray asPCG
+		with: (aSequenceNode statements collect: [ :statement | self visit: statement ]) asArray asPCG
 ]
 
 { #category : #visiting }

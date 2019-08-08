@@ -23,7 +23,7 @@ PCGVisitor >> visitArgumentNode: anArgumentNode [
 ]
 
 { #category : #visiting }
-PCGVisitor >> visitArrayNode: aArrayNode [
+PCGVisitor >> visitArrayNode: anArrayNode [
 	^ self subclassResponsibility
 ]
 
