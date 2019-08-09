@@ -1,3 +1,6 @@
+"
+I convert a PCG AST as a Pharo real AST.
+"
 Class {
 	#name : #PCGReflexiveConverterToRealAST,
 	#superclass : #PCGGenericVisitor,
