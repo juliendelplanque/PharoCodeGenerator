@@ -1,19 +1,29 @@
 Class {
 	#name : #PCGMetaMetaCodeGenerator,
 	#superclass : #PCGVisitor,
+	#instVars : [
+		'variableNameProvider'
+	],
 	#category : #'PharoCodeGenerator-Visitors'
 }
 
 { #category : #visiting }
 PCGMetaMetaCodeGenerator >> buildBodyBlockMetaCodeFrom: objectWithStatements for: codeForObjectUsingTBodyBlock [
-	^ codeForObjectUsingTBodyBlock
+	| bodyArgument bodyBlockMessage |
+	bodyArgument := (variableNameProvider nameForVariable: #body) asPCGArgument.
+	
+	variableNameProvider increaseLevel.
+	bodyBlockMessage := codeForObjectUsingTBodyBlock
 		receiveMessage: #bodyBlock:
 		with:
-			((PCGBlockNode arguments: {#body asPCGArgument})
+			((PCGBlockNode arguments: {bodyArgument})
 				bodyBlock: [ :body | 
 					objectWithStatements statements
 						do: [ :statement | 
-							body << (#body asPCGArgument receiveMessage: #<< with: (self visit: statement)) ] ]).
+							body << (bodyArgument receiveMessage: #<< with: (self visit: statement)) ] ]).
+	variableNameProvider decreaseLevel.
+	
+	^ bodyBlockMessage
 ]
 
 { #category : #visiting }
@@ -43,6 +53,12 @@ PCGMetaMetaCodeGenerator >> buildReceiveMessageCall: aMessageNode for: visitedRe
 		receiveMessage: #receiveMessage:withAll:
 		with: aMessageNode selector asPCG
 		with: (aMessageNode arguments collect: [ :arg | self visit: arg ]) asArray asPCG
+]
+
+{ #category : #initialization }
+PCGMetaMetaCodeGenerator >> initialize [
+	super initialize.
+	variableNameProvider := PCGVariableNameProvider new.
 ]
 
 { #category : #visiting }

@@ -44,14 +44,21 @@ PCGProgramNode >> instanceVariablesForRealAST [
 	^ self class instanceVariablesForRealAST
 ]
 
-{ #category : #accessing }
+{ #category : #converting }
+PCGProgramNode >> meta [
+	self checkAST.
+	^ PCGMetaMetaCodeGenerator new
+		visit: self
+]
+
+{ #category : #converting }
 PCGProgramNode >> realAST [
 	self checkAST.
 	^ PCGStaticConverterToRealAST new
 		visit: self
 ]
 
-{ #category : #accessing }
+{ #category : #converting }
 PCGProgramNode >> sourceCode [
 	^ self realAST newSource
 ]
