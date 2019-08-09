@@ -132,7 +132,7 @@ PCGMetaMetaCodeGenerator >> visitMethodNode: aMethodNode [
 	methodNode := aMethodNode arguments
 		ifEmpty: [ PCGMethodNode asPCG receiveMessage: #selector: with: aMethodNode selector asPCG ]
 		ifNotEmpty: [
-			PCGMessageNode asPCG
+			PCGMethodNode asPCG
 				receiveMessage: #selector:arguments:
 				with: aMethodNode selector asPCG
 				with: (aMethodNode arguments collect: [ :arg | self visit: arg ]) asArray asPCG ].
