@@ -2,7 +2,7 @@
 I substitute PCGTemplateParameterNodes with objects for which its key is equal to the template parameter name in my #context.
 "
 Class {
-	#name : #PCGParametersReplacer,
+	#name : #PCGReflexiveParametersReplacer,
 	#superclass : #PCGGenericVisitor,
 	#instVars : [
 		'context'
@@ -11,17 +11,17 @@ Class {
 }
 
 { #category : #accessing }
-PCGParametersReplacer >> context [
+PCGReflexiveParametersReplacer >> context [
 	^ context
 ]
 
 { #category : #accessing }
-PCGParametersReplacer >> context: anObject [
+PCGReflexiveParametersReplacer >> context: anObject [
 	context := anObject
 ]
 
 { #category : #visiting }
-PCGParametersReplacer >> visitProgramNode: aProgramNode [
+PCGReflexiveParametersReplacer >> visitProgramNode: aProgramNode [
 	|copiedNode|
 	copiedNode := aProgramNode class new.
 	aProgramNode class allInstVarNames do: [ :instVarName |
@@ -42,7 +42,7 @@ PCGParametersReplacer >> visitProgramNode: aProgramNode [
 ]
 
 { #category : #visiting }
-PCGParametersReplacer >> visitTemplateParameter: aTemplateParameter [
+PCGReflexiveParametersReplacer >> visitTemplateParameter: aTemplateParameter [
 	^ (self context
 		at: aTemplateParameter name
 		ifAbsent: [ 
