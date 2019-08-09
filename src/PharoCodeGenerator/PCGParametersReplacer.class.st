@@ -24,7 +24,7 @@ PCGParametersReplacer >> context: anObject [
 PCGParametersReplacer >> visitProgramNode: aProgramNode [
 	|copiedNode|
 	copiedNode := aProgramNode class new.
-	aProgramNode class instVarNames do: [ :instVarName |
+	aProgramNode class allInstVarNames do: [ :instVarName |
 		|subNode realSubNode|
 		subNode := instVarName value: aProgramNode.
 		realSubNode := (subNode isKindOf: PCGProgramNode)
@@ -33,9 +33,11 @@ PCGParametersReplacer >> visitProgramNode: aProgramNode [
 				(subNode isCollection and: [ subNode isString not ])
 					ifTrue: [ subNode collect: [ :subsubNode | self visit: subsubNode ] ]
 					ifFalse: [ subNode ] ].
-		copiedNode
-			perform: instVarName asMutator
-			with: realSubNode ].
+		((PCGTUnchangeableName users includesAny: aProgramNode class withAllSuperclasses) and: [ instVarName = #name ])
+			ifFalse: [ 
+				copiedNode
+					perform: instVarName asMutator
+					with: realSubNode ] ].
 	^ copiedNode
 ]
 
