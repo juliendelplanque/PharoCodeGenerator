@@ -127,6 +127,31 @@ PCGMetaMetaCodeGenerator >> visitMessageNode: aMessageNode [
 ]
 
 { #category : #visiting }
+PCGMetaMetaCodeGenerator >> visitMethodNode: aMethodNode [
+	|methodNode cascadeNode |
+	methodNode := aMethodNode arguments
+		ifEmpty: [ PCGMethodNode asPCG receiveMessage: #selector: with: aMethodNode selector asPCG ]
+		ifNotEmpty: [
+			PCGMessageNode asPCG
+				receiveMessage: #selector:arguments:
+				with: aMethodNode selector asPCG
+				with: (aMethodNode arguments collect: [ :arg | self visit: arg ]) asArray asPCG ].
+			
+	cascadeNode := methodNode asCascadeTarget.
+			
+	aMethodNode pragmas do: [ :pragma |
+		cascadeNode receiveMessage: #addPragma: with: (self visit: pragma) ].
+	
+	self buildBodyBlockMetaCodeFrom: aMethodNode for: cascadeNode.
+	
+	cascadeNode receiveMessage: #protocol: with: aMethodNode protocol asPCG.
+	
+	cascadeNode receiveYourself.
+	
+	^ cascadeNode
+]
+
+{ #category : #visiting }
 PCGMetaMetaCodeGenerator >> visitPragmaNode: aPragmaNode [
 	^ PCGPragmaNode asPCG
 		receiveMessage: #selector:arguments: with: aPragmaNode selector asPCG with: (aPragmaNode arguments collect: [ :arg | self visit: arg ]) asArray asPCG
