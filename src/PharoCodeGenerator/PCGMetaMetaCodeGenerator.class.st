@@ -5,6 +5,18 @@ Class {
 }
 
 { #category : #visiting }
+PCGMetaMetaCodeGenerator >> buildBodyBlockMetaCodeFrom: objectWithStatements for: codeForObjectUsingTBodyBlock [
+	^ codeForObjectUsingTBodyBlock
+		receiveMessage: #bodyBlock:
+		with:
+			((PCGBlockNode arguments: {#body asPCGArgument})
+				bodyBlock: [ :body | 
+					objectWithStatements statements
+						do: [ :statement | 
+							body << (#body asPCGArgument receiveMessage: #<< with: (self visit: statement)) ] ]).
+]
+
+{ #category : #visiting }
 PCGMetaMetaCodeGenerator >> buildReceiveMessageCall: aMessageNode for: visitedReceiver [
 	aMessageNode arguments
 		ifEmpty: [ ^ visitedReceiver
@@ -51,12 +63,11 @@ PCGMetaMetaCodeGenerator >> visitAssignmentNode: anAssignmentNode [
 
 { #category : #visiting }
 PCGMetaMetaCodeGenerator >> visitBlockNode: aBlockNode [
-	^ (PCGBlockNode asPCG receiveMessage: #arguments: with: (aBlockNode arguments collect: [ :arg | self visit: arg ]) asArray asPCG)
-			receiveMessage: #bodyBlock:
-			with: ((PCGBlockNode arguments: { #body asPCGArgument })
-						bodyBlock: [ :body |
-							aBlockNode statements do: [ :statement |
-								body << (#body asPCGArgument receiveMessage: #<< with: (self visit: statement)) ] ])
+	| blockNode |
+	blockNode := PCGBlockNode asPCG
+		receiveMessage: #arguments:
+		with: (aBlockNode arguments collect: [ :arg | self visit: arg ]) asArray asPCG.
+	^ self buildBodyBlockMetaCodeFrom: aBlockNode for: blockNode
 ]
 
 { #category : #visiting }
