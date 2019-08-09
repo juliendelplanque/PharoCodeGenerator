@@ -1,7 +1,7 @@
 Class {
 	#name : #PCGReflexiveConverterToRealAST,
 	#superclass : #PCGGenericVisitor,
-	#category : #'PharoCodeGenerator-Visitors'
+	#category : #'PharoCodeGenerator-LegacyVisitors'
 }
 
 { #category : #visiting }

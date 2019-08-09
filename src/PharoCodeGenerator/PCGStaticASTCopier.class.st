@@ -1,3 +1,6 @@
+"
+I copy a PCG AST and create a fresh, identical, new AST from it.
+"
 Class {
 	#name : #PCGStaticASTCopier,
 	#superclass : #PCGVisitor,

@@ -7,7 +7,7 @@ Class {
 	#instVars : [
 		'context'
 	],
-	#category : #'PharoCodeGenerator-Visitors'
+	#category : #'PharoCodeGenerator-LegacyVisitors'
 }
 
 { #category : #accessing }
