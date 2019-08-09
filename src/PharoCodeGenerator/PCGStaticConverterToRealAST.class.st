@@ -1,6 +1,6 @@
 Class {
 	#name : #PCGStaticConverterToRealAST,
-	#superclass : #PCGGenericVisitor,
+	#superclass : #PCGVisitor,
 	#category : #'PharoCodeGenerator-Visitors'
 }
 
@@ -194,6 +194,11 @@ PCGStaticConverterToRealAST >> visitSuperNode: aSuperNode [
 		start: 0;
 		name: aSuperNode name;
 		yourself
+]
+
+{ #category : #visiting }
+PCGStaticConverterToRealAST >> visitTemplateParameter: aTemplateParameter [
+	^ self error: 'Attempt to convert template AST to real source code.'
 ]
 
 { #category : #visiting }
