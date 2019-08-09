@@ -65,7 +65,7 @@ PCGProgramNode >> sourceCode [
 
 { #category : #'parameters-substitution' }
 PCGProgramNode >> substituteParametersWith: anObject [
-	^ PCGReflexiveParametersReplacer new
+	^ PCGStaticParametersReplacer new
 		context: anObject asDictionary;
 		visit: self
 ]
