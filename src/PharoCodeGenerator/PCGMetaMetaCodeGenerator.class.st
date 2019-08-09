@@ -5,6 +5,35 @@ Class {
 }
 
 { #category : #visiting }
+PCGMetaMetaCodeGenerator >> buildReceiveMessageCall: aMessageNode for: visitedReceiver [
+	aMessageNode arguments
+		ifEmpty: [ ^ visitedReceiver
+				receiveMessage: #receiveMessage:
+				with: aMessageNode selector asPCG ].
+	aMessageNode arguments size = 1
+		ifTrue: [ ^ visitedReceiver
+				receiveMessage: #receiveMessage:with:
+				with: aMessageNode selector asPCG
+				with: (self visit: aMessageNode arguments first) ].
+	aMessageNode arguments size = 2
+		ifTrue: [ ^ visitedReceiver
+				receiveMessage: #receiveMessage:with:with:
+				with: aMessageNode selector asPCG
+				with: (self visit: aMessageNode arguments first)
+				with: (self visit: aMessageNode arguments second) ].
+	aMessageNode arguments size = 3
+		ifTrue: [ ^ visitedReceiver
+				receiveMessage: #receiveMessage:with:with:with:
+				withAll:
+					{aMessageNode selector asPCG}
+						, (aMessageNode arguments collect: [ :arg | self visit: arg ]) ].
+	^ visitedReceiver
+		receiveMessage: #receiveMessage:withAll:
+		with: aMessageNode selector asPCG
+		with: (aMessageNode arguments collect: [ :arg | self visit: arg ]) asArray asPCG
+]
+
+{ #category : #visiting }
 PCGMetaMetaCodeGenerator >> visitArgumentNode: anArgumentNode [
 	^ anArgumentNode name asPCG receiveMessage: #asPCGArgument
 ]
@@ -28,6 +57,17 @@ PCGMetaMetaCodeGenerator >> visitBlockNode: aBlockNode [
 						bodyBlock: [ :body |
 							aBlockNode statements do: [ :statement |
 								body << (#body asPCGArgument receiveMessage: #<< with: (self visit: statement)) ] ])
+]
+
+{ #category : #visiting }
+PCGMetaMetaCodeGenerator >> visitCascadeNode: aCascadeNode [
+	| cascade |
+	cascade := ((self visit: aCascadeNode target) receiveMessage: #asCascadeTarget) asCascadeTarget.
+	
+	aCascadeNode messages do: [ :message |
+		self buildReceiveMessageCall: message for: cascade ].
+	
+	^ cascade
 ]
 
 { #category : #visiting }
@@ -56,20 +96,7 @@ PCGMetaMetaCodeGenerator >> visitLiteralValueNode: aLiteralValueNode [
 PCGMetaMetaCodeGenerator >> visitMessageNode: aMessageNode [
 	| visitedReceiver |
 	visitedReceiver := self visit: aMessageNode receiver.
-	
-	aMessageNode arguments
-		ifEmpty: [ ^ visitedReceiver receiveMessage: #receiveMessage: with: aMessageNode selector asPCG ].
-		
-	aMessageNode arguments size = 1
-		ifTrue: [ ^ visitedReceiver receiveMessage: #receiveMessage:with: with: aMessageNode selector asPCG with: (self visit: aMessageNode arguments first) ].
-		
-	aMessageNode arguments size = 2
-		ifTrue: [ ^ visitedReceiver receiveMessage: #receiveMessage:with:with: with: aMessageNode selector asPCG with: (self visit: aMessageNode arguments first) with: (self visit: aMessageNode arguments second) ].
-		
-	aMessageNode arguments size = 3
-		ifTrue: [ ^ visitedReceiver receiveMessage: #receiveMessage:with:with:with: withAll: { aMessageNode selector asPCG } , (aMessageNode arguments collect: [ :arg | self visit: arg ]) ].
-		
-	^ visitedReceiver receiveMessage: #receiveMessage:withAll: withAll: { aMessageNode selector asPCG } , (aMessageNode arguments collect: [ :arg | self visit: arg ])
+	^ self buildReceiveMessageCall: aMessageNode for: visitedReceiver
 ]
 
 { #category : #visiting }

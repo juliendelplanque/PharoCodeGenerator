@@ -88,6 +88,30 @@ PCGMetaMetaCodeGeneratorTest >> testVisitBlockNode [
 ]
 
 { #category : #test }
+PCGMetaMetaCodeGeneratorTest >> testVisitCascadeNode [
+	| cascade metaMetaAST |
+	cascade := 1 asPCG asCascadeTarget
+					receiveMessage: #sqrt;
+					receiveMessage: #asHexDigit.
+
+	metaMetaAST := PCGMetaMetaCodeGenerator visit: cascade.
+	self assert: metaMetaAST class equals: PCGCascadeNode.
+	self assert: metaMetaAST messages size equals: 2.
+	self assert: metaMetaAST messages first class equals: PCGMessageNode.
+	self assert: metaMetaAST messages first selector equals: #receiveMessage:.
+	self assert: metaMetaAST messages first arguments size equals: 1.
+	self assert: metaMetaAST messages second class equals: PCGMessageNode.
+	self assert: metaMetaAST messages second selector equals: #receiveMessage:.
+	self assert: metaMetaAST messages second arguments size equals: 1.
+	self assert: metaMetaAST target class equals: PCGMessageNode.
+	self assert: metaMetaAST target selector equals: #asCascadeTarget.
+	
+	self assert: metaMetaAST sourceCode equals: '1 asPCG asCascadeTarget
+	receiveMessage: #sqrt;
+	receiveMessage: #asHexDigit'
+]
+
+{ #category : #test }
 PCGMetaMetaCodeGeneratorTest >> testVisitGlobalNode [
 	| global metaMetaAST |
 	global := #Foo asPCGGlobal.
@@ -235,6 +259,31 @@ PCGMetaMetaCodeGeneratorTest >> testVisitMessageNode4 [
 	with: 1 asPCG
 	with: 1 asPCG
 	with: 1 asPCG'
+]
+
+{ #category : #test }
+PCGMetaMetaCodeGeneratorTest >> testVisitMessageNode5 [
+	| messageNode metaMetaAST |
+	messageNode := 1 asPCG receiveMessage: #foo:bar:foo:bar: withAll: {1 asPCG. 1 asPCG. 1 asPCG. 1 asPCG}.
+
+	metaMetaAST := PCGMetaMetaCodeGenerator visit: messageNode.
+	self assert: metaMetaAST class equals: PCGMessageNode.
+	self assert: metaMetaAST selector equals: #receiveMessage:withAll:.
+	self assert: metaMetaAST receiver class equals: PCGMessageNode.
+	self assert: metaMetaAST receiver selector equals: #asPCG.
+	self assert: metaMetaAST arguments size equals: 2.
+	self assert: metaMetaAST arguments first class equals: PCGLiteralValueNode.
+	self assert: metaMetaAST arguments first value equals: #foo:bar:foo:bar:.
+	self assert: metaMetaAST arguments second class equals: PCGArrayNode.
+	self assert: metaMetaAST arguments second statements size equals: 4.
+	
+	self assert: metaMetaAST sourceCode equals: '1 asPCG
+	receiveMessage: #foo:bar:foo:bar:
+	withAll:
+		{1 asPCG.
+		1 asPCG.
+		1 asPCG.
+		1 asPCG}'
 ]
 
 { #category : #test }
