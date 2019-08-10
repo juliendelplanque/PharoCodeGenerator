@@ -37,11 +37,6 @@ PCGBlockNode class >> body: body [
 ]
 
 { #category : #accessing }
-PCGBlockNode class >> classForRealAST [
-	^ RBBlockNode
-]
-
-{ #category : #accessing }
 PCGBlockNode class >> instanceVariablesForRealAST [
 	^ #(#arguments #body)
 ]

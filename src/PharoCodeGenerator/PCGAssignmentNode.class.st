@@ -13,11 +13,6 @@ Class {
 }
 
 { #category : #accessing }
-PCGAssignmentNode class >> classForRealAST [
-	^ RBAssignmentNode
-]
-
-{ #category : #accessing }
 PCGAssignmentNode class >> instanceVariablesForRealAST [
 	^ #(#variable #value)
 ]

@@ -9,11 +9,6 @@ Class {
 }
 
 { #category : #accessing }
-PCGProgramNode class >> classForRealAST [
-	^ RBProgramNode
-]
-
-{ #category : #accessing }
 PCGProgramNode class >> instanceVariablesForRealAST [
 	^ #()
 ]
@@ -49,12 +44,6 @@ PCGProgramNode >> meta [
 	self checkAST.
 	^ PCGMetaMetaCodeGenerator new
 		visit: self
-]
-
-{ #category : #converting }
-PCGProgramNode >> realAST [
-	self checkAST.
-	^ PCGStaticConverterToRBAST visit: self
 ]
 
 { #category : #converting }

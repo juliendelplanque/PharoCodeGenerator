@@ -18,11 +18,6 @@ Class {
 }
 
 { #category : #accessing }
-PCGMethodNode class >> classForRealAST [
-	^ RBMethodNode
-]
-
-{ #category : #accessing }
 PCGMethodNode class >> generatedPragmaSelector [
 	^ #generated
 ]

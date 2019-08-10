@@ -4,8 +4,35 @@ I convert a PCG AST as a Pharo RB AST.
 Class {
 	#name : #PCGStaticConverterToRBAST,
 	#superclass : #PCGStaticConverterToRealAST,
-	#category : #'PharoCodeGenerator-Visitors'
+	#category : #'PharoCodeGenerator-RB'
 }
+
+{ #category : #'methods generation' }
+PCGStaticConverterToRBAST class >> regenerateFactoryMethods [
+	<script>
+	PCGProgramNode allSubclasses \ {PCGTemplateParameter}
+		select: [ :c | c subclasses isEmpty ]
+		thenDo: [ :class |
+			|selectorKeywords arguments|
+			selectorKeywords := self buildFactoryMethodSelectorKeywordsFor: class.
+			arguments := class instanceVariablesForRealAST collect: [ :instVarName |
+				instVarName asPCGArgument ].
+			(PCGMethodNode
+				selectorKeywords: selectorKeywords
+				arguments: arguments)
+				bodyBlock: [ :body | 
+					| cascade |
+					cascade := PCGCascadeNode target: class classForRealAST asPCG receiveNew.
+					(class classForRealAST inheritsFrom: RBVariableNode)
+						ifTrue: [ cascade receiveMessage: #start: with: 0 asPCG ].
+					class instanceVariablesForRealAST
+						do: [ :instVarName | 
+							cascade receiveMessage: instVarName asMutator with: instVarName asPCGArgument ].
+					cascade receiveYourself.
+					body << cascade returnIt ];
+				protocol: 'factory';
+				installOn: self ]
+]
 
 { #category : #factory }
 PCGStaticConverterToRBAST >> createArgumentNodeWithName: name [

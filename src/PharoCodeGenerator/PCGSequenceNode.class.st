@@ -15,11 +15,6 @@ Class {
 }
 
 { #category : #accessing }
-PCGSequenceNode class >> classForRealAST [
-	^ RBSequenceNode
-]
-
-{ #category : #accessing }
 PCGSequenceNode class >> instanceVariablesForRealAST [
 	^ #(#statements #temporaries)
 ]

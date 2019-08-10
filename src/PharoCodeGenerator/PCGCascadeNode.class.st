@@ -15,11 +15,6 @@ Class {
 }
 
 { #category : #accessing }
-PCGCascadeNode class >> classForRealAST [
-	^ RBCascadeNode
-]
-
-{ #category : #accessing }
 PCGCascadeNode class >> instanceVariablesForRealAST [
 	^ #(#messages)
 ]

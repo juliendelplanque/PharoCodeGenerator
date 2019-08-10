@@ -11,11 +11,6 @@ Class {
 	#category : #'PharoCodeGenerator-AST'
 }
 
-{ #category : #accessing }
-PCGLiteralArrayNode class >> classForRealAST [
-	^ RBLiteralArrayNode
-]
-
 { #category : #'instance creation' }
 PCGLiteralArrayNode class >> contents: contents [ 
 	^ self new

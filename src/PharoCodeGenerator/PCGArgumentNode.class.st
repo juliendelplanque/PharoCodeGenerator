@@ -8,11 +8,6 @@ Class {
 	#category : #'PharoCodeGenerator-AST'
 }
 
-{ #category : #accessing }
-PCGArgumentNode class >> classForRealAST [
-	^ RBArgumentNode
-]
-
 { #category : #visiting }
 PCGArgumentNode >> acceptVisitor: aVisitor [
 	^ aVisitor visitArgumentNode: self

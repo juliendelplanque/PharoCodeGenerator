@@ -11,11 +11,6 @@ Class {
 }
 
 { #category : #accessing }
-PCGLiteralNode class >> classForRealAST [
-	^ RBLiteralNode
-]
-
-{ #category : #accessing }
 PCGLiteralNode class >> instanceVariablesForRealAST [
 	^ #()
 ]

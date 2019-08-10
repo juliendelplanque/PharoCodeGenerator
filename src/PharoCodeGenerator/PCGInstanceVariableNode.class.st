@@ -10,11 +10,6 @@ Class {
 	#category : #'PharoCodeGenerator-AST'
 }
 
-{ #category : #accessing }
-PCGInstanceVariableNode class >> classForRealAST [
-	^ RBInstanceVariableNode
-]
-
 { #category : #visiting }
 PCGInstanceVariableNode >> acceptVisitor: aVisitor [
 	^ aVisitor visitInstanceVariableNode: self

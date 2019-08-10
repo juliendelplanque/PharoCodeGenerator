@@ -10,11 +10,6 @@ Class {
 	#category : #'PharoCodeGenerator-AST'
 }
 
-{ #category : #accessing }
-PCGGlobalNode class >> classForRealAST [
-	^ RBGlobalNode
-]
-
 { #category : #visiting }
 PCGGlobalNode >> acceptVisitor: aVisitor [
 	^ aVisitor visitGlobalNode: self

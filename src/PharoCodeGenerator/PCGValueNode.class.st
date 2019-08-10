@@ -11,11 +11,6 @@ Class {
 }
 
 { #category : #accessing }
-PCGValueNode class >> classForRealAST [
-	^ RBValueNode
-]
-
-{ #category : #accessing }
 PCGValueNode class >> instanceVariablesForRealAST [
 	^ #()
 ]

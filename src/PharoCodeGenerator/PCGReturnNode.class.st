@@ -14,11 +14,6 @@ Class {
 }
 
 { #category : #accessing }
-PCGReturnNode class >> classForRealAST [
-	^ RBReturnNode
-]
-
-{ #category : #accessing }
 PCGReturnNode class >> instanceVariablesForRealAST [
 	^ #(#value)
 ]

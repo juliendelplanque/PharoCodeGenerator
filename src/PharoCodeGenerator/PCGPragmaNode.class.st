@@ -13,11 +13,6 @@ Class {
 }
 
 { #category : #accessing }
-PCGPragmaNode class >> classForRealAST [
-	^ RBPragmaNode
-]
-
-{ #category : #accessing }
 PCGPragmaNode class >> instanceVariablesForRealAST [
 	^ #(#selector #arguments)
 ]

@@ -10,11 +10,6 @@ Class {
 	#category : #'PharoCodeGenerator-AST'
 }
 
-{ #category : #accessing }
-PCGThisContextNode class >> classForRealAST [
-	^ RBThisContextNode
-]
-
 { #category : #visiting }
 PCGThisContextNode >> acceptVisitor: aVisitor [
 	^ aVisitor visitThisContextNode: self

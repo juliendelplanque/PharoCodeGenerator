@@ -14,11 +14,6 @@ Class {
 }
 
 { #category : #accessing }
-PCGArrayNode class >> classForRealAST [
-	^ RBArrayNode
-]
-
-{ #category : #accessing }
 PCGArrayNode class >> instanceVariablesForRealAST [
 	^ #(#statements)
 ]

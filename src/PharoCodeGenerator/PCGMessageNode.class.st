@@ -16,11 +16,6 @@ Class {
 }
 
 { #category : #accessing }
-PCGMessageNode class >> classForRealAST [
-	^ RBMessageNode
-]
-
-{ #category : #accessing }
 PCGMessageNode class >> instanceVariablesForRealAST [
 	^ #(#receiver #selector #arguments)
 ]
