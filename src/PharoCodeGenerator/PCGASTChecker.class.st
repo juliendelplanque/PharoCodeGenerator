@@ -66,7 +66,7 @@ PCGASTChecker >> visitProgramNode: aProgramNode [
 			ifTrue: [ (PCGASTIncompleteForTranslation node: aProgramNode unsetInstanceVariable: instVarName) signal ]
 		 ].
 	"Type-check the AST."
-	aProgramNode class slots select: #isTypedSlot thenDo: [ :slot |
+	aProgramNode class allSlots select: #isTypedSlot thenDo: [ :slot |
 		slot checkTypeOfCurrentValueFor: aProgramNode.
 		slot type class = CollectionOfType
 			ifTrue: [ (slot read: aProgramNode) do: [ :toVisit | self visit: toVisit ] ]
