@@ -287,6 +287,40 @@ PCGMetaMetaCodeGeneratorTest >> testVisitMessageNode5 [
 ]
 
 { #category : #test }
+PCGMetaMetaCodeGeneratorTest >> testVisitMethodNode [
+	| methodNode metaMetaAST |
+	methodNode := (PCGMethodNode selector: #foo: arguments: { #x asPCGArgument })
+						addPragmaNamed: #fooPrag;
+						bodyBlock: [ :body |
+							body << 42 asPCG returnIt ];
+						protocol: #'my-protocol'.
+
+	metaMetaAST := PCGMetaMetaCodeGenerator visit: methodNode.
+	self assert: metaMetaAST class equals: PCGCascadeNode.
+	self assert: metaMetaAST target class equals: PCGMessageNode.
+	self assert: metaMetaAST target selector equals: #selector:arguments:.
+	self assert: metaMetaAST target receiver class equals: PCGGlobalNode.
+	self assert: metaMetaAST target receiver name equals: #PCGMethodNode.
+	self assert: metaMetaAST target arguments size equals: 2.
+	self assert: metaMetaAST target arguments first class equals: PCGLiteralValueNode.
+	self assert: metaMetaAST target arguments first value equals: #foo:.
+	self assert: metaMetaAST target arguments second class equals: PCGArrayNode.
+	self assert: metaMetaAST messages size equals: 5.
+	self assert: metaMetaAST messages first selector equals: #addPragma:.
+	self assert: metaMetaAST messages second selector equals: #addPragma:.
+	self assert: metaMetaAST messages third selector equals: #bodyBlock:.
+	self assert: metaMetaAST messages fourth selector equals: #protocol:.
+	self assert: metaMetaAST messages fifth selector equals: #yourself.
+	
+	self assert: metaMetaAST sourceCode equals: '(PCGMethodNode selector: #foo: arguments: {#x asPCGArgument})
+	addPragma: (PCGPragmaNode selector: #generated arguments: {});
+	addPragma: (PCGPragmaNode selector: #fooPrag arguments: {});
+	bodyBlock: [ :body | body << 42 asPCG returnIt ];
+	protocol: #''my-protocol'';
+	yourself'
+]
+
+{ #category : #test }
 PCGMetaMetaCodeGeneratorTest >> testVisitPragmaNode [
 	| pragmaNode metaMetaAST |
 	pragmaNode := PCGPragmaNode selector: #foo: arguments: { 1 asPCG }.
