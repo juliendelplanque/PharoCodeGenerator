@@ -1,11 +1,54 @@
 "
-I convert a PCG AST as a Pharo real AST.
+I am an abstract visit that convert a PCG AST to another kind of AST.
+
+My subclasses must implement all the methods in 'factory' protocol.
+These methods must create a node of the right type from the parameters provided.
 "
 Class {
 	#name : #PCGStaticConverterToRealAST,
 	#superclass : #PCGVisitor,
 	#category : #'PharoCodeGenerator-Visitors'
 }
+
+{ #category : #'methods generation' }
+PCGStaticConverterToRealAST class >> buildFactoryMethodSelectorKeywordsFor: class [
+	| selectorKeywords |
+	selectorKeywords := class instanceVariablesForRealAST
+		collect: [ :instVarName | instVarName asMutator ].
+	selectorKeywords
+		at: 1
+		put:
+			('create' , (class classForRealAST name allButFirst: 'RB' size)
+				, 'With' , selectorKeywords first asCamelCase) asSymbol.
+	^ selectorKeywords
+]
+
+{ #category : #'methods generation' }
+PCGStaticConverterToRealAST class >> regenerateFactoryMethods [
+	<script>
+	PCGProgramNode allSubclasses \ {PCGTemplateParameter}
+		select: [ :c | c subclasses isEmpty ]
+		thenDo: [ :class |
+			|selectorKeywords arguments|
+			selectorKeywords := self buildFactoryMethodSelectorKeywordsFor: class.
+			arguments := class instanceVariablesForRealAST collect: [ :instVarName |
+				instVarName asPCGArgument ].
+			(PCGMethodNode
+				selectorKeywords: selectorKeywords
+				arguments: arguments)
+				bodyBlock: [ :body | 
+					| cascade |
+					cascade := PCGCascadeNode target: class classForRealAST asPCG receiveNew.
+					(class classForRealAST inheritsFrom: RBVariableNode)
+						ifTrue: [ cascade receiveMessage: #start: with: 0 asPCG ].
+					class instanceVariablesForRealAST
+						do: [ :instVarName | 
+							cascade receiveMessage: instVarName asMutator with: instVarName asPCGArgument ].
+					cascade receiveYourself.
+					body << cascade returnIt ];
+				protocol: 'factory';
+				installOn: self ]
+]
 
 { #category : #'methods generation' }
 PCGStaticConverterToRealAST class >> regenerateVisitMethods [
@@ -22,16 +65,11 @@ PCGStaticConverterToRealAST class >> regenerateVisitMethods [
 				selector: ('visit' , (class name allButFirst: 3) , ':') asSymbol
 				arguments: {argument})
 				bodyBlock: [ :body | 
-					| cascade |
-					cascade := PCGCascadeNode
-						target: (argument receiveMessage: #classForRealAST) receiveNew.
-					(class classForRealAST inheritsFrom: RBVariableNode)
-						ifTrue: [ cascade receiveMessage: #start: with: 0 asPCG ].
-					class instanceVariablesForRealAST
-						do: [ :instVarName | 
-							| visitingAst |
-							visitingAst := (class slotNamed: instVarName) type class
-								= CollectionOfType
+					|factorySelectorKeyword arguments|
+					factorySelectorKeyword := Symbol streamContents: [ :s | (self buildFactoryMethodSelectorKeywordsFor: class) do: [ :symbol | s << symbol ] ].
+					arguments := class instanceVariablesForRealAST
+						collect: [ :instVarName | 
+							(class slotNamed: instVarName) type class = CollectionOfType
 								ifTrue: [ (argument receiveMessage: instVarName)
 										receiveMessage: #collect:
 										with:
@@ -43,119 +81,207 @@ PCGStaticConverterToRealAST class >> regenerateVisitMethods [
 										ifTrue: [ #self asPCGNode
 												receiveMessage: #visit:
 												with: (argument receiveMessage: instVarName) ]
-										ifFalse: [ argument receiveMessage: instVarName ] ].
-							cascade receiveMessage: instVarName asMutator with: visitingAst ].
-					cascade receiveYourself.
-					body << cascade returnIt ];
+										ifFalse: [ argument receiveMessage: instVarName ] ] ].
+					body << (#self asPCGNode receiveMessage: factorySelectorKeyword withAll: arguments) returnIt ];
 				protocol: 'visiting';
 				installOn: self ]
+]
+
+{ #category : #factory }
+PCGStaticConverterToRealAST >> createArgumentNodeWithName: name [
+	<generated>
+	^ self subclassResponsibility
+]
+
+{ #category : #factory }
+PCGStaticConverterToRealAST >> createArrayNodeWithStatements: statements [
+	<generated>
+	^ self subclassResponsibility
+]
+
+{ #category : #factory }
+PCGStaticConverterToRealAST >> createAssignmentNodeWithVariable: variable value: value [
+	<generated>
+	^ self subclassResponsibility
+]
+
+{ #category : #factory }
+PCGStaticConverterToRealAST >> createBlockNodeWithArguments: arguments body: body [
+	<generated>
+	^ self subclassResponsibility
+]
+
+{ #category : #factory }
+PCGStaticConverterToRealAST >> createCascadeNodeWithMessages: messages [
+	<generated>
+	^ self subclassResponsibility
+]
+
+{ #category : #factory }
+PCGStaticConverterToRealAST >> createGlobalNodeWithName: name [
+	<generated>
+	^ self subclassResponsibility
+]
+
+{ #category : #factory }
+PCGStaticConverterToRealAST >> createInstanceVariableNodeWithName: name [
+	<generated>
+	^ self subclassResponsibility
+]
+
+{ #category : #factory }
+PCGStaticConverterToRealAST >> createLiteralArrayNodeWithContents: contents [
+	<generated>
+	^ self subclassResponsibility
+]
+
+{ #category : #factory }
+PCGStaticConverterToRealAST >> createLiteralValueNodeWithValue: value [
+	<generated>
+	^ self subclassResponsibility
+]
+
+{ #category : #factory }
+PCGStaticConverterToRealAST >> createMessageNodeWithReceiver: receiver selector: selector arguments: arguments [
+	<generated>
+	^ self subclassResponsibility
+]
+
+{ #category : #factory }
+PCGStaticConverterToRealAST >> createMethodNodeWithSelector: selector body: body arguments: arguments pragmas: pragmas [
+	<generated>
+	^ self subclassResponsibility
+]
+
+{ #category : #factory }
+PCGStaticConverterToRealAST >> createPragmaNodeWithSelector: selector arguments: arguments [
+	<generated>
+	^ self subclassResponsibility
+]
+
+{ #category : #factory }
+PCGStaticConverterToRealAST >> createReturnNodeWithValue: value [
+	<generated>
+	^ self subclassResponsibility
+]
+
+{ #category : #factory }
+PCGStaticConverterToRealAST >> createSelfNodeWithName: name [
+	<generated>
+	^ self subclassResponsibility
+]
+
+{ #category : #factory }
+PCGStaticConverterToRealAST >> createSequenceNodeWithStatements: statements temporaries: temporaries [
+	<generated>
+	^ self subclassResponsibility
+]
+
+{ #category : #factory }
+PCGStaticConverterToRealAST >> createSuperNodeWithName: name [
+	<generated>
+	^ self subclassResponsibility
+]
+
+{ #category : #factory }
+PCGStaticConverterToRealAST >> createTemporaryNodeWithName: name [
+	<generated>
+	^ self subclassResponsibility
+]
+
+{ #category : #factory }
+PCGStaticConverterToRealAST >> createThisContextNodeWithName: name [
+	<generated>
+	^ self subclassResponsibility
 ]
 
 { #category : #visiting }
 PCGStaticConverterToRealAST >> visitArgumentNode: anArgumentNode [
 	<generated>
-	^ anArgumentNode classForRealAST new
-		start: 0;
-		name: anArgumentNode name;
-		yourself
+	^ self createArgumentNodeWithName: anArgumentNode name
 ]
 
 { #category : #visiting }
 PCGStaticConverterToRealAST >> visitArrayNode: anArrayNode [
 	<generated>
-	^ anArrayNode classForRealAST new
-		statements: (anArrayNode statements collect: [ :toVisit | self visit: toVisit ]);
-		yourself
+	^ self
+		createArrayNodeWithStatements: (anArrayNode statements collect: [ :toVisit | self visit: toVisit ])
 ]
 
 { #category : #visiting }
 PCGStaticConverterToRealAST >> visitAssignmentNode: anAssignmentNode [
 	<generated>
-	^ anAssignmentNode classForRealAST new
-		variable: (self visit: anAssignmentNode variable);
-		value: (self visit: anAssignmentNode value);
-		yourself
+	^ self
+		createAssignmentNodeWithVariable: (self visit: anAssignmentNode variable)
+		value: (self visit: anAssignmentNode value)
 ]
 
 { #category : #visiting }
 PCGStaticConverterToRealAST >> visitBlockNode: aBlockNode [
 	<generated>
-	^ aBlockNode classForRealAST new
-		arguments: (aBlockNode arguments collect: [ :toVisit | self visit: toVisit ]);
-		body: (self visit: aBlockNode body);
-		yourself
+	^ self
+		createBlockNodeWithArguments: (aBlockNode arguments collect: [ :toVisit | self visit: toVisit ])
+		body: (self visit: aBlockNode body)
 ]
 
 { #category : #visiting }
 PCGStaticConverterToRealAST >> visitCascadeNode: aCascadeNode [
 	<generated>
-	^ aCascadeNode classForRealAST new
-		messages: (aCascadeNode messages collect: [ :toVisit | self visit: toVisit ]);
-		yourself
+	^ self
+		createCascadeNodeWithMessages: (aCascadeNode messages collect: [ :toVisit | self visit: toVisit ])
 ]
 
 { #category : #visiting }
 PCGStaticConverterToRealAST >> visitGlobalNode: aGlobalNode [
 	<generated>
-	^ aGlobalNode classForRealAST new
-		start: 0;
-		name: aGlobalNode name;
-		yourself
+	^ self createGlobalNodeWithName: aGlobalNode name
 ]
 
 { #category : #visiting }
 PCGStaticConverterToRealAST >> visitInstanceVariableNode: anInstanceVariableNode [
 	<generated>
-	^ anInstanceVariableNode classForRealAST new
-		start: 0;
-		name: anInstanceVariableNode name;
-		yourself
+	^ self
+		createInstanceVariableNodeWithName: anInstanceVariableNode name
 ]
 
 { #category : #visiting }
 PCGStaticConverterToRealAST >> visitLiteralArrayNode: aLiteralArrayNode [
 	<generated>
-	^ aLiteralArrayNode classForRealAST new
-		contents: (self visit: aLiteralArrayNode contents);
-		yourself
+	^ self
+		createLiteralArrayNodeWithContents: (self visit: aLiteralArrayNode contents)
 ]
 
 { #category : #visiting }
 PCGStaticConverterToRealAST >> visitLiteralValueNode: aLiteralValueNode [
 	<generated>
-	^ aLiteralValueNode classForRealAST new
-		value: aLiteralValueNode value;
-		yourself
+	^ self createLiteralValueNodeWithValue: aLiteralValueNode value
 ]
 
 { #category : #visiting }
 PCGStaticConverterToRealAST >> visitMessageNode: aMessageNode [
 	<generated>
-	^ aMessageNode classForRealAST new
-		receiver: (self visit: aMessageNode receiver);
-		selector: aMessageNode selector;
-		arguments: (aMessageNode arguments collect: [ :toVisit | self visit: toVisit ]);
-		yourself
+	^ self
+		createMessageNodeWithReceiver: (self visit: aMessageNode receiver)
+		selector: aMessageNode selector
+		arguments: (aMessageNode arguments collect: [ :toVisit | self visit: toVisit ])
 ]
 
 { #category : #visiting }
 PCGStaticConverterToRealAST >> visitMethodNode: aMethodNode [
 	<generated>
-	^ aMethodNode classForRealAST new
-		selector: aMethodNode selector;
-		body: (self visit: aMethodNode body);
-		arguments: (aMethodNode arguments collect: [ :toVisit | self visit: toVisit ]);
-		pragmas: (aMethodNode pragmas collect: [ :toVisit | self visit: toVisit ]);
-		yourself
+	^ self
+		createMethodNodeWithSelector: aMethodNode selector
+		body: (self visit: aMethodNode body)
+		arguments: (aMethodNode arguments collect: [ :toVisit | self visit: toVisit ])
+		pragmas: (aMethodNode pragmas collect: [ :toVisit | self visit: toVisit ])
 ]
 
 { #category : #visiting }
 PCGStaticConverterToRealAST >> visitPragmaNode: aPragmaNode [
 	<generated>
-	^ aPragmaNode classForRealAST new
-		selector: aPragmaNode selector;
-		arguments: (aPragmaNode arguments collect: [ :toVisit | self visit: toVisit ]);
-		yourself
+	^ self
+		createPragmaNodeWithSelector: aPragmaNode selector
+		arguments: (aPragmaNode arguments collect: [ :toVisit | self visit: toVisit ])
 ]
 
 { #category : #visiting }
@@ -167,36 +293,27 @@ PCGStaticConverterToRealAST >> visitProgramNode: aProgramNode [
 { #category : #visiting }
 PCGStaticConverterToRealAST >> visitReturnNode: aReturnNode [
 	<generated>
-	^ aReturnNode classForRealAST new
-		value: (self visit: aReturnNode value);
-		yourself
+	^ self createReturnNodeWithValue: (self visit: aReturnNode value)
 ]
 
 { #category : #visiting }
 PCGStaticConverterToRealAST >> visitSelfNode: aSelfNode [
 	<generated>
-	^ aSelfNode classForRealAST new
-		start: 0;
-		name: aSelfNode name;
-		yourself
+	^ self createSelfNodeWithName: aSelfNode name
 ]
 
 { #category : #visiting }
 PCGStaticConverterToRealAST >> visitSequenceNode: aSequenceNode [
 	<generated>
-	^ aSequenceNode classForRealAST new
-		statements: (aSequenceNode statements collect: [ :toVisit | self visit: toVisit ]);
-		temporaries: (aSequenceNode temporaries collect: [ :toVisit | self visit: toVisit ]);
-		yourself
+	^ self
+		createSequenceNodeWithStatements: (aSequenceNode statements collect: [ :toVisit | self visit: toVisit ])
+		temporaries: (aSequenceNode temporaries collect: [ :toVisit | self visit: toVisit ])
 ]
 
 { #category : #visiting }
 PCGStaticConverterToRealAST >> visitSuperNode: aSuperNode [
 	<generated>
-	^ aSuperNode classForRealAST new
-		start: 0;
-		name: aSuperNode name;
-		yourself
+	^ self createSuperNodeWithName: aSuperNode name
 ]
 
 { #category : #visiting }
@@ -207,17 +324,11 @@ PCGStaticConverterToRealAST >> visitTemplateParameter: aTemplateParameter [
 { #category : #visiting }
 PCGStaticConverterToRealAST >> visitTemporaryNode: aTemporaryNode [
 	<generated>
-	^ aTemporaryNode classForRealAST new
-		start: 0;
-		name: aTemporaryNode name;
-		yourself
+	^ self createTemporaryNodeWithName: aTemporaryNode name
 ]
 
 { #category : #visiting }
 PCGStaticConverterToRealAST >> visitThisContextNode: aThisContextNode [
 	<generated>
-	^ aThisContextNode classForRealAST new
-		start: 0;
-		name: aThisContextNode name;
-		yourself
+	^ self createThisContextNodeWithName: aThisContextNode name
 ]

@@ -54,8 +54,7 @@ PCGProgramNode >> meta [
 { #category : #converting }
 PCGProgramNode >> realAST [
 	self checkAST.
-	^ PCGStaticConverterToRealAST new
-		visit: self
+	^ PCGStaticConverterToRBAST visit: self
 ]
 
 { #category : #converting }
