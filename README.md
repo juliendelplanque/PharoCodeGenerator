@@ -7,6 +7,13 @@
 
 A toolkit to generate Pharo code.
 
+- [Install](#install)
+- [How it works](#how-it-works)
+- [API overview](#api-overview)
+- [DSL Examples](#dsl-examples)
+- [Template support](#template-support)
+- [Generate PCG code from an existing method in the system](#generate-pcg-code-from-an-existing-method-in-the-system)
+
 ## Install
 
 ```st
