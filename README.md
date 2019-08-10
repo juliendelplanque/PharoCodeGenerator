@@ -20,6 +20,33 @@ Metacello new
 
 ![How PharoCodeGenerator works](resources/howitworks.png)
 
+## API overview
+
+Consider the following code snippet:
+
+```st
+ast := (PCGMethodNode selector: #answerToEverything)
+	bodyBlock: [ :body |
+		body << 42 asPCG returnIt ]
+```
+
+This code generates the following method:
+
+```st
+answerToEverything
+	<generated>
+	^ 42
+```
+
+Here are explanations on the methods one can send to the object stored in `ast` variable:
+
+- `ast realAst` : Builds the Pharo AST corresponding to description made in DSL
+- `ast checkAst` : Checks if the AST is ready for translation to Pharo AST. Raises an error if not.
+- `ast sourceCode` : Returns a String holding source code resulting from generation.
+- `ast withGeneratedPragma: true|false` : Adds or not `<generated>` pragma in method source code.
+- `ast protocol: aString` : Sets the protocol for the methods to be generated.
+- `ast installOn: aBehaviour` : Install the method on aBehaviour object (class, meta-class, trait, etc...).
+
 ## DSL Examples
 This section contains method from the system and the PCG code to generate them.
 
@@ -42,7 +69,7 @@ can be generated via the dsl:
 The following source code taken `Collection>>#collect:` method:
 
 ```st
-collect: aBlock  | newCollection |  newCollection := self species new.  self do: [:each |  newCollection add: (aBlock value: each) ].  ^newCollection
+collect: aBlock  | newCollection |  newCollection := self species new.  self do: [:each | newCollection add: (aBlock value: each) ].  ^newCollection
 ```
 
 can be generated via the dsl:
