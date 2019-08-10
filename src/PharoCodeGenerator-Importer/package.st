@@ -1,1 +1,0 @@
-Package { #name : #'PharoCodeGenerator-Importer' }
