@@ -19,3 +19,8 @@ PCGTemporaryNode class >> classForRealAST [
 PCGTemporaryNode >> acceptVisitor: aVisitor [
 	^ aVisitor visitTemporaryNode: self
 ]
+
+{ #category : #converting }
+PCGTemporaryNode >> asPCGTemporary [
+	^ self
+]

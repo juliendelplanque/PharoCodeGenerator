@@ -17,3 +17,8 @@ PCGArgumentNode class >> classForRealAST [
 PCGArgumentNode >> acceptVisitor: aVisitor [
 	^ aVisitor visitArgumentNode: self
 ]
+
+{ #category : #converting }
+PCGArgumentNode >> asPCGArgument [
+	^ self
+]

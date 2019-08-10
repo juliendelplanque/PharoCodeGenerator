@@ -19,3 +19,8 @@ PCGInstanceVariableNode class >> classForRealAST [
 PCGInstanceVariableNode >> acceptVisitor: aVisitor [
 	^ aVisitor visitInstanceVariableNode: self
 ]
+
+{ #category : #converting }
+PCGInstanceVariableNode >> asPCGInstanceVariable [
+	^ self
+]

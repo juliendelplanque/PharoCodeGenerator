@@ -19,3 +19,8 @@ PCGGlobalNode class >> classForRealAST [
 PCGGlobalNode >> acceptVisitor: aVisitor [
 	^ aVisitor visitGlobalNode: self
 ]
+
+{ #category : #converting }
+PCGGlobalNode >> asPCGGlobal [
+	^ self
+]
