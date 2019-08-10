@@ -106,3 +106,89 @@ can be generated via the dsl:
 (PCGMethodNode	selector: #ifTrue:ifFalse:	arguments:	{#trueAlternativeBlock asPCGArgument.#falseAlternativeBlock asPCGArgument})	bodyBlock: [ :body | 		body			<< (#trueAlternativeBlock asPCGArgument receiveMessage: #value) returnIt ];	protocol: #controlling;	yourself
 ```
 
+## Template support
+PCG provides support for templating.
+
+```st
+template := (PCGMethodNode selector: #answerSelector asPCGTemplateParameter)
+	bodyBlock: [ :body |
+		body << #answer asPCGTemplateParameter returnIt ]
+```
+
+From a `template`, one can generate multiple methods using `#substituteParametersWith:` message:
+
+The following substitution
+
+```st
+(template substituteParametersWith: { 
+	#answerSelector -> #answerToEverything.
+	#answer -> 42 asPCG }) sourceCode.
+```
+
+generates
+
+```st
+answerToEverything
+	<generated>
+	^ 42
+```
+
+This other substitution
+
+```st
+(template substituteParametersWith: { 
+	#answerSelector -> #answerToEverythingInParallelUniverse.
+	#answer -> 43 asPCG }) sourceCode
+```
+
+generates
+
+```st
+answerToEverythingInParallelUniverse
+	<generated>
+	^ 43
+```
+
+## Generate PCG code from an existing method in the system
+If you see a method in your project that can be used as a basis for code generation, PCG can help you.
+
+![Generate PCG code from existing method](resources/fromexistingmethod.png)
+
+Let us import the source code of `Object>>#yourself` as a PCG AST:
+
+```st
+pcgAst := (Object >> #yourself) asPCGAST.
+```
+
+Then,
+
+```st
+pcgAst sourceCode
+```
+
+generates:
+
+```st
+yourself
+	<generated>
+	^ self
+```
+
+Now, one might need to retrieve the PCG script leading to the PCG AST that is able to generate `Object>>#yourself`. This can be achieve via `#meta` message.
+
+Thus,
+
+```st
+pcgAst meta sourceCode
+```
+
+generates
+
+```st
+(PCGMethodNode selector: #yourself)
+	bodyBlock: [ :body | body << #self asPCGNode returnIt ];
+	protocol: #accessing;
+	yourself
+```
+
+This mechanism is handy to generalize an exisiting methods in the system as a PCG template.
