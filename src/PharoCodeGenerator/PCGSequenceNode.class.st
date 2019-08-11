@@ -8,8 +8,8 @@ Class {
 	#traits : 'PCGTStatementsStream + PCGTWithTemporaries',
 	#classTraits : 'PCGTStatementsStream classTrait + PCGTWithTemporaries classTrait',
 	#instVars : [
-		'#statements => TypedSlot type: (SequenceableCollection withItemsType: PCGTStatement)',
-		'#temporaries => TypedSlot type: (SequenceableCollection withItemsType: PCGTemporaryNode)'
+		'#statements type: (SequenceableCollection withItemsType: PCGTStatement)',
+		'#temporaries type: (SequenceableCollection withItemsType: PCGTemporaryNode)'
 	],
 	#category : #'PharoCodeGenerator-AST'
 }

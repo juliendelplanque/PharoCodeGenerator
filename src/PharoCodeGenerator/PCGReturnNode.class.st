@@ -8,7 +8,7 @@ Class {
 	#traits : 'PCGTStatement',
 	#classTraits : 'PCGTStatement classTrait',
 	#instVars : [
-		'#value => TypedSlot type: PCGValueNode'
+		'#value type: PCGValueNode'
 	],
 	#category : #'PharoCodeGenerator-AST'
 }

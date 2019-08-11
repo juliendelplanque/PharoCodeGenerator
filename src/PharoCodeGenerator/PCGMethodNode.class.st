@@ -8,11 +8,11 @@ Class {
 	#traits : 'PCGTStatementsStream + PCGTBodyBlock + PCGTWithTemporaries',
 	#classTraits : 'PCGTStatementsStream classTrait + PCGTBodyBlock classTrait + PCGTWithTemporaries classTrait',
 	#instVars : [
-		'#selector => TypedSlot type: Symbol',
-		'#body => TypedSlot type: PCGSequenceNode',
-		'#arguments => TypedSlot type: (SequenceableCollection withItemsType: PCGArgumentNode)',
-		'#pragmas => TypedSlot type: (SequenceableCollection withItemsType: PCGPragmaNode)',
-		'#protocol => TypedSlot type: String'
+		'#selector type: Symbol',
+		'#body type: PCGSequenceNode',
+		'#arguments type: (SequenceableCollection withItemsType: PCGArgumentNode)',
+		'#pragmas type: (SequenceableCollection withItemsType: PCGPragmaNode)',
+		'#protocol type: String'
 	],
 	#category : #'PharoCodeGenerator-AST'
 }

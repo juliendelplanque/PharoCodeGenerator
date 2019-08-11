@@ -6,7 +6,7 @@ Class {
 	#name : #PCGLiteralValueNode,
 	#superclass : #PCGLiteralNode,
 	#instVars : [
-		'#value => TypedSlot type: Object'
+		'#value type: Object'
 	],
 	#category : #'PharoCodeGenerator-AST'
 }

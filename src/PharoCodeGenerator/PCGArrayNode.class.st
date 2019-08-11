@@ -8,7 +8,7 @@ Class {
 	#traits : 'PCGTMessageReceiver',
 	#classTraits : 'PCGTMessageReceiver classTrait',
 	#instVars : [
-		'#statements => TypedSlot type: (SequenceableCollection withItemsType: PCGTStatement)'
+		'#statements type: (SequenceableCollection withItemsType: PCGTStatement)'
 	],
 	#category : #'PharoCodeGenerator-AST'
 }

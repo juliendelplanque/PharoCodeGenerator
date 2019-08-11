@@ -6,8 +6,8 @@ Class {
 	#name : #PCGPragmaNode,
 	#superclass : #PCGProgramNode,
 	#instVars : [
-		'#selector => TypedSlot type: Symbol',
-		'#arguments => TypedSlot type: (SequenceableCollection withItemsType: PCGLiteralNode)'
+		'#selector type: Symbol',
+		'#arguments type: (SequenceableCollection withItemsType: PCGLiteralNode)'
 	],
 	#category : #'PharoCodeGenerator-AST'
 }

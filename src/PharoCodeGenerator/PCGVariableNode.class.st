@@ -8,7 +8,7 @@ Class {
 	#traits : 'PCGTMessageReceiver',
 	#classTraits : 'PCGTMessageReceiver classTrait',
 	#instVars : [
-		'#name => TypedSlot type: Symbol'
+		'#name type: Symbol'
 	],
 	#category : #'PharoCodeGenerator-AST'
 }

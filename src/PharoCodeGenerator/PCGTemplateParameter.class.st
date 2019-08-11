@@ -9,7 +9,7 @@ Class {
 	#traits : 'PCGTReturnable + PCGTAssignable + PCGTCascadeTarget + PCGTStatement + PCGTMessageReceiver + PCGTAssignmentTarget',
 	#classTraits : 'PCGTReturnable classTrait + PCGTAssignable classTrait + PCGTCascadeTarget classTrait + PCGTStatement classTrait + PCGTMessageReceiver classTrait + PCGTAssignmentTarget classTrait',
 	#instVars : [
-		'#name => TypedSlot type: Symbol'
+		'#name type: Symbol'
 	],
 	#category : #'PharoCodeGenerator-AST'
 }
