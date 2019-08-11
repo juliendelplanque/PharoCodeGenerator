@@ -39,6 +39,11 @@ PCGProgramNode >> instanceVariablesForRealAST [
 	^ self class instanceVariablesForRealAST
 ]
 
+{ #category : #testing }
+PCGProgramNode >> isPCGProgramNode [
+	^ true
+]
+
 { #category : #converting }
 PCGProgramNode >> meta [
 	self checkAST.
