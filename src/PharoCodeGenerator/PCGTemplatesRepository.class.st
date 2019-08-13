@@ -26,26 +26,21 @@ PCGTemplatesRepository >> equalMethodForSlots: aCollectionOfSlots [
 
 { #category : #builders }
 PCGTemplatesRepository >> equalMethodForSlots: aCollectionOfSlots withSuperCall: aBoolean [
-	|testExpression|
+	| equalNodes testExpression |
 	aCollectionOfSlots
 		ifEmpty: [ self error: 'The collection of slots is empty, can not generate #=' ].
 	
-	"Iteratively builds the test expression using slots."
-	testExpression := aCollectionOfSlots first name asPCGInstanceVariable
-		receiveMessage: #=
-		with: (#anObject asPCGArgument receiveMessage: aCollectionOfSlots first name).
+	equalNodes := aCollectionOfSlots collect: [ :slot |
+		slot name asPCGInstanceVariable
+			receiveMessage: #=
+			with: (#anObject asPCGArgument receiveMessage: slot name)
+		] as: OrderedCollection.
 	
 	aBoolean ifTrue: [ 
-		testExpression := (#super asPCGNode receiveMessage: #= with: #anObject asPCGArgument)
-			receiveMessage: #and: with: testExpression inBlock ].
+		equalNodes addFirst: (#super asPCGNode receiveMessage: #= with: #anObject asPCGArgument) ].
 	
-	aCollectionOfSlots allButFirst do: [ :slot |
-		testExpression := testExpression
-			receiveMessage: #and:
-			with: (slot name asPCGInstanceVariable
-						receiveMessage: #=
-						with: (#anObject asPCGArgument receiveMessage: slot name)) inBlock ].
-	
+	testExpression := equalNodes reduce: [ :leftNode :rightNode |
+		leftNode receiveMessage: #and: with: rightNode inBlock ].
 	^ (self equalMethodTemplate substituteParametersWith: { 
 		#testExpression -> testExpression })
 ]
