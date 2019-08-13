@@ -5,3 +5,8 @@ Trait {
 	#name : #PCGTStatement,
 	#category : #'PharoCodeGenerator-Traits'
 }
+
+{ #category : #dsl }
+PCGTStatement >> inBlock [
+	^ PCGBlockNode bodyBlock: [ :body | body << self ]
+]
