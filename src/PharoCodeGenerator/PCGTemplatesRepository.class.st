@@ -61,7 +61,40 @@ PCGTemplatesRepository >> equalMethodTemplate [
 									receiveMessage: #ifFalse:
 									with: false asPCG returnIt inBlock).
 					body << #testExpression asPCGTemplateParameter returnIt ];
-				protocol: 'testing';
+				protocol: 'comparing';
+				yourself
+]
+
+{ #category : #builders }
+PCGTemplatesRepository >> hashMethodForSlots: aCollectionOfSlots withSuperCall: aBoolean [
+	|hashExpression|
+	aCollectionOfSlots
+		ifEmpty: [ self error: 'The collection of slots is empty, can not generate #hash' ].
+	
+	"Iteratively builds the hash expression using slots."
+	hashExpression := aCollectionOfSlots last name asPCGInstanceVariable
+		receiveMessage: #hash.
+	
+	aBoolean ifTrue: [ 
+		hashExpression := (#super asPCGNode receiveMessage: #hash)
+			receiveMessage: #bitXor: with: hashExpression ].
+	
+	aCollectionOfSlots allButLast reversed do: [ :slot |
+		hashExpression := hashExpression
+			receiveMessage: #bitXor:
+			with: (slot name asPCGInstanceVariable
+						receiveMessage: #hash) ].
+	
+	^ (self hashMethodTemplate substituteParametersWith: { 
+		#hashExpression -> hashExpression })
+]
+
+{ #category : #templates }
+PCGTemplatesRepository >> hashMethodTemplate [
+	^ (PCGMethodNode selector: #hash)
+				bodyBlock: [ :body |
+					body << #hashExpression asPCGTemplateParameter returnIt ];
+				protocol: 'comparing';
 				yourself
 ]
 
