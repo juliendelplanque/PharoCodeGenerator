@@ -7,7 +7,7 @@ Class {
 	#superclass : #PCGValueNode,
 	#instVars : [
 		'#variable type: PCGVariableNode',
-		'#value type: PCGValueNode'
+		'#value type: PCGTAssignable'
 	],
 	#category : #'PharoCodeGenerator-AST'
 }
