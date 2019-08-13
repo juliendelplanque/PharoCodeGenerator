@@ -31,15 +31,15 @@ PCGTemplatesRepository >> equalMethodForSlots: aCollectionOfSlots withSuperCall:
 		ifEmpty: [ self error: 'The collection of slots is empty, can not generate #=' ].
 	
 	"Iteratively builds the test expression using slots."
-	testExpression := aCollectionOfSlots last name asPCGInstanceVariable
+	testExpression := aCollectionOfSlots first name asPCGInstanceVariable
 		receiveMessage: #=
-		with: (#anObject asPCGArgument receiveMessage: aCollectionOfSlots last name).
+		with: (#anObject asPCGArgument receiveMessage: aCollectionOfSlots first name).
 	
 	aBoolean ifTrue: [ 
 		testExpression := (#super asPCGNode receiveMessage: #= with: #anObject asPCGArgument)
 			receiveMessage: #and: with: testExpression inBlock ].
 	
-	aCollectionOfSlots allButLast reversed do: [ :slot |
+	aCollectionOfSlots allButFirst do: [ :slot |
 		testExpression := testExpression
 			receiveMessage: #and:
 			with: (slot name asPCGInstanceVariable
@@ -72,14 +72,14 @@ PCGTemplatesRepository >> hashMethodForSlots: aCollectionOfSlots withSuperCall: 
 		ifEmpty: [ self error: 'The collection of slots is empty, can not generate #hash' ].
 	
 	"Iteratively builds the hash expression using slots."
-	hashExpression := aCollectionOfSlots last name asPCGInstanceVariable
+	hashExpression := aCollectionOfSlots first name asPCGInstanceVariable
 		receiveMessage: #hash.
 	
 	aBoolean ifTrue: [ 
 		hashExpression := (#super asPCGNode receiveMessage: #hash)
 			receiveMessage: #bitXor: with: hashExpression ].
 	
-	aCollectionOfSlots allButLast reversed do: [ :slot |
+	aCollectionOfSlots allButFirst do: [ :slot |
 		hashExpression := hashExpression
 			receiveMessage: #bitXor:
 			with: (slot name asPCGInstanceVariable
