@@ -11,6 +11,11 @@ PCGTMessageReceiver >> buildMessageNode: aSymbol withAll: arguments [
 	^ PCGMessageNode receiver: self selector: aSymbol arguments: arguments
 ]
 
+{ #category : #'dsl-sugar' }
+PCGTMessageReceiver >> receiveClass [
+	^ self receiveMessage: #class
+]
+
 { #category : #dsl }
 PCGTMessageReceiver >> receiveMessage: aSymbol [
 	^ self receiveMessage: aSymbol withAll: Array empty
