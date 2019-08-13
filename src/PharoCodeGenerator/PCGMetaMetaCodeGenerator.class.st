@@ -79,7 +79,11 @@ PCGMetaMetaCodeGenerator >> visitAssignmentNode: anAssignmentNode [
 
 { #category : #visiting }
 PCGMetaMetaCodeGenerator >> visitBlockNode: aBlockNode [
-	| blockNode |
+	|blockNode|
+	"Special case to generate shorter and more readable code."
+	(aBlockNode arguments isEmpty and: [ aBlockNode body statements size = 1 ])
+		ifTrue: [ ^ (self visit: aBlockNode body statements first) receiveMessage: #inBlock ].
+	
 	blockNode := PCGBlockNode asPCG
 		receiveMessage: #arguments:
 		with: (aBlockNode arguments collect: [ :arg | self visit: arg ]) asArray asPCG.
