@@ -62,24 +62,20 @@ PCGTemplatesRepository >> equalMethodTemplate [
 
 { #category : #builders }
 PCGTemplatesRepository >> hashMethodForSlots: aCollectionOfSlots withSuperCall: aBoolean [
-	|hashExpression|
+	| hashNodes hashExpression |
 	aCollectionOfSlots
 		ifEmpty: [ self error: 'The collection of slots is empty, can not generate #hash' ].
 	
-	"Iteratively builds the hash expression using slots."
-	hashExpression := aCollectionOfSlots first name asPCGInstanceVariable
-		receiveMessage: #hash.
+	hashNodes := aCollectionOfSlots collect: [ :slot |
+		slot name asPCGInstanceVariable
+			receiveMessage: #hash
+		] as: OrderedCollection.
 	
 	aBoolean ifTrue: [ 
-		hashExpression := (#super asPCGNode receiveMessage: #hash)
-			receiveMessage: #bitXor: with: hashExpression ].
+		hashNodes addFirst: (#super asPCGNode receiveMessage: #hash) ].
 	
-	aCollectionOfSlots allButFirst do: [ :slot |
-		hashExpression := hashExpression
-			receiveMessage: #bitXor:
-			with: (slot name asPCGInstanceVariable
-						receiveMessage: #hash) ].
-	
+	hashExpression := hashNodes reduce: [ :leftNode :rightNode |
+		leftNode receiveMessage: #bitXor: with: rightNode ].
 	^ (self hashMethodTemplate substituteParametersWith: { 
 		#hashExpression -> hashExpression })
 ]
