@@ -32,6 +32,17 @@ PCGPragmaNode class >> selector: selector arguments: arguments [
 		yourself
 ]
 
+{ #category : #comparing }
+PCGPragmaNode >> = anObject [
+	<generated>
+	self == anObject
+		ifTrue: [ ^ true ].
+	self class = anObject class
+		ifFalse: [ ^ false ].
+	^ selector = anObject selector
+		and: [ arguments = anObject arguments ]
+]
+
 { #category : #visiting }
 PCGPragmaNode >> acceptVisitor: aVisitor [
 	^ aVisitor visitPragmaNode: self
@@ -45,6 +56,12 @@ PCGPragmaNode >> arguments [
 { #category : #accessing }
 PCGPragmaNode >> arguments: anObject [
 	arguments := anObject asOrderedCollection
+]
+
+{ #category : #comparing }
+PCGPragmaNode >> hash [
+	<generated>
+	^ selector hash bitXor: arguments hash
 ]
 
 { #category : #initialization }

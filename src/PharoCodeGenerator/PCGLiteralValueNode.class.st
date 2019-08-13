@@ -23,9 +23,25 @@ PCGLiteralValueNode class >> value: value [
 		yourself
 ]
 
+{ #category : #comparing }
+PCGLiteralValueNode >> = anObject [
+	<generated>
+	self == anObject
+		ifTrue: [ ^ true ].
+	self class = anObject class
+		ifFalse: [ ^ false ].
+	^ value = anObject value
+]
+
 { #category : #visiting }
 PCGLiteralValueNode >> acceptVisitor: aVisitor [
 	^ aVisitor visitLiteralValueNode: self
+]
+
+{ #category : #comparing }
+PCGLiteralValueNode >> hash [
+	<generated>
+	^ value hash
 ]
 
 { #category : #accessing }

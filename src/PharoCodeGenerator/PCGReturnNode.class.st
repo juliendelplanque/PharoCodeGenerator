@@ -25,9 +25,25 @@ PCGReturnNode class >> value: value [
 		yourself
 ]
 
+{ #category : #comparing }
+PCGReturnNode >> = anObject [
+	<generated>
+	self == anObject
+		ifTrue: [ ^ true ].
+	self class = anObject class
+		ifFalse: [ ^ false ].
+	^ value = anObject value
+]
+
 { #category : #visiting }
 PCGReturnNode >> acceptVisitor: aVisitor [
 	^ aVisitor visitReturnNode: self
+]
+
+{ #category : #comparing }
+PCGReturnNode >> hash [
+	<generated>
+	^ value hash
 ]
 
 { #category : #accessing }

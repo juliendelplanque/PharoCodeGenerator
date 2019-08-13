@@ -33,6 +33,16 @@ PCGCascadeNode class >> target: target [
 		yourself
 ]
 
+{ #category : #comparing }
+PCGCascadeNode >> = anObject [
+	<generated>
+	self == anObject
+		ifTrue: [ ^ true ].
+	self class = anObject class
+		ifFalse: [ ^ false ].
+	^ target = anObject target and: [ messages = anObject messages ]
+]
+
 { #category : #visiting }
 PCGCascadeNode >> acceptVisitor: aVisitor [
 	^ aVisitor visitCascadeNode: self
@@ -47,6 +57,12 @@ PCGCascadeNode >> addMessage: aMessageNode [
 PCGCascadeNode >> buildMessageNode: aSymbol withAll: arguments [
 	"Here we override the message to change the receiver to be the target of cascade."
 	^ self addMessage: (PCGMessageNode receiver: self target selector: aSymbol arguments: arguments)
+]
+
+{ #category : #comparing }
+PCGCascadeNode >> hash [
+	<generated>
+	^ target hash bitXor: messages hash
 ]
 
 { #category : #initialization }

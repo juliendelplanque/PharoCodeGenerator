@@ -23,6 +23,16 @@ PCGLiteralArrayNode class >> instanceVariablesForRealAST [
 	^ #(#contents)
 ]
 
+{ #category : #comparing }
+PCGLiteralArrayNode >> = anObject [
+	<generated>
+	self == anObject
+		ifTrue: [ ^ true ].
+	self class = anObject class
+		ifFalse: [ ^ false ].
+	^ contents = anObject contents
+]
+
 { #category : #visiting }
 PCGLiteralArrayNode >> acceptVisitor: aVisitor [
 	^ aVisitor visitLiteralArrayNode: self
@@ -36,4 +46,10 @@ PCGLiteralArrayNode >> contents [
 { #category : #accessing }
 PCGLiteralArrayNode >> contents: anObject [
 	contents := anObject
+]
+
+{ #category : #comparing }
+PCGLiteralArrayNode >> hash [
+	<generated>
+	^ contents hash
 ]

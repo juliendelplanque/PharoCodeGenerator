@@ -26,9 +26,25 @@ PCGTemplateParameter class >> name: name [
 		yourself
 ]
 
+{ #category : #comparing }
+PCGTemplateParameter >> = anObject [
+	<generated>
+	self == anObject
+		ifTrue: [ ^ true ].
+	self class = anObject class
+		ifFalse: [ ^ false ].
+	^ name = anObject name
+]
+
 { #category : #visiting }
 PCGTemplateParameter >> acceptVisitor: aVisitor [
 	^ aVisitor visitTemplateParameter: self
+]
+
+{ #category : #comparing }
+PCGTemplateParameter >> hash [
+	<generated>
+	^ name hash
 ]
 
 { #category : #accessing }

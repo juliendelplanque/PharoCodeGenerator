@@ -84,6 +84,19 @@ PCGMethodNode class >> selectorKeywords: anArrayOfSymbols arguments: arguments [
 		yourself
 ]
 
+{ #category : #comparing }
+PCGMethodNode >> = anObject [
+	<generated>
+	self == anObject
+		ifTrue: [ ^ true ].
+	self class = anObject class
+		ifFalse: [ ^ false ].
+	^ selector = anObject selector
+		and: [ body = anObject body
+				and: [ arguments = anObject arguments
+						and: [ pragmas = anObject pragmas and: [ protocol = anObject protocol ] ] ] ]
+]
+
 { #category : #visiting }
 PCGMethodNode >> acceptVisitor: aVisitor [
 	^ aVisitor visitMethodNode: self
@@ -143,6 +156,13 @@ PCGMethodNode >> body: anObject [
 { #category : #accessing }
 PCGMethodNode >> generatedPragmaSelector [
 	^ self class generatedPragmaSelector
+]
+
+{ #category : #comparing }
+PCGMethodNode >> hash [
+	<generated>
+	^ (((selector hash bitXor: body hash) bitXor: arguments hash)
+		bitXor: pragmas hash) bitXor: protocol hash
 ]
 
 { #category : #initialization }

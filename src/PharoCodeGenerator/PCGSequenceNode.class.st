@@ -34,9 +34,26 @@ PCGSequenceNode class >> temporaries: temporaries statements: statements [
 		yourself
 ]
 
+{ #category : #comparing }
+PCGSequenceNode >> = anObject [
+	<generated>
+	self == anObject
+		ifTrue: [ ^ true ].
+	self class = anObject class
+		ifFalse: [ ^ false ].
+	^ statements = anObject statements
+		and: [ temporaries = anObject temporaries ]
+]
+
 { #category : #visiting }
 PCGSequenceNode >> acceptVisitor: aVisitor [
 	^ aVisitor visitSequenceNode: self
+]
+
+{ #category : #comparing }
+PCGSequenceNode >> hash [
+	<generated>
+	^ statements hash bitXor: temporaries hash
 ]
 
 { #category : #initialization }

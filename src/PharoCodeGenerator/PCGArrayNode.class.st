@@ -25,9 +25,25 @@ PCGArrayNode class >> statements: statements [
 		yourself
 ]
 
+{ #category : #comparing }
+PCGArrayNode >> = anObject [
+	<generated>
+	self == anObject
+		ifTrue: [ ^ true ].
+	self class = anObject class
+		ifFalse: [ ^ false ].
+	^ statements = anObject statements
+]
+
 { #category : #visiting }
 PCGArrayNode >> acceptVisitor: aVisitor [
 	^ aVisitor visitArrayNode: self
+]
+
+{ #category : #comparing }
+PCGArrayNode >> hash [
+	<generated>
+	^ statements hash
 ]
 
 { #category : #accessing }

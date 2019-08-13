@@ -25,9 +25,25 @@ PCGAssignmentNode class >> variable: variable value: value [
 		yourself
 ]
 
+{ #category : #comparing }
+PCGAssignmentNode >> = anObject [
+	<generated>
+	self == anObject
+		ifTrue: [ ^ true ].
+	self class = anObject class
+		ifFalse: [ ^ false ].
+	^ variable = anObject variable and: [ value = anObject value ]
+]
+
 { #category : #visiting }
 PCGAssignmentNode >> acceptVisitor: aVisitor [
 	^ aVisitor visitAssignmentNode: self
+]
+
+{ #category : #comparing }
+PCGAssignmentNode >> hash [
+	<generated>
+	^ variable hash bitXor: value hash
 ]
 
 { #category : #accessing }

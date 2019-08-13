@@ -41,6 +41,16 @@ PCGBlockNode class >> instanceVariablesForRealAST [
 	^ #(#arguments #body)
 ]
 
+{ #category : #comparing }
+PCGBlockNode >> = anObject [
+	<generated>
+	self == anObject
+		ifTrue: [ ^ true ].
+	self class = anObject class
+		ifFalse: [ ^ false ].
+	^ arguments = anObject arguments and: [ body = anObject body ]
+]
+
 { #category : #visiting }
 PCGBlockNode >> acceptVisitor: aVisitor [
 	^ aVisitor visitBlockNode: self
@@ -64,6 +74,12 @@ PCGBlockNode >> body [
 { #category : #accessing }
 PCGBlockNode >> body: anObject [
 	body := anObject
+]
+
+{ #category : #comparing }
+PCGBlockNode >> hash [
+	<generated>
+	^ arguments hash bitXor: body hash
 ]
 
 { #category : #initialization }

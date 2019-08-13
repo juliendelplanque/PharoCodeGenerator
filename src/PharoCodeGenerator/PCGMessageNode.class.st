@@ -37,6 +37,17 @@ PCGMessageNode class >> receiver: receiver selector: selector arguments: argumen
 		yourself
 ]
 
+{ #category : #comparing }
+PCGMessageNode >> = anObject [
+	<generated>
+	self == anObject
+		ifTrue: [ ^ true ].
+	self class = anObject class
+		ifFalse: [ ^ false ].
+	^ receiver = anObject receiver
+		and: [ selector = anObject selector and: [ arguments = anObject arguments ] ]
+]
+
 { #category : #visiting }
 PCGMessageNode >> acceptVisitor: aVisitor [
 	^ aVisitor visitMessageNode: self
@@ -50,6 +61,12 @@ PCGMessageNode >> arguments [
 { #category : #accessing }
 PCGMessageNode >> arguments: anObject [
 	arguments := anObject asOrderedCollection
+]
+
+{ #category : #comparing }
+PCGMessageNode >> hash [
+	<generated>
+	^ (receiver hash bitXor: selector hash) bitXor: arguments hash
 ]
 
 { #category : #initialization }
