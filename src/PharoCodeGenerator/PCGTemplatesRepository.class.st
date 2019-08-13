@@ -39,7 +39,7 @@ PCGTemplatesRepository >> equalMethodForSlots: aCollectionOfSlots withSuperCall:
 	aBoolean ifTrue: [ 
 		equalNodes addFirst: (#super asPCGNode receiveMessage: #= with: #anObject asPCGArgument) ].
 	
-	testExpression := equalNodes reduce: [ :leftNode :rightNode |
+	testExpression := equalNodes reversed reduce: [ :rightNode :leftNode |
 		leftNode receiveMessage: #and: with: rightNode inBlock ].
 	^ (self equalMethodTemplate substituteParametersWith: { 
 		#testExpression -> testExpression })

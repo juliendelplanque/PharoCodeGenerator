@@ -36,8 +36,8 @@ PCGTemplatesRepositoryTest >> testEqualMethodForSlotsWithSuperCall [
 		ifTrue: [ ^ true ].
 	self class = anObject class
 		ifFalse: [ ^ false ].
-	^ (name = anObject name and: [ surname = anObject surname ])
-		and: [ age = anObject age ]'.
+	^ name = anObject name
+		and: [ surname = anObject surname and: [ age = anObject age ] ]'.
 		
 	self assert: (templateRepository equalMethodForSlots: { #name => InstanceVariableSlot. #surname => InstanceVariableSlot. #age => InstanceVariableSlot} withSuperCall: true) sourceCode equals: '= anObject
 	<generated>
@@ -45,8 +45,9 @@ PCGTemplatesRepositoryTest >> testEqualMethodForSlotsWithSuperCall [
 		ifTrue: [ ^ true ].
 	self class = anObject class
 		ifFalse: [ ^ false ].
-	^ ((super = anObject and: [ name = anObject name ])
-		and: [ surname = anObject surname ]) and: [ age = anObject age ]'
+	^ super = anObject
+		and: [ name = anObject name
+				and: [ surname = anObject surname and: [ age = anObject age ] ] ]'
 ]
 
 { #category : #test }
