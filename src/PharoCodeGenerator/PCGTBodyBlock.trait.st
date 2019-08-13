@@ -6,6 +6,13 @@ Trait {
 	#category : #'PharoCodeGenerator-Traits'
 }
 
+{ #category : #'instance creation' }
+PCGTBodyBlock classSide >> bodyBlock: aBlock [
+	^ self new
+		bodyBlock: aBlock;
+		yourself
+]
+
 { #category : #dsl }
 PCGTBodyBlock >> bodyBlock: aBlock [
 	| sequence |
