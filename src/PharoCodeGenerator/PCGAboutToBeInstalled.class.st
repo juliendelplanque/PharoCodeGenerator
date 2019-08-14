@@ -16,7 +16,7 @@ PCGAboutToBeInstalled class >> signalForMethod: method installTarget: classToIns
 	<generated>
 	^ self new
 		method: method;
-		classToInstallOn: classToInstallOn;
+		installTarget: classToInstallOn;
 		signal
 ]
 
