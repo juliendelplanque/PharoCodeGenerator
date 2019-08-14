@@ -190,7 +190,7 @@ PCGMethodNode >> installOn: aBehavior [
 		aBehavior compile: self sourceCode.
 		(aBehavior >> self selector)
 			protocol: self protocol
-	] on: PCGAboutToBeInstalled do: #outer.
+	] on: PCGShouldNotBeInstalled do: #return
 ]
 
 { #category : #installing }
