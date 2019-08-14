@@ -25,7 +25,7 @@ PCGTemplatesRepository >> equalMethodForSlots: aCollectionOfSlots [
 ]
 
 { #category : #builders }
-PCGTemplatesRepository >> equalMethodForSlots: aCollectionOfSlots withSuperCall: aBoolean [
+PCGTemplatesRepository >> equalMethodForSlots: aCollectionOfSlots withSuperCall: shouldCallSuper [
 	| equalNodes testExpression |
 	aCollectionOfSlots
 		ifEmpty: [ self error: 'The collection of slots is empty, can not generate #=' ].
@@ -36,7 +36,7 @@ PCGTemplatesRepository >> equalMethodForSlots: aCollectionOfSlots withSuperCall:
 			with: (#anObject asPCGArgument receiveMessage: slot name)
 		] as: OrderedCollection.
 	
-	aBoolean ifTrue: [ 
+	shouldCallSuper ifTrue: [ 
 		equalNodes addFirst: (#super asPCGNode receiveMessage: #= with: #anObject asPCGArgument) ].
 	
 	testExpression := equalNodes reversed reduce: [ :rightNode :leftNode |
@@ -61,7 +61,7 @@ PCGTemplatesRepository >> equalMethodTemplate [
 ]
 
 { #category : #builders }
-PCGTemplatesRepository >> hashMethodForSlots: aCollectionOfSlots withSuperCall: aBoolean [
+PCGTemplatesRepository >> hashMethodForSlots: aCollectionOfSlots withSuperCall: shouldCallSuper [
 	| hashNodes hashExpression |
 	aCollectionOfSlots
 		ifEmpty: [ self error: 'The collection of slots is empty, can not generate #hash' ].
@@ -71,7 +71,7 @@ PCGTemplatesRepository >> hashMethodForSlots: aCollectionOfSlots withSuperCall: 
 			receiveMessage: #hash
 		] as: OrderedCollection.
 	
-	aBoolean ifTrue: [ 
+	shouldCallSuper ifTrue: [ 
 		hashNodes addFirst: (#super asPCGNode receiveMessage: #hash) ].
 	
 	hashExpression := hashNodes reduce: [ :leftNode :rightNode |
