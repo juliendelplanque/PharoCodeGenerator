@@ -22,8 +22,8 @@ PCGTMessageReceiver >> receiveMessage: aSymbol [
 ]
 
 { #category : #dsl }
-PCGTMessageReceiver >> receiveMessage: aSymbol with: arguments [
-	^ self receiveMessage: aSymbol withAll: {arguments}
+PCGTMessageReceiver >> receiveMessage: aSymbol with: argument [
+	^ self receiveMessage: aSymbol withAll: {argument}
 ]
 
 { #category : #dsl }
