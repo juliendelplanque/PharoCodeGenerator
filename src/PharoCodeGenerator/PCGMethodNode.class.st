@@ -185,11 +185,12 @@ PCGMethodNode >> installOn: aBehavior [
 	((aBehavior includesLocalSelector: self selector) and: [ self = (aBehavior >> self selector) asPCGAST ])
 		ifTrue: [ ^ self ].
 	
-	PCGAboutToBeInstalled signalForMethod: self installTarget: aBehavior.
-	
-	aBehavior compile: self sourceCode.
-	(aBehavior >> self selector)
-		protocol: self protocol
+	[
+		PCGAboutToBeInstalled signalForMethod: self installTarget: aBehavior.
+		aBehavior compile: self sourceCode.
+		(aBehavior >> self selector)
+			protocol: self protocol
+	] on: PCGAboutToBeInstalled do: #outer.
 ]
 
 { #category : #installing }
