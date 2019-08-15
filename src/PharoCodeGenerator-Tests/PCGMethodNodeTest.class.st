@@ -33,6 +33,18 @@ PCGMethodNodeTest >> tearDown [
 ]
 
 { #category : #test }
+PCGMethodNodeTest >> testInitialize [
+	| freshMethod |
+	freshMethod := PCGMethodNode new.
+	
+	self assert: freshMethod selector isNil.
+	self assert: freshMethod arguments isEmpty.
+	self assert: freshMethod body statements isEmpty.
+	self assert: freshMethod pragmas size equals: 1.
+	self assert: freshMethod pragmas anyOne selector equals: #generated
+]
+
+{ #category : #test }
 PCGMethodNodeTest >> testInstallOn [
 	self deny: (PCGFakeClass canUnderstand: method selector).
 	method

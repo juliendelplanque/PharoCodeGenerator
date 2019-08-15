@@ -153,6 +153,11 @@ PCGMethodNode >> body: anObject [
 	body := anObject
 ]
 
+{ #category : #dsl }
+PCGMethodNode >> emptyBody [
+	self bodyBlock: [ :b | ]
+]
+
 { #category : #accessing }
 PCGMethodNode >> generatedPragmaSelector [
 	^ self class generatedPragmaSelector
@@ -172,6 +177,7 @@ PCGMethodNode >> initialize [
 		arguments: OrderedCollection new;
 		pragmas: OrderedCollection new;
 		protocol: Protocol unclassified;
+		emptyBody;
 		withGeneratedPragma
 ]
 
