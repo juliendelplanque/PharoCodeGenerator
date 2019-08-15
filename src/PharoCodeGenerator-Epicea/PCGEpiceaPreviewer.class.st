@@ -4,7 +4,12 @@ Class {
 	#category : #'PharoCodeGenerator-Epicea'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #previewing }
+PCGEpiceaPreviewer class >> previewFor: aBlock [
+	^ self new previewFor: aBlock
+]
+
+{ #category : #'log-creation' }
 PCGEpiceaPreviewer >> createLogFor: aBlock [
 	| events |
 	events := OrderedCollection new.
@@ -12,4 +17,9 @@ PCGEpiceaPreviewer >> createLogFor: aBlock [
 		events addAll: aboutToBeInstalled asEpMethodAddition previewedApplyEvents.
 		aboutToBeInstalled resignalAs: PCGShouldNotBeInstalled ].
 	^ EpLog newWithEvents: events
+]
+
+{ #category : #previewing }
+PCGEpiceaPreviewer >> previewFor: aBlock [
+	EpLogBrowserPresenter openWithLog: (self createLogFor: aBlock)
 ]
