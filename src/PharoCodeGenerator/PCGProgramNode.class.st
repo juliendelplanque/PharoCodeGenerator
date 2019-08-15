@@ -18,6 +18,7 @@ PCGProgramNode class >> regenerateEqualAndHash [
 	"This commented code regenerate #= and #hash but requires to do a breath first visit of class hierarchy.
 	 Thus it uses TreeQuery but we do not want this project as dependency.
 	"
+	<metaprogramming>
 	"((PCGProgramNode breadthFirstIterator: #subclasses)
 	select: [ :c | c subclasses isEmpty ])
 	collect: [ :class |

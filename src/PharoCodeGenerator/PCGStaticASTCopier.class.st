@@ -10,6 +10,7 @@ Class {
 { #category : #'methods generation' }
 PCGStaticASTCopier class >> regenerateVisitMethods [
 	<script>
+	<metaprogramming>
 	PCGProgramNode allSubclasses \ {PCGTemplateParameter}
 		select: [ :c | c package = PCGProgramNode package and: [ c subclasses isEmpty ] ]
 		thenCollect: [ :class | 

@@ -10,6 +10,7 @@ Class {
 { #category : #'methods generation' }
 PCGStaticConverterToRBAST class >> regenerateFactoryMethods [
 	<script>
+	<metaprogramming>
 	PCGProgramNode allSubclasses \ {PCGTemplateParameter}
 		select: [ :c | c package = PCGProgramNode package and: [ c subclasses isEmpty ] ]
 		thenDo: [ :class |

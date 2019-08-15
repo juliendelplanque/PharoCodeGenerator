@@ -26,6 +26,7 @@ PCGStaticConverterToRealAST class >> buildFactoryMethodSelectorKeywordsFor: clas
 { #category : #'methods generation' }
 PCGStaticConverterToRealAST class >> regenerateVisitMethods [
 	<script>
+	<metaprogramming>
 	PCGProgramNode allSubclasses \ {PCGTemplateParameter}
 		select: [ :c | c package = PCGProgramNode package and: [ c subclasses isEmpty ] ]
 		thenCollect: [ :class | 
