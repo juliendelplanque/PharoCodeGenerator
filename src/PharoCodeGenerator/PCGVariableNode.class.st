@@ -52,3 +52,11 @@ PCGVariableNode >> name [
 PCGVariableNode >> name: anObject [
 	name := anObject
 ]
+
+{ #category : #printing }
+PCGVariableNode >> printOn: aStream [
+	super printOn: aStream.
+	aStream nextPut: $(.
+	self name printOn: aStream.
+	aStream nextPut: $)
+]
