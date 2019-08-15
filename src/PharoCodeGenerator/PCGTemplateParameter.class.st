@@ -41,6 +41,11 @@ PCGTemplateParameter >> acceptVisitor: aVisitor [
 	^ aVisitor visitTemplateParameter: self
 ]
 
+{ #category : #converting }
+PCGTemplateParameter >> asPCGTemplateParameter [
+	^ self
+]
+
 { #category : #comparing }
 PCGTemplateParameter >> hash [
 	<generated>
