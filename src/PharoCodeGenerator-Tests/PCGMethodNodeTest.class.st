@@ -33,6 +33,19 @@ PCGMethodNodeTest >> tearDown [
 ]
 
 { #category : #test }
+PCGMethodNodeTest >> testAddPragmaNamed [
+	self assert: method pragmas size equals: 1.
+	self assert: method pragmas first selector equals: #generated.
+	
+	method addPragmaNamed: #testPragma.
+	
+	self assert: method pragmas size equals: 2.
+	self assert: method pragmas second selector equals: #testPragma.
+	self assert: method pragmas second arguments size equals: 0.
+	self assert: (method pragmas second arguments collect: #name) asArray equals: #().
+]
+
+{ #category : #test }
 PCGMethodNodeTest >> testInitialize [
 	| freshMethod |
 	freshMethod := PCGMethodNode new.
