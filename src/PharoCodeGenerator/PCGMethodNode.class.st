@@ -114,8 +114,18 @@ PCGMethodNode >> addPragmaNamed: aSymbol [
 ]
 
 { #category : #dsl }
+PCGMethodNode >> addPragmaNamed: aSymbol if: conditionBlock [
+	self addPragmaNamed: aSymbol withAll: Array new if: conditionBlock
+]
+
+{ #category : #dsl }
 PCGMethodNode >> addPragmaNamed: aSymbol with: arg1 [
 	self addPragmaNamed: aSymbol withAll: { arg1 }
+]
+
+{ #category : #dsl }
+PCGMethodNode >> addPragmaNamed: aSymbol with: arg1 if: conditionBlock [
+	self addPragmaNamed: aSymbol withAll: { arg1 } if: conditionBlock
 ]
 
 { #category : #dsl }
@@ -124,13 +134,31 @@ PCGMethodNode >> addPragmaNamed: aSymbol with: arg1 with: arg2 [
 ]
 
 { #category : #dsl }
+PCGMethodNode >> addPragmaNamed: aSymbol with: arg1 with: arg2 if: conditionBlock [
+	self addPragmaNamed: aSymbol withAll: { arg1. arg2 } if: conditionBlock
+]
+
+{ #category : #dsl }
 PCGMethodNode >> addPragmaNamed: aSymbol with: arg1 with: arg2 with: arg3 [
 	self addPragmaNamed: aSymbol withAll: { arg1. arg2. arg3 }
 ]
 
 { #category : #dsl }
+PCGMethodNode >> addPragmaNamed: aSymbol with: arg1 with: arg2 with: arg3 if: conditionBlock [
+	self addPragmaNamed: aSymbol withAll: { arg1. arg2. arg3 } if: conditionBlock
+]
+
+{ #category : #dsl }
 PCGMethodNode >> addPragmaNamed: aSymbol withAll: args [
 	self addPragma: (PCGPragmaNode selector: aSymbol arguments: args)
+]
+
+{ #category : #dsl }
+PCGMethodNode >> addPragmaNamed: aSymbol withAll: args if: conditionBlock [
+	conditionBlock value
+		ifFalse: [ ^ self ].
+
+	^ self addPragmaNamed: aSymbol withAll: args
 ]
 
 { #category : #accessing }
