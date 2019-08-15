@@ -10,8 +10,8 @@ Class {
 { #category : #'methods generation' }
 PCGStaticASTCopier class >> regenerateVisitMethods [
 	<script>
-	PCGProgramNode allSubclasses
-		select: [ :c | c subclasses isEmpty ]
+	PCGProgramNode allSubclasses \ {PCGTemplateParameter}
+		select: [ :c | c package = PCGProgramNode package and: [ c subclasses isEmpty ] ]
 		thenCollect: [ :class | 
 			| classNameWithoutPrefix argument |
 			classNameWithoutPrefix := class name allButFirst: 3.
@@ -125,7 +125,9 @@ PCGStaticASTCopier >> visitInstanceVariableNode: anInstanceVariableNode [
 PCGStaticASTCopier >> visitLiteralArrayNode: aLiteralArrayNode [
 	<generated>
 	^ PCGLiteralArrayNode new
-		contents: (self visit: aLiteralArrayNode contents);
+		contents:
+			(aLiteralArrayNode contents
+				collect: [ :toVisit | self visit: toVisit ]);
 		yourself
 ]
 
