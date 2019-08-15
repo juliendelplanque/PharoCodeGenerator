@@ -8,7 +8,7 @@ Class {
 PCGRealASTToPCGConverter class >> regenerateVisitMethods [
 	<script>
 	PCGProgramNode allSubclasses \ {PCGTemplateParameter}
-		select: [ :c | c subclasses isEmpty ]
+		select: [ :c | c package = PCGProgramNode package and: [ c subclasses isEmpty ] ]
 		thenCollect: [ :class | 
 			| classNameWithoutPrefix argument |
 			classNameWithoutPrefix := class name allButFirst: 3.
@@ -76,7 +76,7 @@ PCGRealASTToPCGConverter >> visitAssignmentNode: anAssignmentNode [
 	<generated>
 	^ PCGAssignmentNode new
 		variable: (self visit: anAssignmentNode variable);
-		value: (self visit: anAssignmentNode value);
+		value: anAssignmentNode value;
 		yourself
 ]
 
@@ -119,7 +119,9 @@ PCGRealASTToPCGConverter >> visitInstanceVariableNode: anInstanceVariableNode [
 PCGRealASTToPCGConverter >> visitLiteralArrayNode: aLiteralArrayNode [
 	<generated>
 	^ PCGLiteralArrayNode new
-		contents: (self visit: aLiteralArrayNode contents);
+		contents:
+			(aLiteralArrayNode contents
+				collect: [ :toVisit | self visit: toVisit ]);
 		yourself
 ]
 

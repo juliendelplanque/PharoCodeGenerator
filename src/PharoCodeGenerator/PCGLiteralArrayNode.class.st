@@ -6,7 +6,7 @@ Class {
 	#name : #PCGLiteralArrayNode,
 	#superclass : #PCGLiteralNode,
 	#instVars : [
-		'#contents type: PCGLiteralNode'
+		'#contents type: (SequenceableCollection withItemsType: PCGLiteralNode)'
 	],
 	#category : #'PharoCodeGenerator-AST'
 }
