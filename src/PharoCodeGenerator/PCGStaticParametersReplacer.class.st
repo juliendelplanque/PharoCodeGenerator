@@ -166,6 +166,7 @@ PCGStaticParametersReplacer >> visitSequenceNode: aSequenceNode [
 PCGStaticParametersReplacer >> visitTemplateParameter: aTemplateParameter [
 	^ self context
 		at: aTemplateParameter name
-		ifPresent: [ :toInject | PCGStaticASTCopier visit: toInject ]
+		ifPresent: [ :toInject | 
+			PCGStaticASTCopier visit: (aTemplateParameter transform: toInject) ]
 		ifAbsent: [ self error: 'Template parameter not found in the context: #' , aTemplateParameter name ]
 ]

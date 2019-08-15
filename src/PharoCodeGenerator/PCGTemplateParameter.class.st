@@ -9,7 +9,8 @@ Class {
 	#traits : 'PCGTReturnable + PCGTAssignable + PCGTCascadeTarget + PCGTStatement + PCGTMessageReceiver + PCGTAssignmentTarget',
 	#classTraits : 'PCGTReturnable classTrait + PCGTAssignable classTrait + PCGTCascadeTarget classTrait + PCGTStatement classTrait + PCGTMessageReceiver classTrait + PCGTAssignmentTarget classTrait',
 	#instVars : [
-		'#name type: Symbol'
+		'#name type: Symbol',
+		'#transformationBlock type: (Interface selectors: #(#value ))'
 	],
 	#category : #'PharoCodeGenerator-AST'
 }
@@ -36,6 +37,11 @@ PCGTemplateParameter >> = anObject [
 	^ name = anObject name
 ]
 
+{ #category : #dsl }
+PCGTemplateParameter >> => aBlock [
+	self transformationBlock: aBlock
+]
+
 { #category : #visiting }
 PCGTemplateParameter >> acceptVisitor: aVisitor [
 	^ aVisitor visitTemplateParameter: self
@@ -46,10 +52,36 @@ PCGTemplateParameter >> asPCGTemplateParameter [
 	^ self
 ]
 
+{ #category : #dsl }
+PCGTemplateParameter >> beArgument [
+	^ self => #asPCGArgument
+]
+
+{ #category : #dsl }
+PCGTemplateParameter >> beGlobal [
+	^ self => #asPCGGlobal
+]
+
+{ #category : #dsl }
+PCGTemplateParameter >> beInstanceVariable [
+	^ self => #asPCGInstanceVariable
+]
+
+{ #category : #dsl }
+PCGTemplateParameter >> beTemporary [
+	^ self => #asPCGTemporary
+]
+
 { #category : #comparing }
 PCGTemplateParameter >> hash [
 	<generated>
 	^ name hash
+]
+
+{ #category : #initialization }
+PCGTemplateParameter >> initialize [
+	super initialize.
+	self transformationBlock: [ :x | x ]
 ]
 
 { #category : #accessing }
@@ -60,4 +92,19 @@ PCGTemplateParameter >> name [
 { #category : #accessing }
 PCGTemplateParameter >> name: anObject [
 	name := anObject
+]
+
+{ #category : #transforming }
+PCGTemplateParameter >> transform: aBlock [
+	^ self transformationBlock value: aBlock
+]
+
+{ #category : #accessing }
+PCGTemplateParameter >> transformationBlock [
+	^ transformationBlock
+]
+
+{ #category : #accessing }
+PCGTemplateParameter >> transformationBlock: aValuable [
+	transformationBlock := aValuable
 ]
