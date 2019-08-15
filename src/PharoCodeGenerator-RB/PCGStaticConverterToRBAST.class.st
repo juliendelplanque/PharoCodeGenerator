@@ -11,7 +11,7 @@ Class {
 PCGStaticConverterToRBAST class >> regenerateFactoryMethods [
 	<script>
 	PCGProgramNode allSubclasses \ {PCGTemplateParameter}
-		select: [ :c | c subclasses isEmpty ]
+		select: [ :c | c package = PCGProgramNode package and: [ c subclasses isEmpty ] ]
 		thenDo: [ :class |
 			|selectorKeywords arguments|
 			selectorKeywords := self buildFactoryMethodSelectorKeywordsFor: class.
