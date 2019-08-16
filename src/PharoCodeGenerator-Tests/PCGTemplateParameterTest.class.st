@@ -62,3 +62,10 @@ PCGTemplateParameterTest >> testEqualGreater [
 	
 	self assert: templateParameter transformationBlock equals: #yourself
 ]
+
+{ #category : #test }
+PCGTemplateParameterTest >> testTransform [
+	templateParameter => [ :x | x asCamelCase ].
+	
+	self assert: (templateParameter transform: 'foo') equals: 'Foo'
+]
