@@ -8,7 +8,7 @@ Trait {
 
 { #category : #dsl }
 PCGTWithTemporaries >> addTemporary: aTemporaryNode [
-	self temporaries add: aTemporaryNode  asPCG
+	self temporaries add: aTemporaryNode asPCG
 ]
 
 { #category : #accessing }
