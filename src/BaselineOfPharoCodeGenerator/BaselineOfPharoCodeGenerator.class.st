@@ -17,5 +17,6 @@ BaselineOfPharoCodeGenerator >> baseline: spec [
 			spec
 				package: 'PharoCodeGenerator' with: [ spec requires: #('TypedSlot') ];
 				package: 'PharoCodeGenerator-RB' with: [ spec requires: #('PharoCodeGenerator') ];
-				package: 'PharoCodeGenerator-Tests' with: [ spec requires: #('PharoCodeGenerator') ] ]
+				package: 'PharoCodeGenerator-Tests' with: [ spec requires: #('PharoCodeGenerator') ];
+				package: 'PharoCodeGenerator-Meta' with: [ spec requires: #('PharoCodeGenerator' 'PharoCodeGenerator-RB') ] ]
 ]
