@@ -132,9 +132,20 @@ PCGStaticConverterToRealAST >> createThisContextNodeWithName: name [
 ]
 
 { #category : #visiting }
+PCGStaticConverterToRealAST >> visit: anObject [
+	"Here we consider that sometimes an attempt to visit an object that is not a PCGProgramNode can be made.
+	 If it happens, the object is copied and this copy is returned.
+	"
+	anObject isPCGProgramNode
+		ifFalse: [ ^ anObject copy ].
+		
+	^ super visit: anObject
+]
+
+{ #category : #visiting }
 PCGStaticConverterToRealAST >> visitArgumentNode: anArgumentNode [
 	<generated>
-	^ self createArgumentNodeWithName: anArgumentNode name
+	^ self createArgumentNodeWithName: (self visit: anArgumentNode name)
 ]
 
 { #category : #visiting }
@@ -170,27 +181,30 @@ PCGStaticConverterToRealAST >> visitCascadeNode: aCascadeNode [
 { #category : #visiting }
 PCGStaticConverterToRealAST >> visitGlobalNode: aGlobalNode [
 	<generated>
-	^ self createGlobalNodeWithName: aGlobalNode name
+	^ self createGlobalNodeWithName: (self visit: aGlobalNode name)
 ]
 
 { #category : #visiting }
 PCGStaticConverterToRealAST >> visitInstanceVariableNode: anInstanceVariableNode [
 	<generated>
 	^ self
-		createInstanceVariableNodeWithName: anInstanceVariableNode name
+		createInstanceVariableNodeWithName: (self visit: anInstanceVariableNode name)
 ]
 
 { #category : #visiting }
 PCGStaticConverterToRealAST >> visitLiteralArrayNode: aLiteralArrayNode [
 	<generated>
 	^ self
-		createLiteralArrayNodeWithContents: (self visit: aLiteralArrayNode contents)
+		createLiteralArrayNodeWithContents:
+			(aLiteralArrayNode contents
+				collect: [ :toVisit | self visit: toVisit ])
 ]
 
 { #category : #visiting }
 PCGStaticConverterToRealAST >> visitLiteralValueNode: aLiteralValueNode [
 	<generated>
-	^ self createLiteralValueNodeWithValue: aLiteralValueNode value
+	^ self
+		createLiteralValueNodeWithValue: (self visit: aLiteralValueNode value)
 ]
 
 { #category : #visiting }
@@ -198,7 +212,7 @@ PCGStaticConverterToRealAST >> visitMessageNode: aMessageNode [
 	<generated>
 	^ self
 		createMessageNodeWithReceiver: (self visit: aMessageNode receiver)
-		selector: aMessageNode selector
+		selector: (self visit: aMessageNode selector)
 		arguments: (aMessageNode arguments collect: [ :toVisit | self visit: toVisit ])
 ]
 
@@ -206,7 +220,7 @@ PCGStaticConverterToRealAST >> visitMessageNode: aMessageNode [
 PCGStaticConverterToRealAST >> visitMethodNode: aMethodNode [
 	<generated>
 	^ self
-		createMethodNodeWithSelector: aMethodNode selector
+		createMethodNodeWithSelector: (self visit: aMethodNode selector)
 		body: (self visit: aMethodNode body)
 		arguments: (aMethodNode arguments collect: [ :toVisit | self visit: toVisit ])
 		pragmas: (aMethodNode pragmas collect: [ :toVisit | self visit: toVisit ])
@@ -216,7 +230,7 @@ PCGStaticConverterToRealAST >> visitMethodNode: aMethodNode [
 PCGStaticConverterToRealAST >> visitPragmaNode: aPragmaNode [
 	<generated>
 	^ self
-		createPragmaNodeWithSelector: aPragmaNode selector
+		createPragmaNodeWithSelector: (self visit: aPragmaNode selector)
 		arguments: (aPragmaNode arguments collect: [ :toVisit | self visit: toVisit ])
 ]
 
@@ -235,7 +249,7 @@ PCGStaticConverterToRealAST >> visitReturnNode: aReturnNode [
 { #category : #visiting }
 PCGStaticConverterToRealAST >> visitSelfNode: aSelfNode [
 	<generated>
-	^ self createSelfNodeWithName: aSelfNode name
+	^ self createSelfNodeWithName: (self visit: aSelfNode name)
 ]
 
 { #category : #visiting }
@@ -249,7 +263,7 @@ PCGStaticConverterToRealAST >> visitSequenceNode: aSequenceNode [
 { #category : #visiting }
 PCGStaticConverterToRealAST >> visitSuperNode: aSuperNode [
 	<generated>
-	^ self createSuperNodeWithName: aSuperNode name
+	^ self createSuperNodeWithName: (self visit: aSuperNode name)
 ]
 
 { #category : #visiting }
@@ -260,11 +274,12 @@ PCGStaticConverterToRealAST >> visitTemplateParameter: aTemplateParameter [
 { #category : #visiting }
 PCGStaticConverterToRealAST >> visitTemporaryNode: aTemporaryNode [
 	<generated>
-	^ self createTemporaryNodeWithName: aTemporaryNode name
+	^ self createTemporaryNodeWithName: (self visit: aTemporaryNode name)
 ]
 
 { #category : #visiting }
 PCGStaticConverterToRealAST >> visitThisContextNode: aThisContextNode [
 	<generated>
-	^ self createThisContextNodeWithName: aThisContextNode name
+	^ self
+		createThisContextNodeWithName: (self visit: aThisContextNode name)
 ]

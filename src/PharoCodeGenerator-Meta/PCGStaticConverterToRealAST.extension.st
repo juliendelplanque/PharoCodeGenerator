@@ -28,11 +28,9 @@ PCGStaticConverterToRealAST class >> regenerateVisitMethods [
 												bodyBlock: [ :blockBody | 
 													blockBody
 														<< (#self asPCGNode receiveMessage: #visit: with: #toVisit asPCGArgument) ]) ]
-								ifFalse: [ ((class slotNamed: instVarName) type inheritsFrom: PCGProgramNode)
-										ifTrue: [ #self asPCGNode
+								ifFalse: [ #self asPCGNode
 												receiveMessage: #visit:
-												with: (argument receiveMessage: instVarName) ]
-										ifFalse: [ argument receiveMessage: instVarName ] ] ].
+												with: (argument receiveMessage: instVarName) ] ].
 					body << (#self asPCGNode receiveMessage: factorySelectorKeyword withAll: arguments) returnIt ];
 				protocol: 'visiting';
 				installOn: self ]
