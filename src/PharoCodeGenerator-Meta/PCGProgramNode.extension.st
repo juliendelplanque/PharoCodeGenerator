@@ -4,6 +4,7 @@ Extension { #name : #PCGProgramNode }
 PCGProgramNode class >> regenerateEqualAndHash [
 	"This commented code regenerate #= and #hash and requires to do a breath first visit of class hierarchy.
 	"
+	<script>
 	<metaprogramming>
 	((BreadthFirstIterator root: PCGProgramNode childrenBlock: #subclasses)
 		| [ :c | c subclasses isEmpty ] selectIt
