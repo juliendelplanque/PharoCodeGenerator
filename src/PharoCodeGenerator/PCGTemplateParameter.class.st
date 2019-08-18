@@ -30,6 +30,7 @@ PCGTemplateParameter >> = anObject [
 	self class = anObject class
 		ifFalse: [ ^ false ].
 	^ name = anObject name
+		and: [ transformationBlock = anObject transformationBlock ]
 ]
 
 { #category : #dsl }
@@ -70,7 +71,7 @@ PCGTemplateParameter >> beTemporary [
 { #category : #comparing }
 PCGTemplateParameter >> hash [
 	<generated>
-	^ name hash
+	^ name hash bitXor: transformationBlock hash
 ]
 
 { #category : #initialization }
