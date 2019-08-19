@@ -50,6 +50,7 @@ PCGCascadeNode >> acceptVisitor: aVisitor [
 
 { #category : #adding }
 PCGCascadeNode >> addMessage: aMessageNode [
+	aMessageNode receiver: self target.
 	self messages add: aMessageNode
 ]
 
