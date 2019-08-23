@@ -12,7 +12,7 @@ BaselineOfPharoCodeGenerator >> baseline: spec [
 		do: [
 			spec
 				baseline: 'TypedSlot'
-				with: [ spec repository: 'github://juliendelplanque/TypedSlot:v1.3.0/src'].
+				with: [ spec repository: 'github://juliendelplanque/TypedSlot:v1.5.2/src'].
 			spec
 				baseline: 'Iterators'
 				with: [ spec repository: 'github://juliendelplanque/Iterators:v1.0.0/src'].
