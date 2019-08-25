@@ -10,7 +10,7 @@ Class {
 	#classTraits : 'PCGTReturnable classTrait + PCGTAssignable classTrait + PCGTCascadeTarget classTrait + PCGTStatement classTrait + PCGTMessageReceiver classTrait + PCGTAssignmentTarget classTrait',
 	#instVars : [
 		'#name type: Symbol',
-		'#transformationBlock type: (Interface selectors: #(#value ))'
+		'#transformationBlock interface: #(#value )'
 	],
 	#category : #'PharoCodeGenerator-AST'
 }
