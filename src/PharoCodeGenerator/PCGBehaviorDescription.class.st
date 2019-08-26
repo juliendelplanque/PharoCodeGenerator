@@ -9,6 +9,13 @@ Class {
 	#category : #'PharoCodeGenerator-MetaModel'
 }
 
+{ #category : #initialization }
+PCGBehaviorDescription >> initialize [
+	super initialize.
+	self methods: OrderedCollection new.
+	self slots: OrderedCollection new.
+]
+
 { #category : #accessing }
 PCGBehaviorDescription >> methods [
 	^ methods
