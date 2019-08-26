@@ -5,19 +5,29 @@ Class {
 	#name : #PCGAboutToBeInstalled,
 	#superclass : #Notification,
 	#instVars : [
-		'method',
-		'installTarget'
+		'installTarget',
+		'entity'
 	],
 	#category : #'PharoCodeGenerator-Notifications'
 }
 
 { #category : #'instance creation' }
-PCGAboutToBeInstalled class >> signalForMethod: method installTarget: classToInstallOn [
+PCGAboutToBeInstalled class >> signalForEntity: method installTarget: classToInstallOn [
 	<generated>
 	^ self new
-		method: method;
+		entity: method;
 		installTarget: classToInstallOn;
 		signal
+]
+
+{ #category : #accessing }
+PCGAboutToBeInstalled >> entity [
+	^ entity
+]
+
+{ #category : #accessing }
+PCGAboutToBeInstalled >> entity: anObject [
+	entity := anObject
 ]
 
 { #category : #accessing }
@@ -28,14 +38,4 @@ PCGAboutToBeInstalled >> installTarget [
 { #category : #accessing }
 PCGAboutToBeInstalled >> installTarget: anObject [
 	installTarget := anObject
-]
-
-{ #category : #accessing }
-PCGAboutToBeInstalled >> method [
-	^ method
-]
-
-{ #category : #accessing }
-PCGAboutToBeInstalled >> method: anObject [
-	method := anObject
 ]

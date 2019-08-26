@@ -1,17 +1,17 @@
-Extension { #name : #PCGAboutToBeInstalled }
+Extension { #name : #PCGMethodAboutToBeInstalled }
 
 { #category : #'*PharoCodeGenerator-Epicea' }
-PCGAboutToBeInstalled >> asEpMethodAddition [
+PCGMethodAboutToBeInstalled >> asEpMethodAddition [
 	^ EpMethodAddition method: self asEpiceaRingDefinition
 ]
 
 { #category : #'*PharoCodeGenerator-Epicea' }
-PCGAboutToBeInstalled >> asEpiceaRingDefinition [
-	^ (RGMethodDefinition named: self method selector)
+PCGMethodAboutToBeInstalled >> asEpiceaRingDefinition [
+	^ (RGMethodDefinition named: self entity selector)
 		parentName: self installTarget name;
 		isMetaSide: self installTarget isMeta;
-		protocol: self method protocol;
-		sourceCode: self method sourceCode;
+		protocol: self entity protocol;
+		sourceCode: self entity sourceCode;
 		stamp: '';
 		package: self installTarget package;
 		yourself.

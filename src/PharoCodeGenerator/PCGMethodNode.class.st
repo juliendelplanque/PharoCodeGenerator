@@ -230,7 +230,7 @@ PCGMethodNode >> installOn: aBehavior [
 		ifTrue: [ ^ self ].
 	
 	[
-		PCGAboutToBeInstalled signalForMethod: self installTarget: aBehavior.
+		PCGMethodAboutToBeInstalled signalForEntity: self installTarget: aBehavior.
 		aBehavior compile: self sourceCode.
 		(aBehavior >> self selector)
 			protocol: self protocol

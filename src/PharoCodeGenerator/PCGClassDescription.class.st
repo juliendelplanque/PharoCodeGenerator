@@ -20,10 +20,13 @@ PCGClassDescription >> initialize [
 
 { #category : #installing }
 PCGClassDescription >> installOn: aRPackage [
-	self superclass subclass: self name
+	self superclass
+		subclass: self name
 		slots: self slots
-		classVariables: {  }
-		package: aRPackage name
+		classVariables: {}
+		package: aRPackage name.
+	self methods do: [ :method | 
+		method installOn: (self class environment at: self name) ]
 ]
 
 { #category : #installing }
