@@ -85,6 +85,12 @@ PCGRealASTToPCGConverter >> visitLiteralArrayNode: aLiteralArrayNode [
 ]
 
 { #category : #visiting }
+PCGRealASTToPCGConverter >> visitLiteralNode: aLiteralNode [
+	self flag: #TODO. "Should be generated"
+    ^ aLiteralNode value
+]
+
+{ #category : #visiting }
 PCGRealASTToPCGConverter >> visitLiteralValueNode: aLiteralValueNode [
 	<generated>
 	^ PCGLiteralValueNode new
