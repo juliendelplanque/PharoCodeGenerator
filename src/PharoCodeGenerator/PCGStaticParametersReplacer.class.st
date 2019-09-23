@@ -53,6 +53,16 @@ PCGStaticParametersReplacer >> visitCascadeNode: aCascadeNode [
 ]
 
 { #category : #visiting }
+PCGStaticParametersReplacer >> visitCompositeTemplateParameter: aCompositeTemplateParameter [
+	aCompositeTemplateParameter templateParameters
+		detect: [ :p | (self context includesKey: p name) not ]
+		ifFound: [ :p | self error: 'Template parameter not found in the context: #' , p name ].
+		
+	
+	^ PCGStaticASTCopier visit: (aCompositeTemplateParameter transform: (aCompositeTemplateParameter templateParameters collect: [ :p | self context at: p name ]))
+]
+
+{ #category : #visiting }
 PCGStaticParametersReplacer >> visitLiteralArrayNode: aLiteralArrayNode [
 	<generated>
 	^ PCGLiteralArrayNode new

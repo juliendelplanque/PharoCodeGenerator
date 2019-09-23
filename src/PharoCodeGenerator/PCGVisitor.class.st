@@ -14,6 +14,7 @@ PCGVisitor class >> visit: aPCGProgramNode [
 
 { #category : #visiting }
 PCGVisitor >> visit: anObject [
+	<generated>
 	^ anObject acceptVisitor: self
 ]
 
@@ -39,6 +40,12 @@ PCGVisitor >> visitBlockNode: aBlockNode [
 
 { #category : #visiting }
 PCGVisitor >> visitCascadeNode: aCascadeNode [
+	^ self subclassResponsibility
+]
+
+{ #category : #visiting }
+PCGVisitor >> visitCompositeTemplateParameter: aCompositeTemplateParameter [
+	<generated>
 	^ self subclassResponsibility
 ]
 

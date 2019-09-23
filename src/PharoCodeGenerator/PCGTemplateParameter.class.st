@@ -22,6 +22,11 @@ PCGTemplateParameter class >> name: name [
 		yourself
 ]
 
+{ #category : #dsl }
+PCGTemplateParameter >> , aTemplateParameter [
+	^ self with: aTemplateParameter
+]
+
 { #category : #comparing }
 PCGTemplateParameter >> = anObject [
 	<generated>
@@ -103,4 +108,12 @@ PCGTemplateParameter >> transformationBlock [
 { #category : #accessing }
 PCGTemplateParameter >> transformationBlock: aValuable [
 	transformationBlock := aValuable
+]
+
+{ #category : #converting }
+PCGTemplateParameter >> with: aTemplateParameter [
+	^ PCGCompositeTemplateParameter new
+		addParameter: self;
+		addParameter: aTemplateParameter;
+		yourself
 ]

@@ -62,6 +62,17 @@ PCGStaticASTCopier >> visitCascadeNode: aCascadeNode [
 ]
 
 { #category : #visiting }
+PCGStaticASTCopier >> visitCompositeTemplateParameter: aCompositeTemplateParameter [
+	<generated>
+	^ PCGCompositeTemplateParameter new
+		templateParameters:
+			(aCompositeTemplateParameter templateParameters
+				collect: [ :toVisit | self visit: toVisit ]);
+		transformationBlock: (self visit: aCompositeTemplateParameter transformationBlock);
+		yourself
+]
+
+{ #category : #visiting }
 PCGStaticASTCopier >> visitGlobalNode: aGlobalNode [
 	<generated>
 	^ PCGGlobalNode new

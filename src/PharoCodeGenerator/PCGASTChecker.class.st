@@ -42,6 +42,11 @@ PCGASTChecker >> visitCascadeNode: aCascadeNode [
 ]
 
 { #category : #visiting }
+PCGASTChecker >> visitCompositeTemplateParameter: aCompositeTemplateParameter [
+	PCGASTInvalidForTranslation signal: 'The AST still contains a template parameter and is thus not ready for conversion to real AST.'
+]
+
+{ #category : #visiting }
 PCGASTChecker >> visitMessageNode: aMessageNode [
 	self checkMethodOrMessageNode: aMessageNode.
 	^ super visitMessageNode: aMessageNode.

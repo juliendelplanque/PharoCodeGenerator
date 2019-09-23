@@ -33,6 +33,11 @@ PCGGenericVisitor >> visitCascadeNode: aCascadeNode [
 ]
 
 { #category : #visiting }
+PCGGenericVisitor >> visitCompositeTemplateParameter: aPCGCompositeTemplateParameter [
+	^ self visitProgramNode: aPCGCompositeTemplateParameter
+]
+
+{ #category : #visiting }
 PCGGenericVisitor >> visitGlobalNode: aGlobalNode [
 	^ self visitProgramNode: aGlobalNode
 ]
