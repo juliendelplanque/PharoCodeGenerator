@@ -43,6 +43,12 @@ PCGVariableNode >> hash [
 	^ name hash
 ]
 
+{ #category : #testing }
+PCGVariableNode >> isVariable [
+	<generated>
+	^ true
+]
+
 { #category : #accessing }
 PCGVariableNode >> name [
 	^ name

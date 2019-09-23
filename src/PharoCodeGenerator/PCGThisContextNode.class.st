@@ -20,3 +20,9 @@ PCGThisContextNode >> initialize [
 	super initialize.
 	name := #thisContext
 ]
+
+{ #category : #testing }
+PCGThisContextNode >> isThisContext [
+	<generated>
+	^ true
+]

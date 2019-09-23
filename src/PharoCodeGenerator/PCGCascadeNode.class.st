@@ -72,6 +72,12 @@ PCGCascadeNode >> initialize [
 	self messages: OrderedCollection new
 ]
 
+{ #category : #testing }
+PCGCascadeNode >> isCascade [
+	<generated>
+	^ true
+]
+
 { #category : #accessing }
 PCGCascadeNode >> messages [
 	^ messages

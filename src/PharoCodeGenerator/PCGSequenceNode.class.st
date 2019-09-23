@@ -63,6 +63,12 @@ PCGSequenceNode >> initialize [
 	self statements: OrderedCollection new
 ]
 
+{ #category : #testing }
+PCGSequenceNode >> isSequence [
+	<generated>
+	^ true
+]
+
 { #category : #accessing }
 PCGSequenceNode >> statements [
 	^ statements

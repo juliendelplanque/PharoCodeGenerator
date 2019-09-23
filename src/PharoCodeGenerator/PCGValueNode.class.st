@@ -14,3 +14,9 @@ Class {
 PCGValueNode class >> instanceVariablesForRealAST [
 	^ #()
 ]
+
+{ #category : #testing }
+PCGValueNode >> isValue [
+	<generated>
+	^ true
+]

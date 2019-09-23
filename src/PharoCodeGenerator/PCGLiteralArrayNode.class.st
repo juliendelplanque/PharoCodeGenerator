@@ -53,3 +53,9 @@ PCGLiteralArrayNode >> hash [
 	<generated>
 	^ contents hash
 ]
+
+{ #category : #testing }
+PCGLiteralArrayNode >> isLiteralArray [
+	<generated>
+	^ true
+]

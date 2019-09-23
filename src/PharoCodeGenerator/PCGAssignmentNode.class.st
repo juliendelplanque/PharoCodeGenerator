@@ -46,6 +46,12 @@ PCGAssignmentNode >> hash [
 	^ variable hash bitXor: value hash
 ]
 
+{ #category : #testing }
+PCGAssignmentNode >> isAssignment [
+	<generated>
+	^ true
+]
+
 { #category : #accessing }
 PCGAssignmentNode >> value [
 	^ value

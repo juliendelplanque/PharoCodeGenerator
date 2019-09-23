@@ -46,6 +46,12 @@ PCGArrayNode >> hash [
 	^ statements hash
 ]
 
+{ #category : #testing }
+PCGArrayNode >> isArray [
+	<generated>
+	^ true
+]
+
 { #category : #accessing }
 PCGArrayNode >> statements [
 	^ statements

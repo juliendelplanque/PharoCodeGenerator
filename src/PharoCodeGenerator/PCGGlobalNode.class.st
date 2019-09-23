@@ -19,3 +19,9 @@ PCGGlobalNode >> acceptVisitor: aVisitor [
 PCGGlobalNode >> asPCGGlobal [
 	^ self
 ]
+
+{ #category : #testing }
+PCGGlobalNode >> isGlobal [
+	<generated>
+	^ true
+]

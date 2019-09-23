@@ -44,6 +44,12 @@ PCGLiteralValueNode >> hash [
 	^ value hash
 ]
 
+{ #category : #testing }
+PCGLiteralValueNode >> isLiteralValue [
+	<generated>
+	^ true
+]
+
 { #category : #accessing }
 PCGLiteralValueNode >> value [
 	^ value

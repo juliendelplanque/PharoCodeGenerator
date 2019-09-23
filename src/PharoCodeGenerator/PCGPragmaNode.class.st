@@ -70,6 +70,12 @@ PCGPragmaNode >> initialize [
 	self arguments: OrderedCollection new.
 ]
 
+{ #category : #testing }
+PCGPragmaNode >> isPragma [
+	<generated>
+	^ true
+]
+
 { #category : #accessing }
 PCGPragmaNode >> selector [
 	^ selector

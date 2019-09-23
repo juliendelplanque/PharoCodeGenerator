@@ -34,3 +34,22 @@ PCGProgramNode class >> regenerateEqualAndHash [
 				do: [ class name , 'does not need #= nor #hash.' traceCr ] ] doIt)
 		upToEnd
 ]
+
+{ #category : #'*PharoCodeGenerator-Meta' }
+PCGProgramNode class >> regenerateTypeTestMethods [
+	<script>
+	<metaprogramming>
+	| template |
+	template := (PCGMethodNode selector: #typeClass asPCGTemplateParameter => [ :class | ('is' , ((class name allButFirst: 'PCG' size) allButLast: 'Node' size)) asSymbol ])
+						protocol: 'testing';
+						bodyBlock: [ :body | 
+							body << ((#typeClass asPCGTemplateParameter , #installClass asPCGTemplateParameter) => [ :typeClass :installClass | (typeClass = installClass) asPCG ]) returnIt ];
+						yourself.
+	PCGProgramNode allSubclasses \ { PCGTemplateParameter. PCGCompositeTemplateParameter } do: [ :class |
+		(template substituteParametersWith: {
+			#typeClass -> class.
+			#installClass -> class }) installOn: class.
+		(template substituteParametersWith: {
+			#typeClass -> class.
+			#installClass -> PCGProgramNode }) installOn: PCGProgramNode. ]
+]

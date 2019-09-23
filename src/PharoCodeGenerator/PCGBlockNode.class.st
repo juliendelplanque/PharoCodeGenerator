@@ -88,6 +88,12 @@ PCGBlockNode >> initialize [
 	self arguments: OrderedCollection new.
 ]
 
+{ #category : #testing }
+PCGBlockNode >> isBlock [
+	<generated>
+	^ true
+]
+
 { #category : #accessing }
 PCGBlockNode >> statements [
 	^ self body statements

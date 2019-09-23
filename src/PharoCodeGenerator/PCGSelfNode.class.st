@@ -20,3 +20,9 @@ PCGSelfNode >> initialize [
 	super initialize.
 	name := #self
 ]
+
+{ #category : #testing }
+PCGSelfNode >> isSelf [
+	<generated>
+	^ true
+]

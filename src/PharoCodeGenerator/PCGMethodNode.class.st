@@ -244,6 +244,12 @@ PCGMethodNode >> installOn: aBehaviour ifHandwrittenMethodAlreadyExist: aBlock [
 		do: aBlock
 ]
 
+{ #category : #testing }
+PCGMethodNode >> isMethod [
+	<generated>
+	^ true
+]
+
 { #category : #accessing }
 PCGMethodNode >> pragmas [
 	^ pragmas

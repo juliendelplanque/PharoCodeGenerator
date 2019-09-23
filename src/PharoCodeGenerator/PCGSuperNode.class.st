@@ -20,3 +20,9 @@ PCGSuperNode >> initialize [
 	super initialize.
 	name := #super
 ]
+
+{ #category : #testing }
+PCGSuperNode >> isSuper [
+	<generated>
+	^ true
+]

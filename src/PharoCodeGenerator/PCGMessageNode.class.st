@@ -75,6 +75,12 @@ PCGMessageNode >> initialize [
 	self arguments: OrderedCollection new.
 ]
 
+{ #category : #testing }
+PCGMessageNode >> isMessage [
+	<generated>
+	^ true
+]
+
 { #category : #accessing }
 PCGMessageNode >> receiver [
 	^ receiver

@@ -46,6 +46,12 @@ PCGReturnNode >> hash [
 	^ value hash
 ]
 
+{ #category : #testing }
+PCGReturnNode >> isReturn [
+	<generated>
+	^ true
+]
+
 { #category : #accessing }
 PCGReturnNode >> value [
 	^ value

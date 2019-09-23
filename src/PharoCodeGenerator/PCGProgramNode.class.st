@@ -40,8 +40,134 @@ PCGProgramNode >> instanceVariablesForRealAST [
 ]
 
 { #category : #testing }
+PCGProgramNode >> isArgument [
+	<generated>
+	^ false
+]
+
+{ #category : #testing }
+PCGProgramNode >> isArray [
+	<generated>
+	^ false
+]
+
+{ #category : #testing }
+PCGProgramNode >> isAssignment [
+	<generated>
+	^ false
+]
+
+{ #category : #testing }
+PCGProgramNode >> isBlock [
+	<generated>
+	^ false
+]
+
+{ #category : #testing }
+PCGProgramNode >> isCascade [
+	<generated>
+	^ false
+]
+
+{ #category : #testing }
+PCGProgramNode >> isGlobal [
+	<generated>
+	^ false
+]
+
+{ #category : #testing }
+PCGProgramNode >> isInstanceVariable [
+	<generated>
+	^ false
+]
+
+{ #category : #testing }
+PCGProgramNode >> isLiteral [
+	<generated>
+	^ false
+]
+
+{ #category : #testing }
+PCGProgramNode >> isLiteralArray [
+	<generated>
+	^ false
+]
+
+{ #category : #testing }
+PCGProgramNode >> isLiteralValue [
+	<generated>
+	^ false
+]
+
+{ #category : #testing }
+PCGProgramNode >> isMessage [
+	<generated>
+	^ false
+]
+
+{ #category : #testing }
+PCGProgramNode >> isMethod [
+	<generated>
+	^ false
+]
+
+{ #category : #testing }
 PCGProgramNode >> isPCGProgramNode [
 	^ true
+]
+
+{ #category : #testing }
+PCGProgramNode >> isPragma [
+	<generated>
+	^ false
+]
+
+{ #category : #testing }
+PCGProgramNode >> isReturn [
+	<generated>
+	^ false
+]
+
+{ #category : #testing }
+PCGProgramNode >> isSelf [
+	<generated>
+	^ false
+]
+
+{ #category : #testing }
+PCGProgramNode >> isSequence [
+	<generated>
+	^ false
+]
+
+{ #category : #testing }
+PCGProgramNode >> isSuper [
+	<generated>
+	^ false
+]
+
+{ #category : #testing }
+PCGProgramNode >> isTemporary [
+	<generated>
+	^ false
+]
+
+{ #category : #testing }
+PCGProgramNode >> isThisContext [
+	<generated>
+	^ false
+]
+
+{ #category : #testing }
+PCGProgramNode >> isValue [
+	<generated>
+	^ false
+]
+
+{ #category : #testing }
+PCGProgramNode >> isVariable [
+	<generated>
+	^ false
 ]
 
 { #category : #converting }

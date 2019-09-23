@@ -14,3 +14,9 @@ Class {
 PCGLiteralNode class >> instanceVariablesForRealAST [
 	^ #()
 ]
+
+{ #category : #testing }
+PCGLiteralNode >> isLiteral [
+	<generated>
+	^ true
+]

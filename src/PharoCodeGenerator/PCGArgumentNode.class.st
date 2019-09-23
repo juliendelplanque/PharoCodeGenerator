@@ -17,3 +17,9 @@ PCGArgumentNode >> acceptVisitor: aVisitor [
 PCGArgumentNode >> asPCGArgument [
 	^ self
 ]
+
+{ #category : #testing }
+PCGArgumentNode >> isArgument [
+	<generated>
+	^ true
+]

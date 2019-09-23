@@ -19,3 +19,9 @@ PCGTemporaryNode >> acceptVisitor: aVisitor [
 PCGTemporaryNode >> asPCGTemporary [
 	^ self
 ]
+
+{ #category : #testing }
+PCGTemporaryNode >> isTemporary [
+	<generated>
+	^ true
+]

@@ -19,3 +19,9 @@ PCGInstanceVariableNode >> acceptVisitor: aVisitor [
 PCGInstanceVariableNode >> asPCGInstanceVariable [
 	^ self
 ]
+
+{ #category : #testing }
+PCGInstanceVariableNode >> isInstanceVariable [
+	<generated>
+	^ true
+]
