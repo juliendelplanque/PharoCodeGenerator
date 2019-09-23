@@ -4,8 +4,9 @@ Extension { #name : #PCGRealASTToPCGConverter }
 PCGRealASTToPCGConverter class >> regenerateVisitMethods [
 	<script>
 	<metaprogramming>
-	PCGProgramNode allSubclasses \ {PCGTemplateParameter}
-		select: [ :c | c package = PCGProgramNode package and: [ c subclasses isEmpty ] ]
+	PCGProgramNode allSubclasses \ {PCGTemplateParameter. PCGCompositeTemplateParameter}
+		select:
+			[ :c | c package = PCGProgramNode package and: [ c subclasses isEmpty ] ]
 		thenCollect: [ :class | 
 			| classNameWithoutPrefix argument |
 			classNameWithoutPrefix := class name allButFirst: 3.
@@ -17,12 +18,12 @@ PCGRealASTToPCGConverter class >> regenerateVisitMethods [
 				arguments: {argument})
 				bodyBlock: [ :body | 
 					| cascade |
-					cascade := PCGCascadeNode
-						target: class asPCG receiveNew.
+					cascade := PCGCascadeNode target: class asPCG receiveNew.
 					class instanceVariablesForRealAST
 						do: [ :instVarName | 
 							| visitingAst |
-							visitingAst := (class slotNamed: instVarName) type class = CollectionOfType
+							visitingAst := (class slotNamed: instVarName) type class
+								= CollectionOfType
 								ifTrue: [ (argument receiveMessage: instVarName)
 										receiveMessage: #collect:
 										with:
@@ -39,5 +40,7 @@ PCGRealASTToPCGConverter class >> regenerateVisitMethods [
 					cascade receiveYourself.
 					body << cascade returnIt ];
 				protocol: 'visiting';
-				installOn: self ifHandwrittenMethodAlreadyExist: [ :e | (e method printString , ' already exist, do not modify it') logCr ] ]
+				installOn: self
+					ifHandwrittenMethodAlreadyExist:
+						[ :e | (e method printString , ' already exist, do not modify it') traceCr ] ]
 ]

@@ -4,7 +4,7 @@ Extension { #name : #PCGStaticConverterToRBAST }
 PCGStaticConverterToRBAST class >> regenerateFactoryMethods [
 	<script>
 	<metaprogramming>
-	PCGProgramNode allSubclasses \ {PCGTemplateParameter}
+	PCGProgramNode allSubclasses \ {PCGTemplateParameter. PCGCompositeTemplateParameter}
 		select: [ :c | c package = PCGProgramNode package and: [ c subclasses isEmpty ] ]
 		thenDo: [ :class |
 			|selectorKeywords arguments|
