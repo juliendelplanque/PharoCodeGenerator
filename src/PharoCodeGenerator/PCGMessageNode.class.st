@@ -37,6 +37,21 @@ PCGMessageNode class >> receiver: receiver selector: selector arguments: argumen
 		yourself
 ]
 
+{ #category : #'instance creation' }
+PCGMessageNode class >> receiver: receiver selector: selector with: arg1 [
+	^ self receiver: receiver selector: selector arguments: { arg1 } 
+]
+
+{ #category : #'instance creation' }
+PCGMessageNode class >> receiver: receiver selector: selector with: arg1 with: arg2 [
+	^ self receiver: receiver selector: selector arguments: { arg1. arg2 } 
+]
+
+{ #category : #'instance creation' }
+PCGMessageNode class >> receiver: receiver selector: selector with: arg1 with: arg2 with: arg3 [
+	^ self receiver: receiver selector: selector arguments: { arg1. arg2. arg3 } 
+]
+
 { #category : #comparing }
 PCGMessageNode >> = anObject [
 	<generated>
