@@ -5,6 +5,9 @@ I define a lighter API that aims to ease AST nodes composition.
 Class {
 	#name : #PCGProgramNode,
 	#superclass : #Object,
+	#instVars : [
+		'#parent type: PCGProgramNode'
+	],
 	#category : #'PharoCodeGenerator-AST'
 }
 
@@ -27,6 +30,16 @@ PCGProgramNode >> asPCG [
 PCGProgramNode >> checkAST [
 	PCGASTChecker new
 		visit: self
+]
+
+{ #category : #accessing }
+PCGProgramNode >> children [
+	^ (self class slots
+		select: [:slot | 
+			slot isTypedSlot and: [
+				(slot read: self) asOrderedCollection allSatisfy: [ :o |
+					o isKindOf: PCGProgramNode ] ] ]
+		thenCollect: [ :slot | (slot read: self) asOrderedCollection ]) flattened
 ]
 
 { #category : #accessing }
@@ -175,6 +188,16 @@ PCGProgramNode >> meta [
 	self checkAST.
 	^ PCGMetaMetaCodeGenerator new
 		visit: self
+]
+
+{ #category : #accessing }
+PCGProgramNode >> parent [
+	^ parent
+]
+
+{ #category : #accessing }
+PCGProgramNode >> parent: anObject [
+	parent := anObject
 ]
 
 { #category : #converting }
