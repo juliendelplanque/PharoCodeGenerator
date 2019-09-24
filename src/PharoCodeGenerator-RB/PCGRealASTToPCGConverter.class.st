@@ -167,3 +167,8 @@ PCGRealASTToPCGConverter >> visitTemporaryNode: aTemporaryNode [
 PCGRealASTToPCGConverter >> visitThisContextNode: aThisContextNode [
 	^ PCGThisContextNode new
 ]
+
+{ #category : #visiting }
+PCGRealASTToPCGConverter >> visitVariableNode: aVariableNode [
+	self error: 'The AST to convert should not contain variable node. You need to perform semantic analysis on it.'
+]
