@@ -171,6 +171,11 @@ PCGMethodNode >> arguments: anObject [
 	arguments := anObject asOrderedCollection
 ]
 
+{ #category : #converting }
+PCGMethodNode >> asPCGAST [
+	^ self
+]
+
 { #category : #dsl }
 PCGMethodNode >> beReturnedSubclassResponsibility [
 	self bodyBlock: [ :b | b << (#self asPCGNode receiveMessage: #subclassResponsibility) returnIt ]
