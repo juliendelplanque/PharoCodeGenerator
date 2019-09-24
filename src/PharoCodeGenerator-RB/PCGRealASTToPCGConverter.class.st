@@ -35,7 +35,7 @@ PCGRealASTToPCGConverter >> visitAssignmentNode: anAssignmentNode [
 	<generated>
 	^ PCGAssignmentNode new
 		variable: (self visit: anAssignmentNode variable);
-		value: anAssignmentNode value;
+		value: (self visit: anAssignmentNode value);
 		yourself
 ]
 

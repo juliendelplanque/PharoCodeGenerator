@@ -31,7 +31,7 @@ PCGRealASTToPCGConverter class >> regenerateVisitMethods [
 												bodyBlock: [ :blockBody | 
 													blockBody
 														<< (#self asPCGNode receiveMessage: #visit: with: #toVisit asPCGArgument) ]) ]
-								ifFalse: [ ((class slotNamed: instVarName) type inheritsFrom: PCGProgramNode)
+								ifFalse: [ (((class slotNamed: instVarName) type inheritsFrom: PCGProgramNode) or: [ (class slotNamed: instVarName) type users anySatisfy: [ :user | user inheritsFrom: PCGProgramNode ] ])
 										ifTrue: [ #self asPCGNode
 												receiveMessage: #visit:
 												with: (argument receiveMessage: instVarName) ]
