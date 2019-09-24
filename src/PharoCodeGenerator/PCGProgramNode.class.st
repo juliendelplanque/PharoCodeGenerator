@@ -192,7 +192,7 @@ PCGProgramNode >> meta [
 
 { #category : #accessing }
 PCGProgramNode >> parent [
-	^ parent
+	^ parent ifNil: [ PCGNullNode new ]
 ]
 
 { #category : #accessing }

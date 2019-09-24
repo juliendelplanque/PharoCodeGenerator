@@ -51,5 +51,8 @@ PCGProgramNode class >> regenerateTypeTestMethods [
 			#installClass -> class }) installOn: class.
 		(template substituteParametersWith: {
 			#typeClass -> class.
-			#installClass -> PCGProgramNode }) installOn: PCGProgramNode. ]
+			#installClass -> PCGProgramNode }) installOn: PCGProgramNode.
+		(template substituteParametersWith: {
+			#typeClass -> class.
+			#installClass -> PCGNullNode }) installOn: PCGNullNode ]
 ]
