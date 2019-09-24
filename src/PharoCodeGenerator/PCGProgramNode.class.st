@@ -125,6 +125,11 @@ PCGProgramNode >> isMethod [
 ]
 
 { #category : #testing }
+PCGProgramNode >> isNull [
+	^ false
+]
+
+{ #category : #testing }
 PCGProgramNode >> isPCGProgramNode [
 	^ true
 ]

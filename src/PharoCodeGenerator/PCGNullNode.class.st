@@ -81,6 +81,11 @@ PCGNullNode >> isMethod [
 ]
 
 { #category : #testing }
+PCGNullNode >> isNull [
+	^ true
+]
+
+{ #category : #testing }
 PCGNullNode >> isPragma [
 	<generated>
 	^ false
