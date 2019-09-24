@@ -70,9 +70,10 @@ PCGStaticConverterToRBAST >> createInstanceVariableNodeWithName: name [
 
 { #category : #factory }
 PCGStaticConverterToRBAST >> createLiteralArrayNodeWithContents: contents [
-	<generated>
+	self flag: #TODO. "Should it be generated?"
 	^ RBLiteralArrayNode new
 		contents: contents;
+		isByteArray: contents class = ByteArray;
 		yourself
 ]
 
