@@ -3,7 +3,7 @@ A PCGSuperNodeTest is a test class for testing the behavior of PCGSuperNode
 "
 Class {
 	#name : #PCGSuperNodeTest,
-	#superclass : #TestCase,
+	#superclass : #PCGTestCase,
 	#instVars : [
 		'superNode'
 	],

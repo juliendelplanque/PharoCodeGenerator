@@ -207,7 +207,7 @@ PCGProgramNode >> parent: anObject [
 
 { #category : #converting }
 PCGProgramNode >> sourceCode [
-	^ self realAST newSource
+	^ RBSimpleFormatter new format: self realAST
 ]
 
 { #category : #'parameters-substitution' }

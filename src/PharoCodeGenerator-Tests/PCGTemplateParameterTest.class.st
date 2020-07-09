@@ -3,7 +3,7 @@ A PCGTemplateParameterTest is a test class for testing the behavior of PCGTempla
 "
 Class {
 	#name : #PCGTemplateParameterTest,
-	#superclass : #TestCase,
+	#superclass : #PCGTestCase,
 	#instVars : [
 		'templateParameter'
 	],

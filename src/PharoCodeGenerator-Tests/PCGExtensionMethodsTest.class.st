@@ -1,6 +1,6 @@
 Class {
 	#name : #PCGExtensionMethodsTest,
-	#superclass : #TestCase,
+	#superclass : #PCGTestCase,
 	#category : #'PharoCodeGenerator-Tests-ExtensionMethods'
 }
 

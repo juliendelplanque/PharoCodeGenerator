@@ -3,7 +3,7 @@ A PCGVariableProviderTest is a test class for testing the behavior of PCGVariabl
 "
 Class {
 	#name : #PCGVariableNameProviderTest,
-	#superclass : #TestCase,
+	#superclass : #PCGTestCase,
 	#instVars : [
 		'variableProvider'
 	],

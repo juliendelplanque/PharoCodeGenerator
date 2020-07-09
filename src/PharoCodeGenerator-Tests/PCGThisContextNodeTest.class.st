@@ -3,7 +3,7 @@ A PCGThisContextNodeTest is a test class for testing the behavior of PCGThisCont
 "
 Class {
 	#name : #PCGThisContextNodeTest,
-	#superclass : #TestCase,
+	#superclass : #PCGTestCase,
 	#instVars : [
 		'thisContextNode'
 	],

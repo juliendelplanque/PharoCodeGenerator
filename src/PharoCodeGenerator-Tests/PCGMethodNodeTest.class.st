@@ -3,7 +3,7 @@ A PCGMethodNodeTest is a test class for testing the behavior of PCGMethodNode
 "
 Class {
 	#name : #PCGMethodNodeTest,
-	#superclass : #TestCase,
+	#superclass : #PCGTestCase,
 	#instVars : [
 		'method'
 	],
@@ -110,11 +110,11 @@ PCGMethodNodeTest >> testSelectorKeywords [
 
 { #category : #test }
 PCGMethodNodeTest >> testSourceCode [
-	self assert: method sourceCode equals: 'test
-	<generated>
-	| foo |
-	foo := 1 + 1.
-	^ 42'
+	self assertSourceCodeOf: method equals: 'test
+  < generated>
+  | foo |
+  foo := 1 + 1.
+  ^42'
 ]
 
 { #category : #test }
@@ -134,8 +134,8 @@ PCGMethodNodeTest >> testWithoutGeneratedPragma [
 	
 	self deny: (method pragmas anySatisfy: [ :p | p selector = PCGMethodNode generatedPragmaSelector ]).
 	
-	self assert: method sourceCode equals: 'test
-	| foo |
-	foo := 1 + 1.
-	^ 42'
+	self assertSourceCodeOf: method equals: 'test
+  | foo |
+  foo := 1 + 1.
+  ^42'
 ]

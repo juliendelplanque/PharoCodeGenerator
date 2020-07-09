@@ -3,7 +3,7 @@ A PCGASTCheckerTest is a test class for testing the behavior of PCGASTChecker
 "
 Class {
 	#name : #PCGASTCheckerTest,
-	#superclass : #TestCase,
+	#superclass : #PCGTestCase,
 	#instVars : [
 		'astChecker'
 	],

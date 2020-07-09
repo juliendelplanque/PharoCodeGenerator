@@ -3,7 +3,7 @@ A PCGSelfNodeTest is a test class for testing the behavior of PCGSelfNode
 "
 Class {
 	#name : #PCGSelfNodeTest,
-	#superclass : #TestCase,
+	#superclass : #PCGTestCase,
 	#instVars : [
 		'selfNode'
 	],

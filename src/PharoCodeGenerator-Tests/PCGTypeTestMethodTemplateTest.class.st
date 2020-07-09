@@ -1,10 +1,10 @@
 Class {
 	#name : #PCGTypeTestMethodTemplateTest,
-	#superclass : #TestCase,
+	#superclass : #PCGTestCase,
 	#instVars : [
 		'template'
 	],
-	#category : #'PharoCodeGenerator-Tests'
+	#category : #'PharoCodeGenerator-Tests-Templates'
 }
 
 { #category : #running }
@@ -19,16 +19,16 @@ PCGTypeTestMethodTemplateTest >> setUp [
 
 { #category : #tests }
 PCGTypeTestMethodTemplateTest >> testSubstitute1 [
-	self assert: (template substituteParametersWith: { 
-		#isMyObjectBoolean -> true asPCG }) sourceCode equals: 'isMyObject
-	<generated>
-	^ true'
+	self assertSourceCodeOf: (template substituteParametersWith: { 
+		#isMyObjectBoolean -> true asPCG }) equals: 'isMyObject
+  < generated>
+  ^true'
 ]
 
 { #category : #tests }
 PCGTypeTestMethodTemplateTest >> testSubstitute2 [
-	self assert: (template substituteParametersWith: { 
-		#isMyObjectBoolean -> false asPCG }) sourceCode equals: 'isMyObject
-	<generated>
-	^ false'
+	self assertSourceCodeOf: (template substituteParametersWith: { 
+		#isMyObjectBoolean -> false asPCG }) equals: 'isMyObject
+  < generated>
+  ^false'
 ]

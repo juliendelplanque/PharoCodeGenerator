@@ -1,6 +1,6 @@
 Class {
 	#name : #PCGMutatorMethodTemplateTest,
-	#superclass : #TestCase,
+	#superclass : #PCGTestCase,
 	#category : #'PharoCodeGenerator-Tests-AST'
 }
 
@@ -24,10 +24,10 @@ PCGMutatorMethodTemplateTest >> testSubstitute1 [
 		#newValueParameter -> #aFooObject asPCGArgument
 	} asDictionary.
 	self
-		assert: (self mutatorTemplate substituteParametersWith: context) sourceCode
+		assertSourceCodeOf: (self mutatorTemplate substituteParametersWith: context)
 		equals: 'foo: aFooObject
-	<generated>
-	foo := aFooObject'
+  < generated>
+  foo := aFooObject'
 ]
 
 { #category : #tests }
@@ -39,10 +39,10 @@ PCGMutatorMethodTemplateTest >> testSubstitute2 [
 		#newValueParameter -> #aString asPCGArgument
 	} asDictionary.
 	self
-		assert: (self mutatorTemplate substituteParametersWith: context) sourceCode
+		assertSourceCodeOf: (self mutatorTemplate substituteParametersWith: context)
 		equals: 'name: aString
-	<generated>
-	name := aString'
+  < generated>
+  name := aString'
 ]
 
 { #category : #tests }
@@ -54,8 +54,8 @@ PCGMutatorMethodTemplateTest >> testSubstitute3 [
 		#newValueParameter -> #aString asPCGArgument
 	} asDictionary.
 	self
-		assert: (self mutatorTemplate substituteParametersWith: context) sourceCode
+		assertSourceCodeOf: (self mutatorTemplate substituteParametersWith: context)
 		equals: 'setName: aString
-	<generated>
-	name := aString'
+  < generated>
+  name := aString'
 ]
