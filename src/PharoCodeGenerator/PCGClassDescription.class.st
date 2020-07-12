@@ -2,10 +2,21 @@ Class {
 	#name : #PCGClassDescription,
 	#superclass : #PCGBehaviorDescription,
 	#instVars : [
-		'superclassName'
+		'superclassName',
+		'classVariables'
 	],
 	#category : #'PharoCodeGenerator-MetaModel'
 }
+
+{ #category : #accessing }
+PCGClassDescription >> classVariables [
+	^ classVariables
+]
+
+{ #category : #accessing }
+PCGClassDescription >> classVariables: anObject [
+	classVariables := anObject
+]
 
 { #category : #accessing }
 PCGClassDescription >> environment [
@@ -16,6 +27,7 @@ PCGClassDescription >> environment [
 PCGClassDescription >> initialize [
 	super initialize.
 	self superclassName: #Object.
+	self classVariables: #()
 ]
 
 { #category : #installing }
@@ -23,7 +35,7 @@ PCGClassDescription >> installOn: aRPackage [
 	self superclass
 		subclass: self name
 		slots: self slots
-		classVariables: {}
+		classVariables: self classVariables
 		package: aRPackage name.
 	self methods do: [ :method | 
 		method installOn: (self class environment at: self name) ]

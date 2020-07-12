@@ -16,6 +16,16 @@ PCGBehaviorDescription >> initialize [
 	self slots: OrderedCollection new.
 ]
 
+{ #category : #installing }
+PCGBehaviorDescription >> installPCGMethod: aPCGMethodNode [
+	self methods
+		detect: [ :m | m selector = aPCGMethodNode selector ]
+		ifFound: [ :m | self methods remove: m ].
+
+	self methods
+		add: aPCGMethodNode
+]
+
 { #category : #accessing }
 PCGBehaviorDescription >> methods [
 	^ methods
