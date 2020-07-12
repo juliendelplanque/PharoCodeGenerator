@@ -168,9 +168,9 @@ PCGStaticASTCopier >> visitSuperNode: aSuperNode [
 
 { #category : #visiting }
 PCGStaticASTCopier >> visitTemplateParameter: aTemplateParameter [
-	<generated>
 	^ PCGTemplateParameter new
 		name: (self visit: aTemplateParameter name);
+		transformationBlock: aTemplateParameter transformationBlock;
 		yourself
 ]
 
