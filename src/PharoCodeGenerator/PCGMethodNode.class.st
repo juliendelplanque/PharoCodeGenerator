@@ -252,6 +252,14 @@ PCGMethodNode >> pragmas: anObject [
 	pragmas := anObject asOrderedCollection
 ]
 
+{ #category : #printing }
+PCGMethodNode >> printOn: aStream [
+	super printOn: aStream.
+	aStream nextPut: $(.
+	self selector printOn: aStream.
+	aStream nextPut: $)
+]
+
 { #category : #accessing }
 PCGMethodNode >> protocol [
 	^ protocol
