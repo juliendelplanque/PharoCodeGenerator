@@ -34,6 +34,7 @@ PCGClassDescription >> initialize [
 PCGClassDescription >> installOn: aRPackage [
 	self superclass
 		subclass: self name
+		uses: self traitCompositionUsed
 		slots: self slots
 		classVariables: self classVariables
 		package: aRPackage name.

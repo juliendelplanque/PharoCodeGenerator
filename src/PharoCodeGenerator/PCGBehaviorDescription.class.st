@@ -3,8 +3,9 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'name',
-		'slots',
-		'methods'
+		'methods',
+		'traitCompositionUsed',
+		'slotsDeclaration'
 	],
 	#category : #'PharoCodeGenerator-MetaModel'
 }
@@ -13,7 +14,8 @@ Class {
 PCGBehaviorDescription >> initialize [
 	super initialize.
 	self methods: OrderedCollection new.
-	self slots: OrderedCollection new.
+	self slotsDeclaration: {} asPCG.
+	self traitCompositionUsed: {} asPCG
 ]
 
 { #category : #installing }
@@ -43,15 +45,25 @@ PCGBehaviorDescription >> name [
 
 { #category : #accessing }
 PCGBehaviorDescription >> name: anObject [
-	name := anObject
+	name := anObject asPCG
 ]
 
 { #category : #accessing }
-PCGBehaviorDescription >> slots [
-	^ slots
+PCGBehaviorDescription >> slotsDeclaration [
+	^ slotsDeclaration
 ]
 
 { #category : #accessing }
-PCGBehaviorDescription >> slots: anObject [
-	slots := anObject
+PCGBehaviorDescription >> slotsDeclaration: anObject [
+	slotsDeclaration := anObject asPCG
+]
+
+{ #category : #accessing }
+PCGBehaviorDescription >> traitCompositionUsed [
+	^ traitCompositionUsed
+]
+
+{ #category : #accessing }
+PCGBehaviorDescription >> traitCompositionUsed: anObject [
+	traitCompositionUsed := anObject asPCG
 ]
