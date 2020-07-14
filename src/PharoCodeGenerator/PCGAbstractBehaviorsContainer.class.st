@@ -1,6 +1,6 @@
 Class {
 	#name : #PCGAbstractBehaviorsContainer,
-	#superclass : #Object,
+	#superclass : #PCGEntityDescription,
 	#instVars : [
 		'behaviors',
 		'name'

@@ -35,6 +35,11 @@ PCGClassDescription >> installOn: aRPackage [
 	^ aRPackage installPCGClass: self
 ]
 
+{ #category : #testing }
+PCGClassDescription >> isPCGClass [
+	^ true
+]
+
 { #category : #installing }
 PCGClassDescription >> superclass [
 	^ self environment at: self superclassName

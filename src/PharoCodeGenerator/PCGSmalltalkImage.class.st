@@ -1,6 +1,6 @@
 Class {
 	#name : #PCGSmalltalkImage,
-	#superclass : #Object,
+	#superclass : #PCGEntityDescription,
 	#instVars : [
 		'packages'
 	],

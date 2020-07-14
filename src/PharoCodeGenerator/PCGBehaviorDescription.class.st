@@ -1,6 +1,6 @@
 Class {
 	#name : #PCGBehaviorDescription,
-	#superclass : #Object,
+	#superclass : #PCGEntityDescription,
 	#instVars : [
 		'name',
 		'methods',
@@ -9,6 +9,11 @@ Class {
 	],
 	#category : #'PharoCodeGenerator-MetaModel'
 }
+
+{ #category : #converting }
+PCGBehaviorDescription >> asPCGGlobal [
+	^ self name evaluate asSymbol asPCGGlobal
+]
 
 { #category : #initialization }
 PCGBehaviorDescription >> initialize [
@@ -26,6 +31,16 @@ PCGBehaviorDescription >> installPCGMethod: aPCGMethodNode [
 
 	self methods
 		add: aPCGMethodNode
+]
+
+{ #category : #testing }
+PCGBehaviorDescription >> isPCGClass [
+	^ false
+]
+
+{ #category : #testing }
+PCGBehaviorDescription >> isPCGTrait [
+	^ false
 ]
 
 { #category : #accessing }
