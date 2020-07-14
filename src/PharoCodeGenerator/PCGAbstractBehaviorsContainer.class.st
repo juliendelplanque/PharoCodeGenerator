@@ -8,6 +8,13 @@ Class {
 	#category : #'PharoCodeGenerator-MetaModel'
 }
 
+{ #category : #'instance creation' }
+PCGAbstractBehaviorsContainer class >> named: aString [
+	^ self new
+		name: aString;
+		yourself
+]
+
 { #category : #accessing }
 PCGAbstractBehaviorsContainer >> behaviors [
 	^ behaviors
