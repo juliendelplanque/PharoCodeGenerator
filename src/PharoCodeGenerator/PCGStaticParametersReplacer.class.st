@@ -86,8 +86,7 @@ PCGStaticParametersReplacer >> visitMessageNode: aMessageNode [
 
 { #category : #visiting }
 PCGStaticParametersReplacer >> visitMethodNode: aMethodNode [
-	<generated>
-	^ PCGMethodNode new
+	^ aMethodNode class new
 		selector: (self visit: aMethodNode selector);
 		body: (self visit: aMethodNode body);
 		arguments:

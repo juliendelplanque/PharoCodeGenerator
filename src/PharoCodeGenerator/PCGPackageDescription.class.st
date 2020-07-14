@@ -31,9 +31,9 @@ PCGPackageDescription >> installOn: anImage [
 ]
 
 { #category : #installing }
-PCGPackageDescription >> installPCGMethod: aPCGMethod [
+PCGPackageDescription >> installPCGExtensionMethod: aPCGExtensionMethod [
 	self extensionMethods
-		add: aPCGMethod
+		add: aPCGExtensionMethod
 ]
 
 { #category : #installing }
