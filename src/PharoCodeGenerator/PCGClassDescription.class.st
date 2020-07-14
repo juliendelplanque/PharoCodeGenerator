@@ -32,14 +32,7 @@ PCGClassDescription >> initialize [
 
 { #category : #installing }
 PCGClassDescription >> installOn: aRPackage [
-	self superclass
-		subclass: self name
-		uses: self traitCompositionUsed
-		slots: self slots
-		classVariables: self classVariables
-		package: aRPackage name.
-	self methods do: [ :method | 
-		method installOn: (self class environment at: self name) ]
+	^ aRPackage installPCGClass: self
 ]
 
 { #category : #installing }

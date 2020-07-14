@@ -6,12 +6,5 @@ Class {
 
 { #category : #installing }
 PCGTraitDescription >> installOn: aRPackage [
-	| traitInstalled |
-	traitInstalled := Trait
-		named: self name evaluate
-		uses: self traitCompositionUsed evaluate
-		package: aRPackage name.
-		
-	self methods do: [ :method |
-		method installOn: traitInstalled ]
+	^ aRPackage installPCGTrait: self
 ]
