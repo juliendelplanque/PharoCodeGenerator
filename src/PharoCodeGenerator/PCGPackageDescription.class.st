@@ -2,25 +2,38 @@ Class {
 	#name : #PCGPackageDescription,
 	#superclass : #PCGAbstractBehaviorsContainer,
 	#instVars : [
-		'tags'
+		'tags',
+		'extensionMethods'
 	],
 	#category : #'PharoCodeGenerator-MetaModel'
 }
 
+{ #category : #accessing }
+PCGPackageDescription >> extensionMethods [
+	^ extensionMethods
+]
+
+{ #category : #accessing }
+PCGPackageDescription >> extensionMethods: anObject [
+	extensionMethods := anObject
+]
+
 { #category : #initialization }
 PCGPackageDescription >> initialize [
 	super initialize.
-	self tags: OrderedCollection new
-]
-
-{ #category : #installing }
-PCGPackageDescription >> install [
-	self halt: #TODO
+	self tags: OrderedCollection new.
+	self extensionMethods: OrderedCollection new
 ]
 
 { #category : #installing }
 PCGPackageDescription >> installOn: anImage [
 	^ anImage installPCGPackageDescription: self
+]
+
+{ #category : #installing }
+PCGPackageDescription >> installPCGMethod: aPCGMethod [
+	self extensionMethods
+		add: aPCGMethod
 ]
 
 { #category : #installing }
