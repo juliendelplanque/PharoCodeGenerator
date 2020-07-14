@@ -1,14 +1,17 @@
+"
+I provide the API to evaluate the code represented by an AST node.
+"
 Trait {
-	#name : #PCGTEvaluatable,
+	#name : #PCGTEvaluable,
 	#category : #'PharoCodeGenerator-Traits'
 }
 
 { #category : #compiler }
-PCGTEvaluatable >> compiler [
+PCGTEvaluable >> compiler [
 	^ self class compiler
 ]
 
 { #category : #evaluating }
-PCGTEvaluatable >> evaluate [
+PCGTEvaluable >> evaluate [
 	^ self compiler evaluate: self sourceCode
 ]
