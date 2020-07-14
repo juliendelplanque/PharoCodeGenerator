@@ -63,6 +63,14 @@ PCGBehaviorDescription >> name: anObject [
 	name := anObject asPCG
 ]
 
+{ #category : #printing }
+PCGBehaviorDescription >> printOn: aStream [
+	super printOn: aStream.
+	aStream nextPut: $(.
+	aStream nextPutAll: ([ self name evaluate ] on: Error do: [ 'Can not generate name.' ]).
+	aStream nextPut: $)
+]
+
 { #category : #accessing }
 PCGBehaviorDescription >> slotsDeclaration [
 	^ slotsDeclaration

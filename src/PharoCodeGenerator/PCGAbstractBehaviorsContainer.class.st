@@ -52,3 +52,11 @@ PCGAbstractBehaviorsContainer >> name [
 PCGAbstractBehaviorsContainer >> name: anObject [
 	name := anObject asPCG
 ]
+
+{ #category : #printing }
+PCGAbstractBehaviorsContainer >> printOn: aStream [
+	super printOn: aStream.
+	aStream nextPut: $(.
+	aStream nextPutAll: ([ self name evaluate ] on: Error do: [ 'Can not generate name.' ]).
+	aStream nextPut: $)
+]
