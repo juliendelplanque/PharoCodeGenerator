@@ -25,6 +25,12 @@ PCGAbstractBehaviorsContainer >> behaviors: anObject [
 	behaviors := anObject
 ]
 
+{ #category : #initialization }
+PCGAbstractBehaviorsContainer >> initialize [
+	super initialize.
+	self behaviors: OrderedCollection new
+]
+
 { #category : #installing }
 PCGAbstractBehaviorsContainer >> installPCGClass: aPCGClassDescription [
 	self behaviors
