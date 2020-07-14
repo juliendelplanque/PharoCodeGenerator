@@ -52,3 +52,36 @@ PCGBehaviorDescriptionTest >> testInstallPCGMethodWithSameNameReplacePrevious [
 	self assert: behavior methods size equals: 1.
 	self assert: behavior methods anyOne equals: method2.
 ]
+
+{ #category : #test }
+PCGBehaviorDescriptionTest >> testName [
+	| behavior |
+	behavior := PCGBehaviorDescription new.
+	
+	behavior name: #foo.
+	
+	self assert: behavior name class equals: PCGLiteralValueNode.
+	self assert: behavior name value equals: #foo
+]
+
+{ #category : #test }
+PCGBehaviorDescriptionTest >> testSlotsDeclaration [
+	| behavior |
+	behavior := PCGBehaviorDescription new.
+	
+	behavior slotsDeclaration: {}.
+	
+	self assert: behavior slotsDeclaration class equals: PCGArrayNode.
+	self assert: behavior slotsDeclaration statements isEmpty
+]
+
+{ #category : #test }
+PCGBehaviorDescriptionTest >> testTraitCompositionUsed [
+	| behavior |
+	behavior := PCGBehaviorDescription new.
+	
+	behavior traitCompositionUsed: {}.
+	
+	self assert: behavior slotsDeclaration class equals: PCGArrayNode.
+	self assert: behavior slotsDeclaration statements isEmpty
+]
