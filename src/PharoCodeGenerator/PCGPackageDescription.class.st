@@ -7,6 +7,12 @@ Class {
 	#category : #'PharoCodeGenerator-MetaModel'
 }
 
+{ #category : #initialization }
+PCGPackageDescription >> initialize [
+	super initialize.
+	self tags: OrderedCollection new
+]
+
 { #category : #installing }
 PCGPackageDescription >> install [
 	self halt: #TODO

@@ -2,7 +2,8 @@ Class {
 	#name : #PCGAbstractBehaviorsContainer,
 	#superclass : #Object,
 	#instVars : [
-		'behaviors'
+		'behaviors',
+		'name'
 	],
 	#category : #'PharoCodeGenerator-MetaModel'
 }
@@ -27,4 +28,14 @@ PCGAbstractBehaviorsContainer >> installPCGClass: aPCGClassDescription [
 PCGAbstractBehaviorsContainer >> installPCGTrait: aPCGTraitDescription [
 	self behaviors
 		add: aPCGTraitDescription
+]
+
+{ #category : #accessing }
+PCGAbstractBehaviorsContainer >> name [
+	^ name
+]
+
+{ #category : #accessing }
+PCGAbstractBehaviorsContainer >> name: anObject [
+	name := anObject asPCG
 ]
