@@ -4,7 +4,7 @@ I define a lighter API that aims to ease AST nodes composition.
 "
 Class {
 	#name : #PCGProgramNode,
-	#superclass : #PCGEntityDescription,
+	#superclass : #Object,
 	#instVars : [
 		'#parent type: PCGProgramNode'
 	],

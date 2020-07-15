@@ -1,6 +1,8 @@
 Class {
 	#name : #PCGAbstractBehaviorsContainer,
-	#superclass : #PCGEntityDescription,
+	#superclass : #Object,
+	#traits : 'PCGTInstallableEntity',
+	#classTraits : 'PCGTInstallableEntity classTrait',
 	#instVars : [
 		'behaviors',
 		'name'

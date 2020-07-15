@@ -1,6 +1,8 @@
 Class {
 	#name : #PCGSmalltalkImage,
-	#superclass : #PCGEntityDescription,
+	#superclass : #Object,
+	#traits : 'PCGTInstallableEntity',
+	#classTraits : 'PCGTInstallableEntity classTrait',
 	#instVars : [
 		'packages'
 	],

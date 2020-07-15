@@ -1,6 +1,8 @@
 Class {
 	#name : #PCGBehaviorDescription,
-	#superclass : #PCGEntityDescription,
+	#superclass : #Object,
+	#traits : 'PCGTInstallableEntity',
+	#classTraits : 'PCGTInstallableEntity classTrait',
 	#instVars : [
 		'name',
 		'methods',

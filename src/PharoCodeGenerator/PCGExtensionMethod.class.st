@@ -1,6 +1,8 @@
 Class {
 	#name : #PCGExtensionMethod,
-	#superclass : #PCGMethodNode,
+	#superclass : #Object,
+	#traits : 'PCGTInstallableEntity',
+	#classTraits : 'PCGTInstallableEntity classTrait',
 	#instVars : [
 		'installationTarget'
 	],
