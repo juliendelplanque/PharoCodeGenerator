@@ -11,6 +11,26 @@ PCGTInstallableEntity >> addInstallationHook: aBlock [
 	self installationHooks add: aBlock
 ]
 
+{ #category : #installing }
+PCGTInstallableEntity >> installOn: anObject [
+	^ self explicitRequirement
+]
+
+{ #category : #installing }
+PCGTInstallableEntity >> installOn: aBehavior if: aBlock [
+	aBlock
+		ifFalse: [ ^ self ].
+	
+	^ self installOn: aBehavior
+]
+
+{ #category : #installing }
+PCGTInstallableEntity >> installOn: aBehaviour ifHandwrittenMethodAlreadyExist: aBlock [
+	[ self installOn: aBehaviour ]
+		on: PCGHandwrittenMethodAlreadyExist
+		do: aBlock
+]
+
 { #category : #accessing }
 PCGTInstallableEntity >> installationHooks [
 	^ installationHooks ifNil: [ installationHooks := OrderedCollection new ]

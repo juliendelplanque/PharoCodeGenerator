@@ -229,21 +229,6 @@ PCGMethodNode >> installOn: aBehavior [
 	^ aBehavior installPCGMethod: self
 ]
 
-{ #category : #installing }
-PCGMethodNode >> installOn: aBehavior if: aBlock [
-	aBlock
-		ifFalse: [ ^ self ].
-	
-	^ self installOn: aBehavior
-]
-
-{ #category : #installing }
-PCGMethodNode >> installOn: aBehaviour ifHandwrittenMethodAlreadyExist: aBlock [
-	[ self installOn: aBehaviour ]
-		on: PCGHandwrittenMethodAlreadyExist
-		do: aBlock
-]
-
 { #category : #testing }
 PCGMethodNode >> isMethod [
 	<generated>
