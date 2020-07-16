@@ -12,7 +12,7 @@ PCGClassDescriptionTest >> testInitialize [
 	| classDescription |
 	classDescription := PCGClassDescription new.
 	
-	self assert: classDescription superclassName equals: #Object.
+	self assert: classDescription superclassName evaluate equals: Object.
 	self assert: classDescription methods isEmpty.
 	self assert: classDescription slotsDeclaration evaluate equals: {}.
 	self assert: classDescription traitCompositionUsed evaluate equals: {}.

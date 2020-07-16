@@ -26,7 +26,7 @@ PCGClassDescription >> environment [
 { #category : #initialization }
 PCGClassDescription >> initialize [
 	super initialize.
-	self superclassName: #Object.
+	self superclassName: Object.
 	self classVariables: #()
 ]
 
