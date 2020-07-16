@@ -1,14 +1,14 @@
-Extension { #name : #RPackage }
+Extension { #name : #RPackageTag }
 
 { #category : #'*PharoCodeGenerator' }
-RPackage >> installPCGClass: aPCGClassDescription [
+RPackageTag >> installPCGClass: aPCGClassDescription [
 	| classInstalled |
 	classInstalled := aPCGClassDescription superclass
 		subclass: aPCGClassDescription name evaluate
 		uses: aPCGClassDescription traitCompositionUsed evaluate
 		slots: aPCGClassDescription slotsDeclaration evaluate
 		classVariables: aPCGClassDescription classVariables
-		package: self name.
+		category: self categoryName.
 	aPCGClassDescription methods do: [ :method | 
 		method installOn: classInstalled ].
 	
@@ -16,32 +16,13 @@ RPackage >> installPCGClass: aPCGClassDescription [
 ]
 
 { #category : #'*PharoCodeGenerator' }
-RPackage >> installPCGExtensionMethod: aPCGExtensionMethod [
-	aPCGExtensionMethod methodNode
-		protocol: ('*' , self name);
-		installOn: aPCGExtensionMethod installationTarget evaluate
-]
-
-{ #category : #'*PharoCodeGenerator' }
-RPackage >> installPCGPackageTagDescription: aPCGPackageTagDescription [
-	| tag |
-	(self includesClassTagNamed: aPCGPackageTagDescription name)
-		ifTrue: [ self halt: #TODO "Raise notification" ].
-
-	tag := self addClassTag: aPCGPackageTagDescription name.
-	
-	aPCGPackageTagDescription behaviors do: [ :b |
-		b installOn: tag ]
-]
-
-{ #category : #'*PharoCodeGenerator' }
-RPackage >> installPCGTrait: aPCGTraitDescription [
+RPackageTag >> installPCGTrait: aPCGTraitDescription [
 	| traitInstalled |
 	traitInstalled := Trait
 		named: aPCGTraitDescription name evaluate
 		uses: aPCGTraitDescription traitCompositionUsed evaluate
 		slots: aPCGTraitDescription slotsDeclaration evaluate
-		category: self name.
+		category: self categoryName.
 		
 	aPCGTraitDescription methods do: [ :method |
 		method installOn: traitInstalled ].
