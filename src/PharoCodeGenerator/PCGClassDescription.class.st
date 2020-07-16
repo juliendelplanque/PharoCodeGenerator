@@ -40,11 +40,6 @@ PCGClassDescription >> isPCGClass [
 	^ true
 ]
 
-{ #category : #installing }
-PCGClassDescription >> superclass [
-	^ self environment at: self superclassName
-]
-
 { #category : #accessing }
 PCGClassDescription >> superclassName [
 	^ superclassName
@@ -52,5 +47,5 @@ PCGClassDescription >> superclassName [
 
 { #category : #accessing }
 PCGClassDescription >> superclassName: anObject [
-	superclassName := anObject
+	superclassName := anObject asPCG
 ]

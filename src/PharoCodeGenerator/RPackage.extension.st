@@ -3,7 +3,7 @@ Extension { #name : #RPackage }
 { #category : #'*PharoCodeGenerator' }
 RPackage >> installPCGClass: aPCGClassDescription [
 	| classInstalled |
-	classInstalled := aPCGClassDescription superclass
+	classInstalled := aPCGClassDescription superclassName evaluate
 		subclass: aPCGClassDescription name evaluate
 		uses: aPCGClassDescription traitCompositionUsed evaluate
 		slots: aPCGClassDescription slotsDeclaration evaluate
@@ -25,10 +25,10 @@ RPackage >> installPCGExtensionMethod: aPCGExtensionMethod [
 { #category : #'*PharoCodeGenerator' }
 RPackage >> installPCGPackageTagDescription: aPCGPackageTagDescription [
 	| tag |
-	(self includesClassTagNamed: aPCGPackageTagDescription name)
+	(self includesClassTagNamed: aPCGPackageTagDescription name evaluate)
 		ifTrue: [ self halt: #TODO "Raise notification" ].
 
-	tag := self addClassTag: aPCGPackageTagDescription name.
+	tag := self addClassTag: aPCGPackageTagDescription name evaluate.
 	
 	aPCGPackageTagDescription behaviors do: [ :b |
 		b installOn: tag ]

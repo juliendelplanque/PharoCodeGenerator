@@ -3,7 +3,7 @@ Extension { #name : #RPackageTag }
 { #category : #'*PharoCodeGenerator' }
 RPackageTag >> installPCGClass: aPCGClassDescription [
 	| classInstalled |
-	classInstalled := aPCGClassDescription superclass
+	classInstalled := aPCGClassDescription superclassName evaluate
 		subclass: aPCGClassDescription name evaluate
 		uses: aPCGClassDescription traitCompositionUsed evaluate
 		slots: aPCGClassDescription slotsDeclaration evaluate

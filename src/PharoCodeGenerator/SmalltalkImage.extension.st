@@ -3,10 +3,10 @@ Extension { #name : #SmalltalkImage }
 { #category : #'*PharoCodeGenerator' }
 SmalltalkImage >> installPCGPackageDescription: aPCGPackageDescription [
 	| package |
-	(RPackage organizer includesPackageNamed: aPCGPackageDescription name)
+	(RPackage organizer includesPackageNamed: aPCGPackageDescription name evaluate)
 		ifTrue: [ self halt: #TODO "Raise notification" ].
 		
-	package := (RPackage named: aPCGPackageDescription name).
+	package := (RPackage named: aPCGPackageDescription name evaluate).
 	package register.
 	
 	aPCGPackageDescription extensionMethods do: [ :m |
