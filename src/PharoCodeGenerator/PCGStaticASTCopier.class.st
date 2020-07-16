@@ -12,7 +12,7 @@ PCGStaticASTCopier >> visit: anObject [
 	"Here we consider that sometimes an attempt to visit a Symbol can be made to handle copy of PCGTemplateParameter.
 	 If a symbol is passed, simply return it, like that this is transparent to user and harms no one.
 	"
-	anObject isPCGProgramNode
+	anObject isPCGObject
 		ifFalse: [ ^ anObject copy ].
 	
 	^ anObject acceptVisitor: self

@@ -4,7 +4,7 @@ Extension { #name : #PCGStaticParametersReplacer }
 PCGStaticParametersReplacer class >> regenerateVisitMethods [
 	<script>
 	<metaprogramming>
-	PCGProgramNode allSubclasses \ { PCGTemplateParameter . PCGCompositeTemplateParameter }
+	PCGProgramNode allSubclasses  , { PCGExtensionMethod } \ { PCGTemplateParameter . PCGCompositeTemplateParameter }
 		select: [ :c | c package = PCGProgramNode package and: [ c subclasses isEmpty ] ]
 		thenDo: [ :class | 
 			| classNameWithoutPrefix argument shouldInstall|
@@ -20,7 +20,7 @@ PCGStaticParametersReplacer class >> regenerateVisitMethods [
 					| cascade |
 					cascade := PCGCascadeNode
 						target: class asPCG receiveNew.
-					class allInstVarNames
+					class allInstVarNames \ { #parent . #installationHooks }
 						do: [ :instVarName | 
 							((PCGTUnchangeableName users includesAny: class withAllSuperclasses) and: [ instVarName = #name ])
 								ifFalse: [ 

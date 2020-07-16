@@ -95,6 +95,16 @@ PCGTemplateParameter >> name: anObject [
 	name := anObject
 ]
 
+{ #category : #printing }
+PCGTemplateParameter >> printOn: aStream [
+	super printOn: aStream.
+	aStream nextPut: $(.
+	self name printOn: aStream.
+	aStream nextPutAll: ' => '.
+	self transformationBlock printOn: aStream.
+	aStream nextPut: $)
+]
+
 { #category : #transforming }
 PCGTemplateParameter >> transform: anObject [
 	^ self transformationBlock value: anObject

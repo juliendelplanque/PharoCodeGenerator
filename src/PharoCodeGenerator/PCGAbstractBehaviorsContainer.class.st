@@ -45,6 +45,11 @@ PCGAbstractBehaviorsContainer >> installPCGTrait: aPCGTraitDescription [
 		add: aPCGTraitDescription
 ]
 
+{ #category : #testing }
+PCGAbstractBehaviorsContainer >> isPCGObject [
+	^ true
+]
+
 { #category : #accessing }
 PCGAbstractBehaviorsContainer >> name [
 	^ name

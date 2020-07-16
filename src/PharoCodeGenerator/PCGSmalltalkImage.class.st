@@ -20,6 +20,11 @@ PCGSmalltalkImage >> installPCGPackageDescription: aPCGPackageDescription [
 	self packages add: aPCGPackageDescription
 ]
 
+{ #category : #testing }
+PCGSmalltalkImage >> isPCGObject [
+	^ true
+]
+
 { #category : #accessing }
 PCGSmalltalkImage >> packages [
 	^ packages

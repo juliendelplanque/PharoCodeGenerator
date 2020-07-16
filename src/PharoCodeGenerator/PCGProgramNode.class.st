@@ -5,6 +5,8 @@ I define a lighter API that aims to ease AST nodes composition.
 Class {
 	#name : #PCGProgramNode,
 	#superclass : #Object,
+	#traits : 'PCGTTemplatable',
+	#classTraits : 'PCGTTemplatable classTrait',
 	#instVars : [
 		'#parent type: PCGProgramNode'
 	],
@@ -130,6 +132,11 @@ PCGProgramNode >> isNull [
 ]
 
 { #category : #testing }
+PCGProgramNode >> isPCGObject [
+	^ true
+]
+
+{ #category : #testing }
 PCGProgramNode >> isPCGProgramNode [
 	^ true
 ]
@@ -208,11 +215,4 @@ PCGProgramNode >> parent: anObject [
 { #category : #converting }
 PCGProgramNode >> sourceCode [
 	^ self realAST newSource
-]
-
-{ #category : #'parameters-substitution' }
-PCGProgramNode >> substituteParametersWith: anObject [
-	^ PCGStaticParametersReplacer new
-		context: anObject asDictionary;
-		visit: self
 ]

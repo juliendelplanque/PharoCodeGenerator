@@ -1,8 +1,8 @@
 Class {
 	#name : #PCGExtensionMethod,
 	#superclass : #Object,
-	#traits : 'PCGTInstallableEntity',
-	#classTraits : 'PCGTInstallableEntity classTrait',
+	#traits : 'PCGTInstallableEntity + PCGTTemplatable',
+	#classTraits : 'PCGTInstallableEntity classTrait + PCGTTemplatable classTrait',
 	#instVars : [
 		'#methodNode type: PCGMethodNode',
 		'#installationTarget type: PCGValueNode'
@@ -15,6 +15,11 @@ PCGExtensionMethod class >> methodNode: methodNode [
 	^ self new
 		methodNode: methodNode;
 		yourself
+]
+
+{ #category : #visiting }
+PCGExtensionMethod >> acceptVisitor: aVisitor [
+	^ aVisitor visitExtensionMethod: self
 ]
 
 { #category : #installing }
@@ -30,6 +35,11 @@ PCGExtensionMethod >> installationTarget [
 { #category : #accessing }
 PCGExtensionMethod >> installationTarget: anObject [
 	installationTarget := anObject asPCG
+]
+
+{ #category : #testing }
+PCGExtensionMethod >> isPCGObject [
+	^ true
 ]
 
 { #category : #accessing }

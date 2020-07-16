@@ -41,6 +41,11 @@ PCGBehaviorDescription >> isPCGClass [
 ]
 
 { #category : #testing }
+PCGBehaviorDescription >> isPCGObject [
+	^ true
+]
+
+{ #category : #testing }
 PCGBehaviorDescription >> isPCGTrait [
 	^ false
 ]
