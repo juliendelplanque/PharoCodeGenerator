@@ -16,6 +16,11 @@ RPackage >> installPCGClass: aPCGClassDescription [
 ]
 
 { #category : #'*PharoCodeGenerator' }
+RPackage >> installPCGExtensionMethod: aPCGExtensionMethod [
+	self halt: #TODO
+]
+
+{ #category : #'*PharoCodeGenerator' }
 RPackage >> installPCGTrait: aPCGTraitDescription [
 	| traitInstalled |
 	traitInstalled := Trait

@@ -172,6 +172,11 @@ PCGMethodNode >> arguments: anObject [
 ]
 
 { #category : #converting }
+PCGMethodNode >> asExtensionMethod [
+	^ PCGExtensionMethod methodNode: self
+]
+
+{ #category : #converting }
 PCGMethodNode >> asPCGAST [
 	^ self
 ]

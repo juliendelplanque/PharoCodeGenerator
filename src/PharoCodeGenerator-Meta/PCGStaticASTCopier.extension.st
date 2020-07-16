@@ -4,7 +4,7 @@ Extension { #name : #PCGStaticASTCopier }
 PCGStaticASTCopier class >> regenerateVisitMethods [
 	<script>
 	<metaprogramming>
-	PCGProgramNode allSubclasses \ {PCGTemplateParameter}
+	PCGProgramNode allSubclasses , { PCGExtensionMethod } \ {PCGTemplateParameter}
 		select: [ :c | c package = PCGProgramNode package and: [ c subclasses isEmpty ] ]
 		thenCollect: [ :class | 
 			| classNameWithoutPrefix argument |
@@ -19,7 +19,7 @@ PCGStaticASTCopier class >> regenerateVisitMethods [
 					| cascade |
 					cascade := PCGCascadeNode
 						target: class asPCG receiveNew.
-					class allInstVarNames
+					class allInstVarNames \ { #installationHooks. #parent }
 						do: [ :instVarName | 
 							((PCGTUnchangeableName users includesAny: class withAllSuperclasses) and: [ instVarName = #name ])
 								ifFalse: [ 

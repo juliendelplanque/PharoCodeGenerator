@@ -38,8 +38,8 @@ PCGStaticASTCopier >> visitArrayNode: anArrayNode [
 PCGStaticASTCopier >> visitAssignmentNode: anAssignmentNode [
 	<generated>
 	^ PCGAssignmentNode new
-		variable: (self visit: anAssignmentNode variable);
 		value: (self visit: anAssignmentNode value);
+		variable: (self visit: anAssignmentNode variable);
 		yourself
 ]
 
@@ -47,8 +47,8 @@ PCGStaticASTCopier >> visitAssignmentNode: anAssignmentNode [
 PCGStaticASTCopier >> visitBlockNode: aBlockNode [
 	<generated>
 	^ PCGBlockNode new
-		arguments: (aBlockNode arguments collect: [ :toVisit | self visit: toVisit ]);
 		body: (self visit: aBlockNode body);
+		arguments: (aBlockNode arguments collect: [ :toVisit | self visit: toVisit ]);
 		yourself
 ]
 
@@ -65,10 +65,19 @@ PCGStaticASTCopier >> visitCascadeNode: aCascadeNode [
 PCGStaticASTCopier >> visitCompositeTemplateParameter: aCompositeTemplateParameter [
 	<generated>
 	^ PCGCompositeTemplateParameter new
+		transformationBlock: (self visit: aCompositeTemplateParameter transformationBlock);
 		templateParameters:
 			(aCompositeTemplateParameter templateParameters
 				collect: [ :toVisit | self visit: toVisit ]);
-		transformationBlock: (self visit: aCompositeTemplateParameter transformationBlock);
+		yourself
+]
+
+{ #category : #visiting }
+PCGStaticASTCopier >> visitExtensionMethod: anExtensionMethod [
+	<generated>
+	^ PCGExtensionMethod new
+		methodNode: (self visit: anExtensionMethod methodNode);
+		installationTarget: (self visit: anExtensionMethod installationTarget);
 		yourself
 ]
 
@@ -111,8 +120,8 @@ PCGStaticASTCopier >> visitMessageNode: aMessageNode [
 	<generated>
 	^ PCGMessageNode new
 		receiver: (self visit: aMessageNode receiver);
-		selector: (self visit: aMessageNode selector);
 		arguments: (aMessageNode arguments collect: [ :toVisit | self visit: toVisit ]);
+		selector: (self visit: aMessageNode selector);
 		yourself
 ]
 
@@ -120,11 +129,11 @@ PCGStaticASTCopier >> visitMessageNode: aMessageNode [
 PCGStaticASTCopier >> visitMethodNode: aMethodNode [
 	<generated>
 	^ PCGMethodNode new
-		selector: (self visit: aMethodNode selector);
 		body: (self visit: aMethodNode body);
+		selector: (self visit: aMethodNode selector);
 		arguments: (aMethodNode arguments collect: [ :toVisit | self visit: toVisit ]);
-		pragmas: (aMethodNode pragmas collect: [ :toVisit | self visit: toVisit ]);
 		protocol: (self visit: aMethodNode protocol);
+		pragmas: (aMethodNode pragmas collect: [ :toVisit | self visit: toVisit ]);
 		yourself
 ]
 
@@ -132,8 +141,8 @@ PCGStaticASTCopier >> visitMethodNode: aMethodNode [
 PCGStaticASTCopier >> visitPragmaNode: aPragmaNode [
 	<generated>
 	^ PCGPragmaNode new
-		selector: (self visit: aPragmaNode selector);
 		arguments: (aPragmaNode arguments collect: [ :toVisit | self visit: toVisit ]);
+		selector: (self visit: aPragmaNode selector);
 		yourself
 ]
 

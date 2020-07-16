@@ -4,10 +4,18 @@ Class {
 	#traits : 'PCGTInstallableEntity',
 	#classTraits : 'PCGTInstallableEntity classTrait',
 	#instVars : [
-		'installationTarget'
+		'#methodNode type: PCGMethodNode',
+		'#installationTarget type: PCGValueNode'
 	],
 	#category : #'PharoCodeGenerator-MetaModel'
 }
+
+{ #category : #'instance creation' }
+PCGExtensionMethod class >> methodNode: methodNode [
+	^ self new
+		methodNode: methodNode;
+		yourself
+]
 
 { #category : #installing }
 PCGExtensionMethod >> installOn: aPackage [
@@ -22,4 +30,14 @@ PCGExtensionMethod >> installationTarget [
 { #category : #accessing }
 PCGExtensionMethod >> installationTarget: anObject [
 	installationTarget := anObject asPCG
+]
+
+{ #category : #accessing }
+PCGExtensionMethod >> methodNode [
+	^ methodNode
+]
+
+{ #category : #accessing }
+PCGExtensionMethod >> methodNode: anObject [
+	methodNode := anObject
 ]

@@ -50,6 +50,11 @@ PCGVisitor >> visitCompositeTemplateParameter: aCompositeTemplateParameter [
 ]
 
 { #category : #visiting }
+PCGVisitor >> visitExtensionMethod: anExtensionMethod [
+	^ self subclassResponsibility
+]
+
+{ #category : #visiting }
 PCGVisitor >> visitGlobalNode: aGlobalNode [
 	^ self subclassResponsibility
 ]
