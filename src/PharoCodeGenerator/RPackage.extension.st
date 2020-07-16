@@ -17,7 +17,9 @@ RPackage >> installPCGClass: aPCGClassDescription [
 
 { #category : #'*PharoCodeGenerator' }
 RPackage >> installPCGExtensionMethod: aPCGExtensionMethod [
-	self halt: #TODO
+	aPCGExtensionMethod methodNode
+		protocol: ('*' , self name);
+		installOn: aPCGExtensionMethod installationTarget evaluate
 ]
 
 { #category : #'*PharoCodeGenerator' }
