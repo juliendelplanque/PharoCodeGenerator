@@ -14,5 +14,9 @@ SmalltalkImage >> installPCGPackageDescription: aPCGPackageDescription [
 	aPCGPackageDescription tags do: [ :t |
 		t installOn: package ].
 	aPCGPackageDescription behaviors do: [ :b |
-		b installOn: package ]
+		b installOn: package ].
+	
+	aPCGPackageDescription runInstallationHooksFor: package.
+	
+	^ package
 ]

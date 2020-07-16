@@ -14,6 +14,7 @@ Behavior >> installPCGMethod: aPCGMethodNode [
 		PCGMethodAboutToBeInstalled signalForEntity: aPCGMethodNode installTarget: self.
 		self compile: aPCGMethodNode sourceCode.
 		(self >> aPCGMethodNode selector)
-			protocol: aPCGMethodNode protocol
+			protocol: aPCGMethodNode protocol.
+		aPCGMethodNode runInstallationHooksFor: (self >> aPCGMethodNode selector)
 	] on: PCGShouldNotBeInstalled do: #return
 ]

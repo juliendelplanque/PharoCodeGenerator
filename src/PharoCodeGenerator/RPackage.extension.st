@@ -11,15 +11,20 @@ RPackage >> installPCGClass: aPCGClassDescription [
 		package: self name.
 	aPCGClassDescription methods do: [ :method | 
 		method installOn: classInstalled ].
-	
+	aPCGClassDescription runInstallationHooksFor: classInstalled.
 	^ classInstalled
 ]
 
 { #category : #'*PharoCodeGenerator' }
 RPackage >> installPCGExtensionMethod: aPCGExtensionMethod [
-	aPCGExtensionMethod methodNode
-		protocol: ('*' , self name);
-		installOn: aPCGExtensionMethod installationTarget evaluate
+	| installedMethod |
+	installedMethod := aPCGExtensionMethod methodNode
+								protocol: ('*' , self name);
+								installOn: aPCGExtensionMethod installationTarget evaluate.
+		
+	aPCGExtensionMethod runInstallationHooksFor: installedMethod.
+	
+	^ installedMethod
 ]
 
 { #category : #'*PharoCodeGenerator' }
@@ -31,7 +36,11 @@ RPackage >> installPCGPackageTagDescription: aPCGPackageTagDescription [
 	tag := self addClassTag: aPCGPackageTagDescription name evaluate.
 	
 	aPCGPackageTagDescription behaviors do: [ :b |
-		b installOn: tag ]
+		b installOn: tag ].
+	
+	aPCGPackageTagDescription runInstallationHooksFor: tag.
+	
+	^ tag
 ]
 
 { #category : #'*PharoCodeGenerator' }
@@ -45,6 +54,8 @@ RPackage >> installPCGTrait: aPCGTraitDescription [
 		
 	aPCGTraitDescription methods do: [ :method |
 		method installOn: traitInstalled ].
-
+	
+	aPCGTraitDescription runInstallationHooksFor: traitInstalled.
+	
 	^ traitInstalled.
 ]

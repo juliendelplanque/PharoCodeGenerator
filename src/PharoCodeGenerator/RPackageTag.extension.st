@@ -12,6 +12,8 @@ RPackageTag >> installPCGClass: aPCGClassDescription [
 	aPCGClassDescription methods do: [ :method | 
 		method installOn: classInstalled ].
 	
+	aPCGClassDescription runInstallationHooksFor: classInstalled.
+	
 	^ classInstalled
 ]
 
@@ -26,6 +28,8 @@ RPackageTag >> installPCGTrait: aPCGTraitDescription [
 		
 	aPCGTraitDescription methods do: [ :method |
 		method installOn: traitInstalled ].
+	
+	aPCGTraitDescription runInstallationHooksFor: traitInstalled.
 
 	^ traitInstalled.
 ]
