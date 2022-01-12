@@ -235,6 +235,13 @@ PCGMethodNode >> installOn: aBehavior [
 ]
 
 { #category : #testing }
+PCGMethodNode >> isInstallationNecessaryOn: aClass [
+	^ [ (aClass includesLocalSelector: self selector) not or: [ self = (aClass >> self selector) asPCGAST ] ]
+		on: Error
+		do: [ "If we have an error it's probably because the current AST of the method is not valid. This means we should reinstall." true ]
+]
+
+{ #category : #testing }
 PCGMethodNode >> isMethod [
 	<generated>
 	^ true
