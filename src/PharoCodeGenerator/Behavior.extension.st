@@ -7,9 +7,8 @@ Behavior >> installPCGMethod: aPCGMethodNode [
 			noneSatisfy: [ :p | p selector = aPCGMethodNode generatedPragmaSelector ] ])
 				ifTrue: [ PCGHandwrittenMethodAlreadyExist signalForMethod: self >> aPCGMethodNode selector ].
 				
-	((self includesLocalSelector: aPCGMethodNode selector) and: [ aPCGMethodNode = (self >> aPCGMethodNode selector) asPCGAST ])
-		ifTrue: [ ^ aPCGMethodNode ].
-	
+	(aPCGMethodNode isInstallationNecessaryOn: self) ifFalse: [ ^ aPCGMethodNode ].
+
 	[
 		PCGMethodAboutToBeInstalled signalForEntity: aPCGMethodNode installTarget: self.
 		self compile: aPCGMethodNode sourceCode.
