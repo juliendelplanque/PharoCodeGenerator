@@ -61,6 +61,11 @@ PCGTemplatesRepository >> equalMethodTemplate [
 ]
 
 { #category : #builders }
+PCGTemplatesRepository >> hashMethodForSlots: aCollectionOfSlots [
+	^ self hashMethodForSlots: aCollectionOfSlots withSuperCall: false
+]
+
+{ #category : #builders }
 PCGTemplatesRepository >> hashMethodForSlots: aCollectionOfSlots withSuperCall: shouldCallSuper [
 	| hashNodes hashExpression |
 	aCollectionOfSlots

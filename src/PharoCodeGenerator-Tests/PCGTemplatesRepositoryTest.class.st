@@ -54,6 +54,10 @@ PCGTemplatesRepositoryTest >> testHashMethodForSlotsWithSuperCall [
 	self assertSourceCodeOf: (templateRepository hashMethodForSlots: { #name => InstanceVariableSlot. #surname => InstanceVariableSlot. #age => InstanceVariableSlot} withSuperCall: false) equals: 'hash
   < generated>
   ^(name hash bitXor: surname hash) bitXor: age hash'.
+
+	self assertSourceCodeOf: (templateRepository hashMethodForSlots: { #name => InstanceVariableSlot. #surname => InstanceVariableSlot. #age => InstanceVariableSlot}) equals: 'hash
+  < generated>
+  ^(name hash bitXor: surname hash) bitXor: age hash'.
 		
 	self assertSourceCodeOf: (templateRepository hashMethodForSlots: { #name => InstanceVariableSlot. #surname => InstanceVariableSlot. #age => InstanceVariableSlot} withSuperCall: true) equals: 'hash
   < generated>
