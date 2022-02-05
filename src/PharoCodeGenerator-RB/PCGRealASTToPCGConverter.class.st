@@ -23,6 +23,11 @@ PCGRealASTToPCGConverter >> visitArgumentNode: anArgumentNode [
 ]
 
 { #category : #visiting }
+PCGRealASTToPCGConverter >> visitArgumentVariableNode: anArgumentVariableNode [
+	^ self visitArgumentNode: anArgumentVariableNode
+]
+
+{ #category : #visiting }
 PCGRealASTToPCGConverter >> visitArrayNode: anArrayNode [
 	<generated>
 	^ PCGArrayNode new

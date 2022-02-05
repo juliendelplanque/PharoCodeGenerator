@@ -5,7 +5,7 @@ Class {
 	#classTraits : 'PCGTReturnable classTrait + PCGTAssignable classTrait + PCGTCascadeTarget classTrait + PCGTStatement classTrait + PCGTMessageReceiver classTrait + PCGTAssignmentTarget classTrait',
 	#instVars : [
 		'#templateParameters type: (SequenceableCollection withItemsType: PCGTemplateParameter)',
-		'#transformationBlock interface: #(#valueWithArguments: )'
+		'#transformationBlock interface: #(#valueWithArguments:)'
 	],
 	#category : #'PharoCodeGenerator-AST'
 }
