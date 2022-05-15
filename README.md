@@ -3,6 +3,8 @@
 [![Pharo version](https://img.shields.io/badge/Pharo-6.1-%23aac9ff.svg)](https://pharo.org/download)
 [![Pharo version](https://img.shields.io/badge/Pharo-7.0-%23aac9ff.svg)](https://pharo.org/download)
 [![Pharo version](https://img.shields.io/badge/Pharo-8.0-%23aac9ff.svg)](https://pharo.org/download)
+[![Pharo version](https://img.shields.io/badge/Pharo-9.0-%23aac9ff.svg)](https://pharo.org/download)
+[![Pharo version](https://img.shields.io/badge/Pharo-10.0-%23aac9ff.svg)](https://pharo.org/download)
 
 A toolkit to generate Pharo code. See the demo-video presented at ESUG'19 [here](https://www.youtube.com/watch?v=L3CiHWkW9Gs).
 
