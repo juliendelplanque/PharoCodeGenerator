@@ -21,12 +21,12 @@ PCGPharoUpTo8CompatibilityRBFactory class >> instanceVariableNamed: aName [
 
 { #category : #accessing }
 PCGPharoUpTo8CompatibilityRBFactory class >> selfNode [
-	^ RBSelfNode new
+	^ RBSelfNode named: 'self'
 ]
 
 { #category : #accessing }
 PCGPharoUpTo8CompatibilityRBFactory class >> superNode [
-	^ RBSuperNode new
+	^ RBSuperNode named: 'super'
 ]
 
 { #category : #accessing }
@@ -36,5 +36,5 @@ PCGPharoUpTo8CompatibilityRBFactory class >> temporaryVariableNamed: aName [
 
 { #category : #accessing }
 PCGPharoUpTo8CompatibilityRBFactory class >> thisContextNode [
-	^ RBThisContextNode new
+	^ RBThisContextNode named: 'thisContext'
 ]
