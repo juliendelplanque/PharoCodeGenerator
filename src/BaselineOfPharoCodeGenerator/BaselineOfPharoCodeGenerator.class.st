@@ -15,20 +15,20 @@ BaselineOfPharoCodeGenerator >> baseline: spec [
 			spec
 				package: 'PharoCodeGenerator' with: [ spec requires: #('TypedSlot') ];
 				package: 'PharoCodeGenerator-RB' with: [ spec requires: #('PharoCodeGenerator') ];
-				package: 'PharoCodeGenerator-Tests' with: [ spec requires: #('PharoCodeGenerator') ];
+				package: 'PharoCodeGenerator-Tests' with: [ spec requires: #('PharoCodeGenerator-RB') ];
 				package: 'PharoCodeGenerator-Meta' with: [ spec requires: #('PharoCodeGenerator' 'PharoCodeGenerator-RB' 'Iterators') ] ].
 
 	spec
 		for: #(#'pharo5.x' #'pharo6.x' #'pharo7.x' #'pharo8.x')
 		do: [ spec
-				package: 'PharoCodeGenerator-RB-Pharo9';
-				package: 'PharoCodeGenerator-RB' with: [ spec requires: #('PharoCodeGenerator-RB-Pharo9') ] ].
+				package: 'PharoCodeGenerator-RB-PharoUpTo8';
+				package: 'PharoCodeGenerator-RB' with: [ spec requires: #('PharoCodeGenerator-RB-PharoUpTo8') ] ].
 
 	spec
 		for: (self pharoVersionsFrom: 9)
 		do: [ spec
-				package: 'PharoCodeGenerator-RB-PharoUpTo8';
-				package: 'PharoCodeGenerator-RB' with: [ spec requires: #('PharoCodeGenerator-RB-PharoUpTo8') ] ]
+				package: 'PharoCodeGenerator-RB-Pharo9';
+				package: 'PharoCodeGenerator-RB' with: [ spec requires: #('PharoCodeGenerator-RB-Pharo9') ] ]
 ]
 
 { #category : #baselines }
