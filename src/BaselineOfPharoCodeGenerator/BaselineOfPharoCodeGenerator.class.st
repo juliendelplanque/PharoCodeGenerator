@@ -21,6 +21,17 @@ BaselineOfPharoCodeGenerator >> baseline: spec [
 	spec
 		for: #(#'pharo5.x' #'pharo6.x' #'pharo7.x' #'pharo8.x')
 		do: [ spec
+				package: 'PharoCodeGenerator-RB-Pharo9';
+				package: 'PharoCodeGenerator-RB' with: [ spec requires: #('PharoCodeGenerator-RB-Pharo9') ] ].
+
+	spec
+		for: (self pharoVersionsFrom: 9)
+		do: [ spec
 				package: 'PharoCodeGenerator-RB-PharoUpTo8';
 				package: 'PharoCodeGenerator-RB' with: [ spec requires: #('PharoCodeGenerator-RB-PharoUpTo8') ] ]
+]
+
+{ #category : #baselines }
+BaselineOfPharoCodeGenerator >> pharoVersionsFrom: aVersion [
+	^ (aVersion to: SystemVersion current major) collect: [ :v | ('pharo' , v asString , '.x') asSymbol ]
 ]
