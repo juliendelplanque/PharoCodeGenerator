@@ -9,11 +9,7 @@ Class {
 
 { #category : #factory }
 PCGStaticConverterToRBAST >> createArgumentNodeWithName: name [
-	<generated>
-	^ RBArgumentNode new
-		start: 0;
-		name: name;
-		yourself
+	^ self pharoCompatibilityRBFactory argumentNamed: name
 ]
 
 { #category : #factory }
@@ -52,25 +48,16 @@ PCGStaticConverterToRBAST >> createCascadeNodeWithMessages: messages [
 
 { #category : #factory }
 PCGStaticConverterToRBAST >> createGlobalNodeWithName: name [
-	<generated>
-	^ RBGlobalNode new
-		start: 0;
-		name: name;
-		yourself
+	^ self pharoCompatibilityRBFactory globalNamed: name
 ]
 
 { #category : #factory }
 PCGStaticConverterToRBAST >> createInstanceVariableNodeWithName: name [
-	<generated>
-	^ RBInstanceVariableNode new
-		start: 0;
-		name: name;
-		yourself
+	^ self pharoCompatibilityRBFactory instanceVariableNamed: name
 ]
 
 { #category : #factory }
 PCGStaticConverterToRBAST >> createLiteralArrayNodeWithContents: contents [
-	self flag: #TODO. "Should it be generated?"
 	^ RBLiteralArrayNode new
 		contents: contents;
 		isByteArray: contents class = ByteArray;
@@ -125,11 +112,7 @@ PCGStaticConverterToRBAST >> createReturnNodeWithValue: value [
 
 { #category : #factory }
 PCGStaticConverterToRBAST >> createSelfNodeWithName: name [
-	<generated>
-	^ RBSelfNode new
-		start: 0;
-		name: name;
-		yourself
+	^ self pharoCompatibilityRBFactory selfNode
 ]
 
 { #category : #factory }
@@ -143,27 +126,20 @@ PCGStaticConverterToRBAST >> createSequenceNodeWithStatements: statements tempor
 
 { #category : #factory }
 PCGStaticConverterToRBAST >> createSuperNodeWithName: name [
-	<generated>
-	^ RBSuperNode new
-		start: 0;
-		name: name;
-		yourself
+	^ self pharoCompatibilityRBFactory superNode
 ]
 
 { #category : #factory }
 PCGStaticConverterToRBAST >> createTemporaryNodeWithName: name [
-	<generated>
-	^ RBTemporaryNode new
-		start: 0;
-		name: name;
-		yourself
+	^ self pharoCompatibilityRBFactory temporaryVariableNamed: name
 ]
 
 { #category : #factory }
 PCGStaticConverterToRBAST >> createThisContextNodeWithName: name [
-	<generated>
-	^ RBThisContextNode new
-		start: 0;
-		name: name;
-		yourself
+	^ self pharoCompatibilityRBFactory thisContextNode
+]
+
+{ #category : #factory }
+PCGStaticConverterToRBAST >> pharoCompatibilityRBFactory [
+	^ PCGPharoCompatibilityRBFactory availableFactory
 ]
