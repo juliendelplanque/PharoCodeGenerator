@@ -6,17 +6,17 @@ Class {
 
 { #category : #accessing }
 PCGPharoUpTo8CompatibilityRBFactory class >> argumentNamed: aName [
-	^ RBArgumentNode named: name
+	^ RBArgumentNode named: aName
 ]
 
 { #category : #accessing }
 PCGPharoUpTo8CompatibilityRBFactory class >> globalNamed: aName [
-	^ RBGlobalNode named: name
+	^ RBGlobalNode named: aName
 ]
 
 { #category : #accessing }
 PCGPharoUpTo8CompatibilityRBFactory class >> instanceVariableNamed: aName [
-	^ RBInstanceVariableNode named: name
+	^ RBInstanceVariableNode named: aName
 ]
 
 { #category : #accessing }
@@ -31,7 +31,7 @@ PCGPharoUpTo8CompatibilityRBFactory class >> superNode [
 
 { #category : #accessing }
 PCGPharoUpTo8CompatibilityRBFactory class >> temporaryVariableNamed: aName [
-	^ RBTemporaryNode named: name
+	^ RBTemporaryNode named: aName
 ]
 
 { #category : #accessing }
